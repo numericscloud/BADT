@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("BizTalkDeploymentTool")]
 [assembly: AssemblyDescription("BizTalk MSI and SSO config deployment tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Nibc")]
+[assembly: AssemblyCompany("RituRaj")]
 [assembly: AssemblyProduct("BizTalkDeploymentTool")]
-[assembly: AssemblyCopyright("Copyright © Nibc 2014")]
+[assembly: AssemblyCopyright("Copyright © RituRaj 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
