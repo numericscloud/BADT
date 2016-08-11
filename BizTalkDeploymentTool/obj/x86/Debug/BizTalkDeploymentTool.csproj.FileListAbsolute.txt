@@ -59,7 +59,6 @@ D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.MsiDeploy.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.UserControls.ResourceDeploy.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.UserControl1.resources
-D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.BRE.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.IIS.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.Services.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.SSOAdminInspector.resources
