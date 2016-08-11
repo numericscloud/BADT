@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BizTalkDeploymentTool.BaseAction">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\BaseAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.AppBaseAction">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\AppBaseAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.InstallApplicationAction">
+    <Position X="3.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>BTDTAction\InstallApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.RestartHostInstanceAction">
+    <Position X="6" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAASAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\RestartHostInstanceAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.RestartIISAction">
+    <Position X="8.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\RestartIISAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.BizAppBaseAction">
+    <Position X="1.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\BizAppBaseAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.CheckForInProgressInstancesAction">
+    <Position X="3.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\CheckForInProgressInstancesAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.DeleteApplicationAction">
+    <Position X="5.5" Y="5.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\DeleteApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.DeploySsoAction">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\DeploySsoAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.ImportApplicationAction">
+    <Position X="10" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAQBAA=</HashCode>
+      <FileName>BTDTAction\ImportApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.UnInstallApplicationAction">
+    <Position X="12" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\UnInstallApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.StartApplicationAction">
+    <Position X="1.5" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\StartApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BizTalkDeploymentTool.StopApplicationAction">
+    <Position X="3.75" Y="8" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BTDTAction\StopApplicationAction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

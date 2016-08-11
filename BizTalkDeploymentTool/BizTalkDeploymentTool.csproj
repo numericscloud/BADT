@@ -1,0 +1,600 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{911A70AE-7351-44DB-885D-16A90A1431D0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BizTalkDeploymentTool</RootNamespace>
+    <AssemblyName>BizTalkDeploymentTool</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>D05DEDC4773AC420133F424B8188A03D949BACEC</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>BizTalkDeploymentTool_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>false</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>false</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb4adc36d7e89fa7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\temp\Automated build and deployment with BizTalk Deployment Framework\C#\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Admin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.BizTalk.Admin\3.0.1.0__31bf3856ad364e35\Microsoft.BizTalk.Admin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.ApplicationDeployment.Engine, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Microsoft.BizTalk.ApplicationDeployment.Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.BizTalk.Deployment\3.0.1.0__31bf3856ad364e35\Microsoft.BizTalk.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.ExplorerOM, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Developer Tools\Microsoft.BizTalk.ExplorerOM.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Interop.SSOClient, Version=9.0.1000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\Microsoft.NET\assembly\GAC_MSIL\Microsoft.BizTalk.Interop.SSOClient\v4.0_9.0.1000.0__31bf3856ad364e35\Microsoft.BizTalk.Interop.SSOClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Operations, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2013 R2\Microsoft.BizTalk.Operations.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.BizTalk.Pipeline, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\Microsoft BizTalk Server 2010\Microsoft.BizTalk.Pipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Biztalk.RuleEngineExtensions, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.BizTalk.RuleEngineExtensions\3.0.1.0__31bf3856ad364e35\Microsoft.Biztalk.RuleEngineExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Build.Framework" />
+    <Reference Include="Microsoft.Build.Utilities.v3.5, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Build.Utilities.v3.5\3.5.0.0__b03f5f7f11d50a3a\Microsoft.Build.Utilities.v3.5.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\WiX Toolset v3.10\bin\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EnterpriseSingleSignOn.Interop, Version=9.0.1000.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\Microsoft Host Integration Server 2013\system\Microsoft.EnterpriseSingleSignOn.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Word, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Office.Interop.Word\14.0.0.0__71e9bce111e9429c\Microsoft.Office.Interop.Word.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="Microsoft.RuleEngine, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.RuleEngine\3.0.1.0__31bf3856ad364e35\Microsoft.RuleEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Administration, Version=7.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\System32\inetsrv\Microsoft.Web.Administration.dll</HintPath>
+    </Reference>
+    <Reference Include="SSOConfigurationImportTask">
+      <HintPath>ExternalAssembly\SSOConfigurationImportTask.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutBADT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBADT.Designer.cs">
+      <DependentUpon>AboutBADT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\AppBaseAction.cs" />
+    <Compile Include="Actions\ApplicationInfo.cs" />
+    <Compile Include="Actions\BaseAction.cs" />
+    <Compile Include="Actions\BizTalkInfo.cs" />
+    <Compile Include="Actions\BizAppBaseAction.cs" />
+    <Compile Include="Actions\BreActionFactory.cs" />
+    <Compile Include="Actions\CheckWebServiceStatusAction.cs" />
+    <Compile Include="Actions\ChangeWebAppPool.cs" />
+    <Compile Include="Actions\DeleteIISAppAction.cs" />
+    <Compile Include="Actions\CreateIISAppAction.cs" />
+    <Compile Include="Actions\CreateAppPoolAction.cs" />
+    <Compile Include="Actions\DeleteApplicationPool.cs" />
+    <Compile Include="Actions\ImportApplicationBindingAction.cs" />
+    <Compile Include="Actions\ResourceBaseAction.cs" />
+    <Compile Include="Actions\BreBaseAction.cs" />
+    <Compile Include="Actions\GacAssemblyAction.cs" />
+    <Compile Include="Actions\ResourceInfo.cs" />
+    <Compile Include="Actions\BreInfo.cs" />
+    <Compile Include="Actions\CheckForInProgressInstancesAction.cs" />
+    <Compile Include="Actions\DeletePolicyAction.cs" />
+    <Compile Include="Actions\DeleteVocabularyAction.cs" />
+    <Compile Include="Actions\ImportPublishBrl.cs" />
+    <Compile Include="Actions\ResourceGacedAction.cs" />
+    <Compile Include="Actions\RecycleApplicationPool.cs" />
+    <Compile Include="Actions\LoadServiceStartupTypeAction.cs" />
+    <Compile Include="Actions\RestartServiceAction.cs" />
+    <Compile Include="Actions\SaveInstancesAction.cs" />
+    <Compile Include="Actions\ValidateStartApplicationAction.cs" />
+    <Compile Include="Actions\TerminateInstancesAction.cs" />
+    <Compile Include="Actions\StartServiceAction.cs" />
+    <Compile Include="Actions\StopServiceAction.cs" />
+    <Compile Include="Actions\UnDeployPolicyAction.cs" />
+    <Compile Include="Actions\DeployPolicyAction.cs" />
+    <Compile Include="Actions\RestartIISAction.cs" />
+    <Compile Include="Actions\DeploySsoAction.cs" />
+    <Compile Include="Actions\ImportApplicationAction.cs" />
+    <Compile Include="Actions\InstallApplicationAction.cs" />
+    <Compile Include="Actions\UnInstallApplicationAction.cs" />
+    <Compile Include="Actions\DeleteApplicationAction.cs" />
+    <Compile Include="Actions\StartApplicationAction.cs" />
+    <Compile Include="Actions\RestartHostInstanceAction.cs" />
+    <Compile Include="Actions\StopApplicationAction.cs" />
+    <Compile Include="ArtifactView\PipelineInfo.cs" />
+    <Compile Include="BizTalkApplicationDeployment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BizTalkApplicationDeployment.Designer.cs">
+      <DependentUpon>BizTalkApplicationDeployment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BRE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BRE.Designer.cs">
+      <DependentUpon>BRE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BTDTReportOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BTDTReportOptions.Designer.cs">
+      <DependentUpon>BTDTReportOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BTDTReportOptionsFormProperties.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BusinessRulesDeploymentWizard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BusinessRulesDeploymentWizard.Designer.cs">
+      <DependentUpon>BusinessRulesDeploymentWizard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Credentials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Credentials.Designer.cs">
+      <DependentUpon>Credentials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ApplicationArtifactsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ApplicationArtifactsView.Designer.cs">
+      <DependentUpon>ApplicationArtifactsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DeploymentHealthCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DeploymentHealthCheck.Designer.cs">
+      <DependentUpon>DeploymentHealthCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DisplayLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DisplayLog.Designer.cs">
+      <DependentUpon>DisplayLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ApplicationExtensions.cs" />
+    <Compile Include="BTDT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BTDT.Designer.cs">
+      <DependentUpon>BTDT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\BtsCatalogExplorerExtensions.cs" />
+    <Compile Include="Extensions\HostInstanceExtensions.cs" />
+    <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="Extensions\ISSOAdminExtensions.cs" />
+    <Compile Include="Extensions\PropertyGridExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Actions\ActionFactory.cs" />
+    <Compile Include="Extensions\TreeViewExtensions.cs" />
+    <Compile Include="Extensions\XmlExtensions.cs" />
+    <Compile Include="GACAssembly.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GACAssembly.Designer.cs">
+      <DependentUpon>GACAssembly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extensions\ServiceControlerExtensions.cs" />
+    <Compile Include="Global\GlobalProperties.cs" />
+    <Compile Include="Helpers\ApplicationLoad.cs" />
+    <Compile Include="Helpers\BizTalkOperationsHelper.cs" />
+    <Compile Include="ArtifactView\BreRuleSetInfo.cs" />
+    <Compile Include="Helpers\BtsOrchestrationHelper.cs" />
+    <Compile Include="Helpers\Impersonation.cs" />
+    <Compile Include="Helpers\HighlightColors.cs" />
+    <Compile Include="Helpers\SSOAffiliateApplications.cs" />
+    <Compile Include="Helpers\TerminateInstancesWorkerArea.cs" />
+    <Compile Include="Helpers\LocateMsiWorkerArea.cs" />
+    <Compile Include="Helpers\FastDirectoryEnumerator.cs" />
+    <Compile Include="Helpers\ItemFlags.cs" />
+    <Compile Include="Helpers\PropertyClass.cs" />
+    <Compile Include="HostInstances.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HostInstances.Designer.cs">
+      <DependentUpon>HostInstances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IIS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IIS.Designer.cs">
+      <DependentUpon>IIS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ImportBinding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ImportBinding.Designer.cs">
+      <DependentUpon>ImportBinding.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LocateMsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LocateMsi.Designer.cs">
+      <DependentUpon>LocateMsi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MsiInspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MsiInspector.Designer.cs">
+      <DependentUpon>MsiInspector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ApplicationDeploymentHelper.cs" />
+    <Compile Include="Helpers\BreHelper.cs" />
+    <Compile Include="Helpers\BTSTaskHelper.cs" />
+    <Compile Include="Helpers\GenerateDeploymentInstructions.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\IISHelper.cs" />
+    <Compile Include="Helpers\MsiPackage.cs" />
+    <Compile Include="Helpers\Property.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Helpers\ExplorerOMHelper.cs" />
+    <Compile Include="Helpers\GenericHelper.cs" />
+    <Compile Include="Helpers\RegistryHelper.cs" />
+    <Compile Include="Helpers\ReportsHelper.cs" />
+    <Compile Include="Helpers\ServicesHelper.cs" />
+    <Compile Include="Helpers\SQLHelper.cs" />
+    <Compile Include="Helpers\SSOHelper.cs" />
+    <Compile Include="Helpers\WmiHelper.cs" />
+    <Compile Include="IISDeploymentTool.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IISDeploymentTool.Designer.cs">
+      <DependentUpon>IISDeploymentTool.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_ReceiveLocation.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_SendPort.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="SetHandlers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetHandlers.Designer.cs">
+      <DependentUpon>SetHandlers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ApplicationDeploymentHealthCheck.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ApplicationDeploymentHealthCheck.Designer.cs">
+      <DependentUpon>ApplicationDeploymentHealthCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BizTalkHostInstances.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\BizTalkHostInstances.Designer.cs">
+      <DependentUpon>BizTalkHostInstances.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MsiDeploy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\MsiDeploy.Designer.cs">
+      <DependentUpon>MsiDeploy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ResourceDeploy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\ResourceDeploy.Designer.cs">
+      <DependentUpon>ResourceDeploy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Services.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Services.Designer.cs">
+      <DependentUpon>Services.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SSOAdminInspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SSOAdminInspector.Designer.cs">
+      <DependentUpon>SSOAdminInspector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UIComponent\ListViewColumnSorter.cs" />
+    <Compile Include="UIComponent\SortableListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UIComponent\SortableListView.Designer.cs">
+      <DependentUpon>SortableListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UserControlListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UserControlListView.Designer.cs">
+      <DependentUpon>UserControlListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Viewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Viewer.Designer.cs">
+      <DependentUpon>Viewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WindowsServiceController.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WindowsServiceController.Designer.cs">
+      <DependentUpon>WindowsServiceController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_HostInstance.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="StopWatch\OurStopWatch.cs" />
+    <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_SendHandler2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ThreadProcessing\ThreadProcessor.cs" />
+    <Compile Include="WMI\IIsWebService.cs" />
+    <Compile Include="WMI\MSBTS_Host.cs" />
+    <Compile Include="WMI\MSBTS_HostInstance.cs" />
+    <Compile Include="WMI\MSBTS_MessageInstance.cs" />
+    <Compile Include="WMI\MSBTS_MsgBoxSetting..cs" />
+    <Compile Include="WMI\MSBTS_Server.cs" />
+    <Compile Include="WMI\MSBTS_ServiceInstance.cs" />
+    <Compile Include="WMI\Win32_Process.cs" />
+    <Compile Include="WMI\WMICommon.cs" />
+    <Compile Include="WMI\WMIInstall.cs" />
+    <Compile Include="WMI\WMIInstallErrorCodeResolver.cs" />
+    <Compile Include="WMI\WMIUnInstall.cs" />
+    <EmbeddedResource Include="AboutBADT.resx">
+      <DependentUpon>AboutBADT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BizTalkApplicationDeployment.resx">
+      <DependentUpon>BizTalkApplicationDeployment.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="Resources\Annotate_Complete_12.bmp" />
+    <EmbeddedResource Include="ApplicationArtifactsView.resx">
+      <DependentUpon>ApplicationArtifactsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="HostInstances.resx">
+      <DependentUpon>HostInstances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportBinding.resx">
+      <DependentUpon>ImportBinding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetHandlers.resx">
+      <DependentUpon>SetHandlers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ApplicationDeploymentHealthCheck.resx">
+      <DependentUpon>ApplicationDeploymentHealthCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\BizTalkHostInstances.resx">
+      <DependentUpon>BizTalkHostInstances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\MsiDeploy.resx">
+      <DependentUpon>MsiDeploy.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\ResourceDeploy.resx">
+      <DependentUpon>ResourceDeploy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Defaultss.xslt" />
+    <EmbeddedResource Include="BRE.resx">
+      <DependentUpon>BRE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IIS.resx">
+      <DependentUpon>IIS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Services.resx">
+      <DependentUpon>Services.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SSOAdminInspector.resx">
+      <DependentUpon>SSOAdminInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UserControlListView.resx">
+      <DependentUpon>UserControlListView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Viewer.resx">
+      <DependentUpon>Viewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WindowsServiceController.resx">
+      <DependentUpon>WindowsServiceController.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Resources\error.ico" />
+    <None Include="Resources\Likely_unavail.ico" />
+    <None Include="Resources\Annotate_Complete.ico" />
+    <None Include="Resources\base_checkboxes.png" />
+    <EmbeddedResource Include="BTDT.resx">
+      <DependentUpon>BTDT.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BTDTReportOptions.resx">
+      <DependentUpon>BTDTReportOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BusinessRulesDeploymentWizard.resx">
+      <DependentUpon>BusinessRulesDeploymentWizard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Credentials.resx">
+      <DependentUpon>Credentials.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DeploymentHealthCheck.resx">
+      <DependentUpon>DeploymentHealthCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DisplayLog.resx">
+      <DependentUpon>DisplayLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GACAssembly.resx">
+      <DependentUpon>GACAssembly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LocateMsi.resx">
+      <DependentUpon>LocateMsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MsiInspector.resx">
+      <DependentUpon>MsiInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IISDeploymentTool.resx">
+      <DependentUpon>IISDeploymentTool.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Actions\Actions.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ExternalAssembly\Microsoft.Deployment.WindowsInstaller.dll" />
+    <Content Include="ExternalAssembly\SSOConfigurationImportTask.dll" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

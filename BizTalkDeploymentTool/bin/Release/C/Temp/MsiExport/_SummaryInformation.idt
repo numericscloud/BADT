@@ -1,0 +1,17 @@
+PropertyId	Value
+i2	l255
+_SummaryInformation	PropertyId
+1	1252
+2	Installation Database
+3	Deployment Framework for BizTalk Sample - HelloWorld
+4	Deployment Framework for BizTalk Team
+5	Installer
+6	This installer database contains the logic and data required to install Deployment Framework for BizTalk - HelloWorld.
+7	Intel;1033
+9	{85E35A50-D49A-4910-B1A6-7233F49594AE}
+12	2016/06/28 11:55:32
+13	2016/06/28 11:55:32
+14	300
+15	2
+18	Windows Installer XML Toolset (3.8.1128.0)
+19	2
