@@ -1,0 +1,5 @@
+Signature_	Root	Key	Name	Type
+s72	i2	s255	S255	I2
+RegLocator	Signature_
+NetFxInstallRootForNetfx40Full	2	Software\Microsoft\NET Framework Setup\NDP\v4\Full	InstallPath	2
+SearchForBTSProductName	2	SOFTWARE\Microsoft\BizTalk Server\3.0	ProductName	2
