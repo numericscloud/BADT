@@ -1,6 +1,0 @@
-Registry	Root	Key	Name	Value	Component_
-s72	i2	l255	L255	L0	s72
-Registry	Registry
-reg398CDC6E8DFB69E7237A07EC5441BA70	-1	SOFTWARE\[Manufacturer]\Deployment Framework for BizTalk - HelloWorld	InstalledVersion	1.0.0	Cleanup
-regA931AD53F714586B8FEB65564A799EC6	-1	SOFTWARE\[Manufacturer]\Deployment Framework for BizTalk - HelloWorld	InstallPath	[INSTALLDIR]	Cleanup
-regDE027340D9C579A3A7F9A0D77FACC04E	-1	SOFTWARE\[Manufacturer]\Deployment Framework for BizTalk - HelloWorld	-		Cleanup
