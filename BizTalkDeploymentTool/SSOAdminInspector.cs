@@ -154,37 +154,47 @@ namespace BizTalkDeploymentTool
         private void button1_Click(object sender, EventArgs e)
         {
             this.FormState = FormStateEnum.Processing;
-            bool credentialsValid = false;
             try
             {
-                credentialsValid = CredentialsValid(comboBox1.Text, comboBox2.Text, textBox1.Text);
-            }
-            catch (Exception exe)
-            {
-                DisplayError(exe.Message);
-            }
-            if (!credentialsValid)
-            {
-                DisplayError("The credentials supplied are incorrect.");
-            }
-            else
-            {
-                TreeNode parentNode = treeViewSSOApps.Nodes[Constants._SSO_AFFILIATE_ROOT_NODE];
-                foreach (TreeNode affiliateAppNode in parentNode.Nodes)
+                bool credentialsValid = false;
+                try
                 {
-                    SSOAffiliateApplication ssoApp = affiliateAppNode.Tag as SSOAffiliateApplication;
-                    if (ssoApp.UserAccount.ToUpper().Contains((string.Format(@"{0}\{1}", comboBox1.Text, comboBox2.Text)).ToUpper()))
+                    credentialsValid = CredentialsValid(comboBox1.Text, comboBox2.Text, textBox1.Text);
+                }
+                catch (Exception exe)
+                {
+                    DisplayError(exe.Message);
+                }
+                if (!credentialsValid)
+                {
+                    DisplayError("The credentials supplied are incorrect.");
+                }
+                else
+                {
+                    TreeNode parentNode = treeViewSSOApps.Nodes[Constants._SSO_AFFILIATE_ROOT_NODE];
+                    foreach (TreeNode affiliateAppNode in parentNode.Nodes)
                     {
-                        SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
-                        Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(affiliateAppNode.Text, comboBox1.Text, comboBox2.Text, textBox1.Text);
-                        ssoApp.UserMappings = credentials;
-                        affiliateAppNode.Tag = ssoApp;
-                        affiliateAppNode.ImageIndex = 2;
-                        affiliateAppNode.SelectedImageIndex = 2;
+                        SSOAffiliateApplication ssoApp = affiliateAppNode.Tag as SSOAffiliateApplication;
+                        if (ssoApp.UserAccount.ToUpper().Contains((string.Format(@"{0}\{1}", comboBox1.Text, comboBox2.Text)).ToUpper()))
+                        {
+                            SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
+                            Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(affiliateAppNode.Text, comboBox1.Text, comboBox2.Text, textBox1.Text);
+                            ssoApp.UserMappings = credentials;
+                            affiliateAppNode.Tag = ssoApp;
+                            affiliateAppNode.ImageIndex = 2;
+                            affiliateAppNode.SelectedImageIndex = 2;
+                        }
                     }
                 }
             }
-            this.FormState = FormStateEnum.Initial;
+            catch (Exception exe)
+            {
+                DisplayError(exe);
+            }
+            finally
+            {
+                this.FormState = FormStateEnum.Initial;
+            }
         }
 
         private bool CredentialsValid(string domain, string user, string password)
