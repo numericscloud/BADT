@@ -26,9 +26,9 @@ namespace BizTalkDeploymentTool.Helpers
             string[] cInfo;
 
             Microsoft.BizTalk.SSOClient.Interop.ISSOMapper mapper = new Microsoft.BizTalk.SSOClient.Interop.ISSOMapper();
-            mapper.GetApplications(out applicationList, out desc,out cInfo);
+            mapper.GetApplications(out applicationList, out desc, out cInfo);
             return applicationList;
-            
+
         }
 
         /// <summary>
@@ -47,12 +47,12 @@ namespace BizTalkDeploymentTool.Helpers
             try
             {
                 exceptionMessage = string.Empty;
-                ISSOAdmin ssoAdmin = new ISSOAdmin();                
+                ISSOAdmin ssoAdmin = new ISSOAdmin();
                 if (redeploy)
                     ssoAdmin.DeleteApplication(ssoConfigappName);
                 MSBuildTasks.ImportSSOConfigurationApplicationTask import = new MSBuildTasks.ImportSSOConfigurationApplicationTask();
                 import.EncryptionKey = ssoKey;
-                import.EncryptedFile = ssoEncryptedFile;                
+                import.EncryptedFile = ssoEncryptedFile;
                 result = import.Execute();
                 if (result)
                 {
@@ -65,6 +65,19 @@ namespace BizTalkDeploymentTool.Helpers
                 result = false;
             }
             return result;
+        }
+
+        public static object[] GetWindowsUserMapping(string userAccount, string applicationName)
+        {
+            Microsoft.BizTalk.SSOClient.Interop.ISSOMapper mapper = new Microsoft.BizTalk.SSOClient.Interop.ISSOMapper();
+            string[] tt = userAccount.Split('\\');
+            return mapper.GetMappingsForWindowsUser(tt[0], tt[1], applicationName);
+        }
+        public static string[] GetCredentials(string applicationName, int flags)
+        {
+            string externalUser = "";
+            Microsoft.BizTalk.SSOClient.Interop.ISSOLookup2 lookup = new Microsoft.BizTalk.SSOClient.Interop.ISSOLookup2();
+            return lookup.GetCredentials(applicationName, flags, out externalUser);
         }
     }
 }

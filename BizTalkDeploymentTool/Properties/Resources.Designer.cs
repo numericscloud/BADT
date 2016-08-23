@@ -243,6 +243,16 @@ namespace BizTalkDeploymentTool.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ShowCreden {
+            get {
+                object obj = ResourceManager.GetObject("ShowCreden", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Stop1 {
             get {
                 object obj = ResourceManager.GetObject("Stop1", resourceCulture);

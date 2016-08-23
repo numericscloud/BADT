@@ -74,10 +74,6 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cb4adc36d7e89fa7, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\temp\Automated build and deployment with BizTalk Deployment Framework\C#\ClassLibrary1\bin\Debug\ClassLibrary1.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.BizTalk.Admin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.BizTalk.Admin\3.0.1.0__31bf3856ad364e35\Microsoft.BizTalk.Admin.dll</HintPath>
@@ -219,6 +215,12 @@
     <Compile Include="BizTalkApplicationDeployment.Designer.cs">
       <DependentUpon>BizTalkApplicationDeployment.cs</DependentUpon>
     </Compile>
+    <Compile Include="BRE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BRE.Designer.cs">
+      <DependentUpon>BRE.cs</DependentUpon>
+    </Compile>
     <Compile Include="BTDTReportOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -348,6 +350,12 @@
     <Compile Include="IISDeploymentTool.Designer.cs">
       <DependentUpon>IISDeploymentTool.cs</DependentUpon>
     </Compile>
+    <Compile Include="SSOAffiliateUserCredentials.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SSOAffiliateUserCredentials.Designer.cs">
+      <DependentUpon>SSOAffiliateUserCredentials.cs</DependentUpon>
+    </Compile>
     <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_ReceiveLocation.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -454,6 +462,7 @@
     <Compile Include="WMI\WMIInstall.cs" />
     <Compile Include="WMI\WMIInstallErrorCodeResolver.cs" />
     <Compile Include="WMI\WMIUnInstall.cs" />
+    <None Include="Resources\ShowCreden.png" />
     <EmbeddedResource Include="AboutBADT.resx">
       <DependentUpon>AboutBADT.cs</DependentUpon>
     </EmbeddedResource>
@@ -473,6 +482,9 @@
     <EmbeddedResource Include="SetHandlers.resx">
       <DependentUpon>SetHandlers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="SSOAffiliateUserCredentials.resx">
+      <DependentUpon>SSOAffiliateUserCredentials.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UserControls\ApplicationDeploymentHealthCheck.resx">
       <DependentUpon>ApplicationDeploymentHealthCheck.cs</DependentUpon>
     </EmbeddedResource>
@@ -490,6 +502,9 @@
       <DependentUpon>UserControl1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Defaultss.xslt" />
+    <EmbeddedResource Include="BRE.resx">
+      <DependentUpon>BRE.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="IIS.resx">
       <DependentUpon>IIS.cs</DependentUpon>
     </EmbeddedResource>
