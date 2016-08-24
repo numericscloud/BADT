@@ -630,11 +630,7 @@ namespace BizTalkDeploymentTool
             }
             else
             {
-
-                item.SubItems[3].Text = String.Format(CultureInfo.CurrentCulture, "{0}:{1}:{2}.{3}",
-    elapsed.Hours,
-    elapsed.Minutes,
-    elapsed.Seconds, elapsed.Milliseconds); //elapsed.ToString("hh:mm:ss.fff");
+                item.SubItems[3].Text = elapsed.ToString(@"hh\:mm\:ss\:fff"); 
             }
             item.SubItems[4].Text = message;
             item.ToolTipText = message;
