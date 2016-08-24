@@ -13,7 +13,10 @@ using System.Windows.Forms;
 namespace BizTalkDeploymentTool
 {
     public partial class SSOAffiliateUserCredentials : Form
-    {
+    {        
+        private string _Domain { get; set; }
+        private string _userName { get; set; }
+
         public SSOAffiliateUserCredentials()
         {
             InitializeComponent();
@@ -26,12 +29,19 @@ namespace BizTalkDeploymentTool
             textBoxUser.Text = user;
             textBoxAppName.Text = applicationName;
             textBoxExternalUser.Text = externalUser;
+            this._Domain = domain;
+            this._userName = user;
 
         }
 
         private void SSOAffiliateUserCredentials_Load(object sender, EventArgs e)
         {
-
+            if (string.Format("{0}\\{1}", this._Domain, this._userName) == System.Security.Principal.WindowsIdentity.GetCurrent().Name)
+            {
+                textBox1.ReadOnly = true;
+                button1.Enabled = false;
+                DisplayCredentials();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -47,14 +57,7 @@ namespace BizTalkDeploymentTool
                 }
                 else
                 {
-                    SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
-                    Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(textBoxAppName.Text, textBoxDomain.Text, textBoxUser.Text, textBox1.Text);
-                    foreach (KeyValuePair<string, string> item in credentials)
-                    {
-                        ListViewItem listViewItem = new ListViewItem(new string[] { item.Key, item.Value });
-                        sortableListView1.Items.Add(listViewItem);
-                    }
-
+                    DisplayCredentials();
                 }
             }
             catch (Exception exe)
@@ -62,6 +65,16 @@ namespace BizTalkDeploymentTool
                 DisplayError(exe.Message);
             }
 
+        }
+        private void DisplayCredentials()
+        {
+            SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
+            Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(textBoxAppName.Text, textBoxDomain.Text, textBoxUser.Text, textBox1.Text);
+            foreach (KeyValuePair<string, string> item in credentials)
+            {
+                ListViewItem listViewItem = new ListViewItem(new string[] { item.Key, item.Value });
+                sortableListView1.Items.Add(listViewItem);
+            }
         }
         private bool CredentialsValid(string domain, string user, string password)
         {

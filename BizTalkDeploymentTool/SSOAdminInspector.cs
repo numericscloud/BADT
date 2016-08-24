@@ -115,14 +115,14 @@ namespace BizTalkDeploymentTool
                 ssoApp.Flag = ssoAffiliateApps.Flags[i];
 
                 string[] userAccounts = ssoAffiliateApps.UserAccounts[i].Split(';');
-
+                Array.Sort(userAccounts);
                 for (int j = 0; j < userAccounts.Count(); j++)
                 {
                     object[] test = SSOHelper.GetWindowsUserMapping(userAccounts[j].Trim(), ssoAffiliateApps.Applications[i]);
                     foreach (var obj in test)
                     {
                         dynamic item = obj;
-                        TreeNode userNode = affiliateAppNode.Nodes.Add(userAccounts[j]);
+                        TreeNode userNode = affiliateAppNode.Nodes.Add(userAccounts[j].Trim());
                         userNode.ImageIndex =3;
                         userNode.SelectedImageIndex = 3;
                         userNode.Tag = item;
