@@ -30,6 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSOAffiliateUserCredentials));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBoxExternalUser = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxAppName = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.textBoxDomain = new System.Windows.Forms.TextBox();
             this.textBoxUser = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -41,10 +45,6 @@
             this.sortableListView1 = new BizTalkDeploymentTool.UIComponent.SortableListView();
             this.Field = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBoxAppName = new System.Windows.Forms.TextBox();
-            this.textBoxExternalUser = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -71,6 +71,42 @@
             this.groupBox1.Size = new System.Drawing.Size(715, 191);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // textBoxExternalUser
+            // 
+            this.textBoxExternalUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxExternalUser.Location = new System.Drawing.Point(177, 51);
+            this.textBoxExternalUser.Name = "textBoxExternalUser";
+            this.textBoxExternalUser.ReadOnly = true;
+            this.textBoxExternalUser.Size = new System.Drawing.Size(230, 20);
+            this.textBoxExternalUser.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 48);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 13);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "External User";
+            // 
+            // textBoxAppName
+            // 
+            this.textBoxAppName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxAppName.Location = new System.Drawing.Point(177, 19);
+            this.textBoxAppName.Name = "textBoxAppName";
+            this.textBoxAppName.ReadOnly = true;
+            this.textBoxAppName.Size = new System.Drawing.Size(230, 20);
+            this.textBoxAppName.TabIndex = 13;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "Application Name";
             // 
             // textBoxDomain
             // 
@@ -165,13 +201,16 @@
             this.Field,
             this.Value});
             this.sortableListView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sortableListView1.FullRowSelect = true;
             this.sortableListView1.GridLines = true;
+            this.sortableListView1.HideSelection = false;
             this.sortableListView1.Location = new System.Drawing.Point(0, 0);
             this.sortableListView1.Name = "sortableListView1";
             this.sortableListView1.Size = new System.Drawing.Size(715, 339);
             this.sortableListView1.TabIndex = 0;
             this.sortableListView1.UseCompatibleStateImageBehavior = false;
             this.sortableListView1.View = System.Windows.Forms.View.Details;
+            this.sortableListView1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.sortableListView1_KeyPress);
             // 
             // Field
             // 
@@ -182,42 +221,6 @@
             // 
             this.Value.Text = "Value";
             this.Value.Width = 400;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 13);
-            this.label1.TabIndex = 12;
-            this.label1.Text = "Application Name";
-            // 
-            // textBoxAppName
-            // 
-            this.textBoxAppName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxAppName.Location = new System.Drawing.Point(177, 19);
-            this.textBoxAppName.Name = "textBoxAppName";
-            this.textBoxAppName.ReadOnly = true;
-            this.textBoxAppName.Size = new System.Drawing.Size(230, 20);
-            this.textBoxAppName.TabIndex = 13;
-            // 
-            // textBoxExternalUser
-            // 
-            this.textBoxExternalUser.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxExternalUser.Location = new System.Drawing.Point(177, 51);
-            this.textBoxExternalUser.Name = "textBoxExternalUser";
-            this.textBoxExternalUser.ReadOnly = true;
-            this.textBoxExternalUser.Size = new System.Drawing.Size(230, 20);
-            this.textBoxExternalUser.TabIndex = 15;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 48);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 13);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "External User";
             // 
             // SSOAffiliateUserCredentials
             // 

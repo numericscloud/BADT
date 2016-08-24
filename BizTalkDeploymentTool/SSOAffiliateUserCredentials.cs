@@ -36,30 +36,32 @@ namespace BizTalkDeploymentTool
 
         private void button1_Click(object sender, EventArgs e)
         {
-            bool credentialsValid = false;
             try
             {
+                bool credentialsValid = false;
                 credentialsValid = CredentialsValid(textBoxDomain.Text, textBoxUser.Text, textBox1.Text);
+
+                if (!credentialsValid)
+                {
+                    DisplayError("The credentials supplied are incorrect.");
+                }
+                else
+                {
+                    SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
+                    Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(textBoxAppName.Text, textBoxDomain.Text, textBoxUser.Text, textBox1.Text);
+                    foreach (KeyValuePair<string, string> item in credentials)
+                    {
+                        ListViewItem listViewItem = new ListViewItem(new string[] { item.Key, item.Value });
+                        sortableListView1.Items.Add(listViewItem);
+                    }
+
+                }
             }
             catch (Exception exe)
             {
                 DisplayError(exe.Message);
             }
-            if (!credentialsValid)
-            {
-                DisplayError("The credentials supplied are incorrect.");
-            }
-            else
-            {
-                SSOAffiliateApplications ssoAffiliateApps = new SSOAffiliateApplications();
-                Dictionary<string, string> credentials = ssoAffiliateApps.GetCredentials(textBoxAppName.Text, textBoxDomain.Text, textBoxUser.Text, textBox1.Text);
-                foreach (KeyValuePair<string, string> item in credentials)
-                {
-                     ListViewItem listViewItem = new ListViewItem(new string[] { item.Key, item.Value });
-                     sortableListView1.Items.Add(listViewItem);
-                }
 
-            }
         }
         private bool CredentialsValid(string domain, string user, string password)
         {
@@ -73,6 +75,39 @@ namespace BizTalkDeploymentTool
         private void DisplayError(string message)
         {
             MessageBox.Show(message, "BTDT", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void sortableListView1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (sender != sortableListView1) return;
+            if (e.KeyChar == (char)3)
+            {
+                copyToClipBoard();
+            }
+        }
+        private void copyToClipBoard()
+        {
+            try
+            {
+                if (sortableListView1 != null && sortableListView1.SelectedItems != null)
+                {
+                    StringBuilder sb = new StringBuilder();
+                    foreach (ListViewItem item in sortableListView1.SelectedItems)
+                    {
+                        foreach (System.Windows.Forms.ListViewItem.ListViewSubItem subitem in item.SubItems)
+                        {
+                            sb.AppendLine(subitem.Text);
+                        }
+
+                    }
+                    Clipboard.SetText(sb.ToString());
+                }
+            }
+            catch (Exception exe)
+            {
+                DisplayError("Failed copying to clipboard:" + exe.Message);
+            }
+
         }
 
 
