@@ -245,7 +245,7 @@ namespace BizTalkDeploymentTool
                         this.FormState = FormStateEnum.Processing;
                         fileToOpen = openMsiFileDialog.FileName;
 
-                        Microsoft.Deployment.WindowsInstaller.Database msiDb = new Microsoft.Deployment.WindowsInstaller.Database(fileToOpen);
+                       /* Microsoft.Deployment.WindowsInstaller.Database msiDb = new Microsoft.Deployment.WindowsInstaller.Database(fileToOpen);
 
                         msiDb.ExportAll(@"C:\Temp\MsiExport");
                         Microsoft.Deployment.WindowsInstaller.TableCollection tblColl = msiDb.Tables;
@@ -265,9 +265,10 @@ namespace BizTalkDeploymentTool
                             {
                                 text = current.GetString(1);                             
                             }
-                        }
+                        }*/
                         // string cmd = string.Format("cmd.exe /C "Deployment\\Framework\\DeployTools\\UacElevate.exe "[MSBUILDPATH]" "/p:Configuration=Server /t:LaunchServerDeployWizard Deployment\HelloWorld.Deployment.btdfproj [MSBUILDTOOLSVER]""");
                       //  Microsoft.Deployment.WindowsInstaller.Installer.InstallProduct(fileToOpen, null);
+
                         MsiPackage misPackage = new MsiPackage(fileToOpen);
                         txtMSILocation.Text = fileToOpen;
                         txtAppName.Text = misPackage.DisplayName;
