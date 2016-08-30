@@ -114,7 +114,7 @@ namespace BizTalkDeploymentTool
                 int p = backgroundWorkerIndex * 100 / filesCount;
                 backgroundWorker1.ReportProgress(p);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                // DisplayError(ex);
             }

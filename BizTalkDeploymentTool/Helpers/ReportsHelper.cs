@@ -11,7 +11,6 @@ namespace BizTalkDeploymentTool.Report
 {
    public class ReportsHelper
     {
-        static string diffFile = null;
        public static void GenerateReport(string fileName)
        {
            Process applicationStatus = new Process();

@@ -589,7 +589,9 @@ namespace BizTalkDeploymentTool
             UpdateLog2(e.ActionStatus, e.Message, GetTreeNodeForUpdate(e.Action));
             // UpdateLog2(e.ActionStatus, e.Message, GetListViewItemForLogUpdate(listViewWebApps, e.Action));
         }
-        
+
+
+        private ListViewItem.ListViewSubItem uriSubItemSelected;
         private void listViewWebApps_MouseClick(object sender, MouseEventArgs e)
         {
             ListView lstViewContextStrip = sender as ListView;
@@ -608,7 +610,6 @@ namespace BizTalkDeploymentTool
             }
         }
 
-        private ListViewItem.ListViewSubItem uriSubItemSelected;
        
         private void tabPageDeleteApplication_Enter(object sender, EventArgs e)
         {

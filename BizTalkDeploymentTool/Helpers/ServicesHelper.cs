@@ -51,7 +51,7 @@ namespace BizTalkDeploymentTool.Helpers
                     {
                         return (ServiceStartModeExt)Enum.Parse(typeof(ServiceStartModeExt), startupType);
                     }
-                    catch (Exception exe)
+                    catch (Exception)
                     {
                         return ServiceStartModeExt.UNKNOWN;
                     }
