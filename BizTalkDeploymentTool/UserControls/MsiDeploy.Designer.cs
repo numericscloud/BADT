@@ -77,14 +77,26 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.splitContainerDependency = new System.Windows.Forms.SplitContainer();
+            this.treeViewDependency = new System.Windows.Forms.TreeView();
+            this.imageListTreeViewDepen = new System.Windows.Forms.ImageList(this.components);
+            this.propertyGridDepApps = new System.Windows.Forms.PropertyGrid();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.openMsiFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.openSsoFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.folderSaveMessagesBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnStop = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.contextMenuStripSelectDependentApp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.selectMsiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.contextMenuStripLoadActionsForDepApps = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.loadActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStripAction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.grpBxMSI.SuspendLayout();
@@ -105,8 +117,16 @@
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDependency)).BeginInit();
+            this.splitContainerDependency.Panel1.SuspendLayout();
+            this.splitContainerDependency.Panel2.SuspendLayout();
+            this.splitContainerDependency.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.contextMenuStripSelectDependentApp.SuspendLayout();
+            this.contextMenuStripLoadActionsForDepApps.SuspendLayout();
             this.SuspendLayout();
             // 
             // contextMenuStripAction
@@ -443,8 +463,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.ActionsPage);
             this.tabControl.Controls.Add(this.InstancesPage);
+            this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.tabControl.Location = new System.Drawing.Point(0, 201);
+            this.tabControl.ImageList = this.imageList1;
+            this.tabControl.Location = new System.Drawing.Point(7, 201);
             this.tabControl.Name = "tabControl";
             this.tabControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl.SelectedIndex = 0;
@@ -455,12 +477,12 @@
             // ActionsPage
             // 
             this.ActionsPage.Controls.Add(this.splitContainer1);
-            this.ActionsPage.Location = new System.Drawing.Point(4, 22);
+            this.ActionsPage.Location = new System.Drawing.Point(4, 23);
             this.ActionsPage.Name = "ActionsPage";
             this.ActionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ActionsPage.Size = new System.Drawing.Size(1592, 930);
+            this.ActionsPage.Size = new System.Drawing.Size(1592, 929);
             this.ActionsPage.TabIndex = 0;
-            this.ActionsPage.Text = "Actions";
+            this.ActionsPage.Text = "Deploy Actions";
             this.ActionsPage.UseVisualStyleBackColor = true;
             // 
             // splitContainer1
@@ -477,8 +499,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rTxtBxMessage);
-            this.splitContainer1.Size = new System.Drawing.Size(1586, 924);
-            this.splitContainer1.SplitterDistance = 855;
+            this.splitContainer1.Size = new System.Drawing.Size(1586, 923);
+            this.splitContainer1.SplitterDistance = 854;
             this.splitContainer1.TabIndex = 14;
             // 
             // listViewControl
@@ -497,7 +519,7 @@
             this.listViewControl.GridLines = true;
             this.listViewControl.Location = new System.Drawing.Point(0, 0);
             this.listViewControl.Name = "listViewControl";
-            this.listViewControl.Size = new System.Drawing.Size(1586, 855);
+            this.listViewControl.Size = new System.Drawing.Size(1586, 854);
             this.listViewControl.TabIndex = 13;
             this.listViewControl.UseCompatibleStateImageBehavior = false;
             this.listViewControl.View = System.Windows.Forms.View.Details;
@@ -527,7 +549,7 @@
             // 
             this.Elapsed.Text = "Elapsed";
             this.Elapsed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Elapsed.Width = 65;
+            this.Elapsed.Width = 85;
             // 
             // Message
             // 
@@ -549,10 +571,10 @@
             // InstancesPage
             // 
             this.InstancesPage.Controls.Add(this.splitContainer2);
-            this.InstancesPage.Location = new System.Drawing.Point(4, 22);
+            this.InstancesPage.Location = new System.Drawing.Point(4, 23);
             this.InstancesPage.Name = "InstancesPage";
             this.InstancesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.InstancesPage.Size = new System.Drawing.Size(1592, 930);
+            this.InstancesPage.Size = new System.Drawing.Size(1592, 929);
             this.InstancesPage.TabIndex = 1;
             this.InstancesPage.Text = "All In-Progress Service Instances";
             this.InstancesPage.UseVisualStyleBackColor = true;
@@ -571,8 +593,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1586, 924);
-            this.splitContainer2.SplitterDistance = 770;
+            this.splitContainer2.Size = new System.Drawing.Size(1586, 923);
+            this.splitContainer2.SplitterDistance = 769;
             this.splitContainer2.TabIndex = 16;
             // 
             // instancesGridView
@@ -590,7 +612,7 @@
             this.instancesGridView.ReadOnly = true;
             this.instancesGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.instancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.instancesGridView.Size = new System.Drawing.Size(1586, 770);
+            this.instancesGridView.Size = new System.Drawing.Size(1586, 769);
             this.instancesGridView.TabIndex = 15;
             // 
             // contextMenuStripInstances
@@ -654,6 +676,95 @@
             this.label1.Size = new System.Drawing.Size(0, 13);
             this.label1.TabIndex = 0;
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.groupBox1);
+            this.tabPage2.ImageIndex = 1;
+            this.tabPage2.Location = new System.Drawing.Point(4, 23);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1592, 929);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Dependent Applications";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.splitContainerDependency);
+            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Location = new System.Drawing.Point(3, 3);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(1586, 923);
+            this.groupBox1.TabIndex = 2;
+            this.groupBox1.TabStop = false;
+            // 
+            // splitContainerDependency
+            // 
+            this.splitContainerDependency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerDependency.Location = new System.Drawing.Point(3, 17);
+            this.splitContainerDependency.Name = "splitContainerDependency";
+            // 
+            // splitContainerDependency.Panel1
+            // 
+            this.splitContainerDependency.Panel1.Controls.Add(this.treeViewDependency);
+            // 
+            // splitContainerDependency.Panel2
+            // 
+            this.splitContainerDependency.Panel2.Controls.Add(this.propertyGridDepApps);
+            this.splitContainerDependency.Panel2.Controls.Add(this.listView1);
+            this.splitContainerDependency.Size = new System.Drawing.Size(1580, 903);
+            this.splitContainerDependency.SplitterDistance = 333;
+            this.splitContainerDependency.TabIndex = 1;
+            // 
+            // treeViewDependency
+            // 
+            this.treeViewDependency.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.treeViewDependency.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.treeViewDependency.HideSelection = false;
+            this.treeViewDependency.ImageIndex = 0;
+            this.treeViewDependency.ImageList = this.imageListTreeViewDepen;
+            this.treeViewDependency.Location = new System.Drawing.Point(0, 0);
+            this.treeViewDependency.Name = "treeViewDependency";
+            this.treeViewDependency.SelectedImageIndex = 0;
+            this.treeViewDependency.Size = new System.Drawing.Size(333, 903);
+            this.treeViewDependency.TabIndex = 0;
+            this.treeViewDependency.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDependency_AfterSelect);
+            this.treeViewDependency.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDependency_NodeMouseClick);
+            // 
+            // imageListTreeViewDepen
+            // 
+            this.imageListTreeViewDepen.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageListTreeViewDepen.ImageStream")));
+            this.imageListTreeViewDepen.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageListTreeViewDepen.Images.SetKeyName(0, "warning_exclamation.png");
+            this.imageListTreeViewDepen.Images.SetKeyName(1, "stop.jpg");
+            this.imageListTreeViewDepen.Images.SetKeyName(2, "true.jpg");
+            // 
+            // propertyGridDepApps
+            // 
+            this.propertyGridDepApps.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.propertyGridDepApps.Location = new System.Drawing.Point(0, 0);
+            this.propertyGridDepApps.Name = "propertyGridDepApps";
+            this.propertyGridDepApps.Size = new System.Drawing.Size(1243, 903);
+            this.propertyGridDepApps.TabIndex = 1;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(0, 0);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(1243, 903);
+            this.listView1.TabIndex = 0;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "warning_exclamation.png");
+            this.imageList1.Images.SetKeyName(1, "info.png");
+            // 
             // openMsiFileDialog
             // 
             this.openMsiFileDialog.Filter = "MSI file (*.msi)|*.msi|All files (*.*)|*.*";
@@ -661,6 +772,44 @@
             // openSsoFileDialog
             // 
             this.openSsoFileDialog.Filter = "SSO file (*.sso*)|*.sso*|All files (*.*)|*.*";
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.tabPage1);
+            this.tabControl1.Location = new System.Drawing.Point(0, 4);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(1600, 191);
+            this.tabControl1.TabIndex = 21;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.grpBxMSI);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1592, 165);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Farm Deploy";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            // 
+            // contextMenuStripSelectDependentApp
+            // 
+            this.contextMenuStripSelectDependentApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.selectMsiToolStripMenuItem});
+            this.contextMenuStripSelectDependentApp.Name = "contextMenuStrip1";
+            this.contextMenuStripSelectDependentApp.Size = new System.Drawing.Size(128, 26);
+            // 
+            // selectMsiToolStripMenuItem
+            // 
+            this.selectMsiToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("selectMsiToolStripMenuItem.Image")));
+            this.selectMsiToolStripMenuItem.Name = "selectMsiToolStripMenuItem";
+            this.selectMsiToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.selectMsiToolStripMenuItem.Text = "Select Msi";
+            this.selectMsiToolStripMenuItem.Click += new System.EventHandler(this.selectMsiToolStripMenuItem_Click);
             // 
             // btnClear
             // 
@@ -692,28 +841,20 @@
             this.btnStop.Visible = false;
             this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
-            // tabControl1
+            // contextMenuStripLoadActionsForDepApps
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Location = new System.Drawing.Point(0, 4);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1600, 191);
-            this.tabControl1.TabIndex = 21;
+            this.contextMenuStripLoadActionsForDepApps.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.loadActionsToolStripMenuItem});
+            this.contextMenuStripLoadActionsForDepApps.Name = "contextMenuStripLoadActionsForDepApps";
+            this.contextMenuStripLoadActionsForDepApps.Size = new System.Drawing.Size(144, 26);
             // 
-            // tabPage1
+            // loadActionsToolStripMenuItem
             // 
-            this.tabPage1.Controls.Add(this.grpBxMSI);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1592, 165);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Farm Deploy";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            this.tabPage1.Enter += new System.EventHandler(this.tabPage1_Enter);
+            this.loadActionsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loadActionsToolStripMenuItem.Image")));
+            this.loadActionsToolStripMenuItem.Name = "loadActionsToolStripMenuItem";
+            this.loadActionsToolStripMenuItem.Size = new System.Drawing.Size(143, 22);
+            this.loadActionsToolStripMenuItem.Text = "Load Actions";
+            this.loadActionsToolStripMenuItem.Click += new System.EventHandler(this.loadActionsToolStripMenuItem_Click);
             // 
             // MsiDeploy
             // 
@@ -752,8 +893,16 @@
             this.splitContainer3.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.splitContainerDependency.Panel1.ResumeLayout(false);
+            this.splitContainerDependency.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerDependency)).EndInit();
+            this.splitContainerDependency.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.contextMenuStripSelectDependentApp.ResumeLayout(false);
+            this.contextMenuStripLoadActionsForDepApps.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -815,5 +964,17 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TreeView treeViewDependency;
+        private System.Windows.Forms.SplitContainer splitContainerDependency;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripSelectDependentApp;
+        private System.Windows.Forms.ToolStripMenuItem selectMsiToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripLoadActionsForDepApps;
+        private System.Windows.Forms.ToolStripMenuItem loadActionsToolStripMenuItem;
+        private System.Windows.Forms.PropertyGrid propertyGridDepApps;
+        private System.Windows.Forms.ImageList imageListTreeViewDepen;
     }
 }

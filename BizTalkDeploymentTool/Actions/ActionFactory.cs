@@ -15,6 +15,7 @@ namespace BizTalkDeploymentTool.Actions
         public struct ActionParameters
         {
             public string TargetEnvironment;
+            public string PackageLocation;
             public string SSOConfigLocation;
             public string SSOAppname;
             public string SSOKey;
@@ -236,6 +237,8 @@ namespace BizTalkDeploymentTool.Actions
                 ImportApplicationAction importApplicationAction = (ImportApplicationAction)action;
                 importApplicationAction.TargetEnvironment = parameters.TargetEnvironment;
             }
+
+           
             if (action is InstallApplicationAction)
             {
                 InstallApplicationAction installApplicationAction = (InstallApplicationAction)action;
@@ -306,6 +309,83 @@ namespace BizTalkDeploymentTool.Actions
                 }
             }
             //OurStopWatch.Exit();
+            return baseActions;
+        }
+
+        public static List<BaseAction> CreateDeployDependentAppsActions(string applicationName, string msiLocation, string targetEnv)
+        {
+            //OurStopWatch.Enter("CreateActions");
+            List<string> messagingServers = GlobalProperties.MessagingServers;
+
+            List<BaseAction> baseActions = new List<BaseAction>();
+            BizTalkInfo bizTalkInfo = new BizTalkInfo();
+            bool applicationExists = bizTalkInfo.CatalogExplorer.ApplicationExists(applicationName);
+
+            ApplicationInfo appInfo = new ApplicationInfo();
+            appInfo.ApplicationName = applicationName;
+
+            if (applicationExists)
+            {
+
+                foreach (string serverName in messagingServers)
+                {
+                    baseActions.Add(new InstallApplicationAction(serverName, msiLocation, null));
+                }
+                ImportDependentApplicationAction importAppAction = new ImportDependentApplicationAction(appInfo, msiLocation, targetEnv);
+                importAppAction.TargetEnvironment = targetEnv;
+                baseActions.Add(importAppAction);
+
+                //baseActions.Add(new DeploySsoAction());
+
+                baseActions.Add(new StartApplicationAction(appInfo, bizTalkInfo));
+                baseActions.Add(new ValidateStartApplicationAction(appInfo, bizTalkInfo));
+            }
+            //OurStopWatch.Exit();
+            return baseActions;
+        }
+
+        public static List<BaseAction> CreateUnDeployDependentAppsActions(string applicationName, string msiLocation)
+        {
+            //OurStopWatch.Enter("CreateActions");
+            List<string> messagingServers = GlobalProperties.MessagingServers;
+
+            List<BaseAction> baseActions = new List<BaseAction>();
+            BizTalkInfo bizTalkInfo = new BizTalkInfo();
+            bool applicationExists = bizTalkInfo.CatalogExplorer.ApplicationExists(applicationName);
+
+            ApplicationInfo appInfo = new ApplicationInfo();
+            appInfo.ApplicationName = applicationName;
+
+            if (applicationExists)
+            {
+                baseActions.Add(new StopApplicationAction(appInfo, bizTalkInfo));
+                baseActions.Add(new DeleteApplicationAction(appInfo, bizTalkInfo));
+                foreach (string serverName in messagingServers)
+                {
+                    if (GenericHelper.PingServer(serverName))
+                    {
+                        try
+                        {
+                            string UninstallGuid = RegistryHelper.GetUninstallGuid(appInfo.ApplicationName, serverName);
+                            if (!String.IsNullOrEmpty(UninstallGuid))
+                            {
+                                baseActions.Add(new UnInstallApplicationAction(appInfo, serverName));
+                            }
+                        }
+                        catch (Exception)
+                        {
+                            baseActions.Add(new UnInstallApplicationAction(appInfo, serverName));
+                        }
+                    }
+                    else
+                    {
+                        baseActions.Add(new UnInstallApplicationAction(appInfo, serverName));
+                    }
+
+                }
+            }
+
+
             return baseActions;
         }
     }

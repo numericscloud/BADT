@@ -19,9 +19,13 @@ using BizTalkDeploymentTool.Global;
 using System.Threading.Tasks;
 using Microsoft.BizTalk.ExplorerOM;
 using System.Globalization;
+using System.Collections;
+using System.ComponentModel;
 
 namespace BizTalkDeploymentTool
 {
+
+
     public partial class MsiDeploy : UserControl
     {
         public enum FormStateEnum
@@ -34,6 +38,7 @@ namespace BizTalkDeploymentTool
         #region Private Properties
         ThreadProcessor threadProcessor = null;
         string executingServer;
+        bool allDependentActionsLoaded = false;
         Stopwatch swinstancesAction = new Stopwatch();
         List<DataGridViewCell> Instances = null;
         private static int terminateWorkerIndex = 0;
@@ -91,6 +96,7 @@ namespace BizTalkDeploymentTool
                     btnClear.Visible = false;
                     btnStop.Visible = false;
                     btnToggle.Visible = false;
+                    btnBrowseConfig.Enabled = true;
                     txtMSILocation.Text = string.Empty;
                     txtAppName.Text = string.Empty;
                     txtSSOConfigLoc.Text = string.Empty;
@@ -103,15 +109,21 @@ namespace BizTalkDeploymentTool
                     terminateToolStripMenuItem.Enabled = false;
                     saveToFileToolStripMenuItem.Enabled = false;
                     rTxtBxMessage.Text = string.Empty;
-
+                    allDependentActionsLoaded = false;
                     checkToolStripMenuItem.Enabled = false;
                     uncheckToolStripMenuItem.Enabled = false;
                     runXSelectedActionsToolStripMenuItem.Enabled = false;
                     runAllCheckedActionsToolStripMenuItem.Enabled = false;
                     generateInstructionsToolStripMenuItem.Enabled = false;
-                    listViewControl.Items.Clear();
+                    selectMsiToolStripMenuItem.Enabled = true;
                     pictureBox1.Enabled = false;
                     tabControl1.Enabled = true;
+                    ssoactionAdded = false;
+                    treeViewDependency.Nodes.Clear();
+                    listViewControl.Groups.Clear();
+                    listViewControl.Items.Clear();
+                    propertyGridDepApps.SelectedObject = null;
+                    tabControl.TabPages[2].ImageIndex = 1;
                     UpdateCursor(Cursors.Default);
                     break;
 
@@ -166,6 +178,7 @@ namespace BizTalkDeploymentTool
 
         private void btnBrowseMSI_Click(object sender, EventArgs e)
         {
+
             LoadMsiPackage();
         }
 
@@ -189,30 +202,39 @@ namespace BizTalkDeploymentTool
             {
                 if (((BaseAction)item.Tag).DisplayName == ssoAction.DisplayName)
                 {
-                    ssoactionAdded = true;
+                    item.Remove();
                 }
             }
-            if (!ssoactionAdded && tabControl.TabPages[0].Text != Constants._UNDEPLOY_ACTION_PAGE_TEXT)
+            if (!ssoactionAdded)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { ssoAction.DisplayName, "Not Executed", "Never", string.Empty, string.Empty });
+                ListViewItem listViewItem = new ListViewItem(new string[] { ssoAction.DisplayName, "Not Executed", "Never", string.Empty, string.Empty }, listViewControl.Groups["1"]);
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(lblMsiLoc.Font.Name, lblMsiLoc.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
                 listViewItem.Tag = ssoAction;
                 listViewControl.Items.Add(listViewItem);
+                /*if(listViewControl.Items.Count > 1)
+                {
+                    listViewControl.Items.Insert(listViewControl.Items.Count - 3, listViewItem);
+                }else
+                {
+                    listViewControl.Items.Add( listViewItem);
+                }*/
                 if (listViewControl.Items.Count > 1)
                 {
                     // Start
-                    ListViewItem startAction = listViewControl.Items[listViewControl.Items.Count - 3];
+                    ListViewItem startAction = listViewControl.Groups["1"].Items[listViewControl.Items.Count - 3];
                     //SSO
-                    ListViewItem deploySSOAction = listViewControl.Items[listViewControl.Items.Count - 1];
-
+                    ListViewItem deploySSOAction = listViewControl.Groups["1"].Items[listViewControl.Items.Count - 1];
                     //Validate
-                    ListViewItem validateDepAction = listViewControl.Items[listViewControl.Items.Count - 2];
+                    ListViewItem validateDepAction = listViewControl.Groups["1"].Items[listViewControl.Items.Count - 2];
 
                     listViewControl.Items[listViewControl.Items.Count - 3] = (ListViewItem)deploySSOAction.Clone();
+                    listViewControl.Items[listViewControl.Items.Count - 3].Group = listViewControl.Groups["1"];
                     listViewControl.Items[listViewControl.Items.Count - 2] = (ListViewItem)startAction.Clone();
+                    listViewControl.Items[listViewControl.Items.Count - 2].Group = listViewControl.Groups["1"];
                     listViewControl.Items[listViewControl.Items.Count - 1] = (ListViewItem)validateDepAction.Clone();
+                    listViewControl.Items[listViewControl.Items.Count - 1].Group = listViewControl.Groups["1"];
                 }
 
             }
@@ -240,43 +262,49 @@ namespace BizTalkDeploymentTool
                 string fileToOpen = string.Empty;
                 if (openMsiFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    this.FormState = FormStateEnum.Initial;
                     try
                     {
                         this.FormState = FormStateEnum.Processing;
                         fileToOpen = openMsiFileDialog.FileName;
 
-                       /* Microsoft.Deployment.WindowsInstaller.Database msiDb = new Microsoft.Deployment.WindowsInstaller.Database(fileToOpen);
+                        /* Microsoft.Deployment.WindowsInstaller.Database msiDb = new Microsoft.Deployment.WindowsInstaller.Database(fileToOpen);
 
-                        msiDb.ExportAll(@"C:\Temp\MsiExport");
-                        Microsoft.Deployment.WindowsInstaller.TableCollection tblColl = msiDb.Tables;
-                        StringBuilder name = new StringBuilder();
-                        foreach (Microsoft.Deployment.WindowsInstaller.ColumnInfo item in tblColl["CustomAction"].Columns)
-                        {
-                            name.AppendLine(item.Name);
-                        }
+                         msiDb.ExportAll(@"C:\Temp\MsiExport");
+                         Microsoft.Deployment.WindowsInstaller.TableCollection tblColl = msiDb.Tables;
+                         StringBuilder name = new StringBuilder();
+                         foreach (Microsoft.Deployment.WindowsInstaller.ColumnInfo item in tblColl["CustomAction"].Columns)
+                         {
+                             name.AppendLine(item.Name);
+                         }
                           
                         
-                        string text="";
-                        //msiDb.ExportAll(@"C:\Temp\MsiExport");`Name`
-                        using (Microsoft.Deployment.WindowsInstaller.View view = msiDb.OpenView("SELECT `Target` FROM `CustomAction`", new object[0]))
-                        {
-                            view.Execute();
-                            foreach (Microsoft.Deployment.WindowsInstaller.Record current in view)
-                            {
-                                text = current.GetString(1);                             
-                            }
-                        }*/
+                         string text="";
+                         //msiDb.ExportAll(@"C:\Temp\MsiExport");`Name`
+                         using (Microsoft.Deployment.WindowsInstaller.View view = msiDb.OpenView("SELECT `Target` FROM `CustomAction`", new object[0]))
+                         {
+                             view.Execute();
+                             foreach (Microsoft.Deployment.WindowsInstaller.Record current in view)
+                             {
+                                 text = current.GetString(1);                             
+                             }
+                         }*/
                         // string cmd = string.Format("cmd.exe /C "Deployment\\Framework\\DeployTools\\UacElevate.exe "[MSBUILDPATH]" "/p:Configuration=Server /t:LaunchServerDeployWizard Deployment\HelloWorld.Deployment.btdfproj [MSBUILDTOOLSVER]""");
-                      //  Microsoft.Deployment.WindowsInstaller.Installer.InstallProduct(fileToOpen, null);
+                        //  Microsoft.Deployment.WindowsInstaller.Installer.InstallProduct(fileToOpen, null);
 
                         MsiPackage misPackage = new MsiPackage(fileToOpen);
                         txtMSILocation.Text = fileToOpen;
                         txtAppName.Text = misPackage.DisplayName;
                         LoadTargetEnvironments(misPackage.TargetEnvironments.ToArray());
 
+                        LoadDependentApplications(txtAppName.Text);
+
                         LoadActions(txtAppName.Text, txtMSILocation.Text, misPackage.WebDirectories());
 
                         LoadInProgressServiceInstances(txtAppName.Text);
+                       
+
+                        // listViewControl.Groups.Add(new ListViewGroup("Text", HorizontalAlignment.Left));
                     }
 
                     finally
@@ -290,6 +318,77 @@ namespace BizTalkDeploymentTool
             catch (Exception ex)
             {
                 DisplayError(ex);
+            }
+        }
+
+        private void LoadDependentApplications(string p)
+        {
+            treeViewDependency.Nodes.Clear();
+            TreeNode baseNode = treeViewDependency.Nodes.Add(p);
+            baseNode.ContextMenuStrip = contextMenuStripLoadActionsForDepApps;
+            // Load Depency TreeView
+            LoadDependencies(p, baseNode);
+
+            // Resolving the treeview to ommit same application if it exists as a dependency at a higher level node.
+            ResolveDependencyTreeNode();
+
+            treeViewDependency.ExpandAll();
+            if (baseNode.Nodes.Count == 0)
+            {
+                treeViewDependency.Nodes.Clear();
+                tabControl.TabPages[2].ImageIndex = 1;
+            }
+            else
+            {
+                tabControl.TabPages[2].ImageIndex = 0;
+            }
+
+        }
+
+        private void ResolveDependencyTreeNode()
+        {
+            List<TreeNode> nodesToRemove = new List<TreeNode>();
+            foreach (TreeNode i in treeViewDependency.Nodes.FlattenTree())
+            {
+                foreach (TreeNode j in treeViewDependency.Nodes.FlattenTree())
+                {
+                    if(i.Text == j.Text && j.Level > i.Level)
+                    {
+                        nodesToRemove.Add(i);
+                    }
+                }   
+            }
+            foreach (TreeNode item in nodesToRemove)
+            {
+                treeViewDependency.Nodes.Remove(item);              
+            }
+        }
+
+        private void LoadDependencies(string p, TreeNode baseNode)
+        {
+            DependencyDeployment.DependencyResolver cl = new DependencyDeployment.DependencyResolver();
+            Dictionary<string, string> dependentApps = cl.ResolveDependency(p);
+            Dictionary<string, List<string>> dependentApps2 = dependentApps.GroupBy(r => r.Value)
+                  .ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
+
+            foreach (KeyValuePair<string, string> item in dependentApps)
+            {
+                TreeNode dependentAppNode = baseNode.Nodes[item.Value];
+                if (dependentAppNode == null)
+                {
+                    DependencyDeployment.DependentApplicationProperties dProps = new DependencyDeployment.DependentApplicationProperties();
+                    dependentAppNode = baseNode.Nodes.Add(item.Value, item.Value);
+                    dependentAppNode.ImageIndex = 1;
+                    dependentAppNode.SelectedImageIndex = 1;
+                    dependentAppNode.ContextMenuStrip = contextMenuStripSelectDependentApp;
+                    dProps.Assemblies = dependentApps2[item.Value];
+                    dProps.ActionsLoaded = false;
+                    dProps.MsiSelected = false;
+                    dProps.GuidInstalledApplication = RegistryHelper.GetUninstallGuid(item.Value, Environment.MachineName);
+                    dependentAppNode.Tag = dProps;
+                }
+                //dependentAppNode.Nodes.Add(item.Key);
+                LoadDependencies(item.Value, dependentAppNode);
             }
         }
 
@@ -329,9 +428,9 @@ namespace BizTalkDeploymentTool
 
         private void LoadActions(string applicationName, string msiLocation, List<string> webDirectories)
         {
-            //OurStopWatch.Enter("LoadActions");
             listViewControl.Items.Clear();
-            txtSSOConfigLoc.Text = txtConfigAppName.Text = txtBxSSOKey.Text = "";
+            ListViewGroup mainapplicationGroup = new ListViewGroup("1", string.Format("{0}-----{1}", applicationName , "Un/deploy Actions"));
+            listViewControl.Groups.Add(mainapplicationGroup);            
             foreach (BaseAction action in ActionFactory.CreateActions(applicationName, msiLocation, webDirectories))
             {
                 Color statusColor = Color.SteelBlue;
@@ -354,28 +453,20 @@ namespace BizTalkDeploymentTool
                     initialMessage = "This action will fail. The server is not reachable.";
                     statusColor = Color.Salmon;
                 }
-                /* RecycleApplicationPool recycleAppPool = action as RecycleApplicationPool;
-                 if(recycleAppPool !=null && !recycleAppPool.IsApplicationPoolExisting)
-                 {
-                     initialMessage = "This action will fail. Application pool does not exist. Please create the application pool on the server.";
-                     statusColor = Color.Salmon;
-                 }*/
 
-                ListViewItem listViewItem = new ListViewItem(new string[] { action.DisplayName, "Not Executed", "Never", string.Empty, initialMessage });
+                ListViewItem listViewItem = new ListViewItem(new string[] { action.DisplayName, "Not Executed", "Never", string.Empty, initialMessage }, mainapplicationGroup);
                 listViewItem.SubItems[1].ForeColor = statusColor;
                 listViewItem.SubItems[1].Font = new Font(lblMsiLoc.Font.Name, lblMsiLoc.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
                 listViewItem.Tag = action;
                 listViewControl.Items.Add(listViewItem);
             }
-            //OurStopWatch.Exit();
         }
 
 
 
         private void LoadInProgressServiceInstances(string applicationName)
         {
-            //OurStopWatch.Enter("LoadInProgressServiceInstances");
             terminateToolStripMenuItem.Enabled = false;
             saveToFileToolStripMenuItem.Enabled = false;
             DataTable dt = SQLHelper.GetAllInProgressServiceInstances(applicationName);
@@ -385,7 +476,6 @@ namespace BizTalkDeploymentTool
                 terminateToolStripMenuItem.Enabled = true;
                 saveToFileToolStripMenuItem.Enabled = true;
             }
-            //OurStopWatch.Exit();
         }
 
 
@@ -631,7 +721,7 @@ namespace BizTalkDeploymentTool
             }
             else
             {
-                item.SubItems[3].Text = elapsed.ToString(@"hh\:mm\:ss\:fff"); 
+                item.SubItems[3].Text = elapsed.ToString(@"hh\:mm\:ss\:fff");
             }
             item.SubItems[4].Text = message;
             item.ToolTipText = message;
@@ -709,7 +799,7 @@ namespace BizTalkDeploymentTool
             }
             else if (e.Button == MouseButtons.Left)
             {
-                rTxtBxMessage.Text = listViewControl.FocusedItem.ToolTipText;
+                if (listViewControl.FocusedItem != null) rTxtBxMessage.Text = listViewControl.FocusedItem.ToolTipText;
             }
         }
 
@@ -1293,5 +1383,197 @@ namespace BizTalkDeploymentTool
             }
         }
 
+        private void selectMsiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DependencyDeployment.SelectMsi selectMsi = new DependencyDeployment.SelectMsi(treeViewDependency.SelectedNode.Text);
+            DialogResult dr = selectMsi.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                DependencyDeployment.DependentApplicationProperties dProps = treeViewDependency.SelectedNode.Tag as DependencyDeployment.DependentApplicationProperties;
+                dProps.MsiLocation = selectMsi.MsiLocation;
+                dProps.Environment = selectMsi.TargetEnv;
+                dProps.MsiSelected = true;
+                dProps.GuidApplicationMsi = selectMsi.ApplicationMsiGuid;
+                treeViewDependency.SelectedNode.Tag = dProps;
+                PopulatePropertyGrid(dProps);
+                treeViewDependency.SelectedNode.ImageIndex = 2;
+                treeViewDependency.SelectedNode.SelectedImageIndex = 2;
+            }
+        }
+
+        private void loadActionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReverseTravers(treeViewDependency.Nodes, 1);
+            SortListViewGroup();
+            tabControl.SelectedTab = tabControl.TabPages[0];
+            allDependentActionsLoaded = true;
+            StabilizeFormForDependency();
+
+        }
+
+        private void StabilizeFormForDependency()
+        {
+            loadActionsToolStripMenuItem.Enabled = false;
+            selectMsiToolStripMenuItem.Enabled = false;
+            btnBrowseConfig.Enabled = false;
+            tabControl.TabPages[2].ImageIndex = 1;
+            treeViewDependency.TopNode.SelectedImageIndex = 2;
+            treeViewDependency.TopNode.ImageIndex = 2;
+        }
+
+        private void SortListViewGroup()
+        {
+            ListViewGroup[] groups = new ListViewGroup[listViewControl.Groups.Count];
+            listViewControl.Groups.CopyTo(groups, 0);
+            for (int i = 0; i < listViewControl.Groups.Count; i++)
+            {
+                groups[i] = listViewControl.Groups[i];
+            }
+            Array.Sort(groups, new GroupComparer());
+            listViewControl.BeginUpdate();
+            listViewControl.Groups.Clear();
+
+            listViewControl.Groups.AddRange(groups);
+            listViewControl.EndUpdate();
+
+            //listViewControl.Items.Clear();
+            Dictionary<ListViewItem, ListViewGroup> listLVI = new Dictionary<ListViewItem, ListViewGroup>();
+            foreach (ListViewGroup lvg in listViewControl.Groups)
+            {
+                foreach (ListViewItem item in lvg.Items)
+                {
+                    listLVI.Add(item, lvg);
+                }
+            }
+            listViewControl.Items.Clear();
+            foreach (KeyValuePair<ListViewItem, ListViewGroup> item in listLVI)
+            {
+                item.Key.Group = item.Value;
+                listViewControl.Items.Add(item.Key);
+            }
+
+        }
+
+        class GroupComparer : IComparer
+        {
+            public int Compare(object objA, object objB)
+            {
+                return -Convert.ToInt32(((ListViewGroup)objA).Name).CompareTo(Convert.ToInt32(((ListViewGroup)objB).Name));
+            }
+        }
+
+
+        void ReverseTravers(TreeNodeCollection nodes, int depth)
+        {
+            if (nodes == null) return;
+            foreach (TreeNode child in nodes)
+            {
+                ReverseTravers(child.Nodes, depth + 1);
+                if (child.Text != txtAppName.Text)
+                    LoadActionsForDependentApps(child, depth);
+            }
+        }
+
+        private void LoadActionsForDependentApps(TreeNode child, int depth)
+        {
+            DependencyDeployment.DependentApplicationProperties appProps = child.Tag as DependencyDeployment.DependentApplicationProperties;
+            if (appProps != null)
+            {
+                ListViewGroup mainapplicationGroup = new ListViewGroup(depth.ToString(), string.Format("{0}----{1}",child.Text ,"Undeploy Actions"));
+                listViewControl.Groups.Add(mainapplicationGroup);
+                foreach (BaseAction action in ActionFactory.CreateUnDeployDependentAppsActions(child.Text, appProps.MsiLocation))
+                {
+                    Color statusColor = Color.SteelBlue;
+                    string initialMessage = string.Empty;
+                    if (!IsAdministrator() && action.IsAdminOnly)
+                    {
+                        initialMessage = "This action will fail. Action needs Administrator privileges to run. Please run the tool as Administrator.";
+                        statusColor = Color.Salmon;
+                    }
+                    UnInstallApplicationAction UninstallAction = action as UnInstallApplicationAction;
+
+                    if (UninstallAction != null && !GenericHelper.PingServer(UninstallAction.ServerName))
+                    {
+                        initialMessage = "This action will fail. The server is not reachable.";
+                        statusColor = Color.Salmon;
+                    }
+                    ListViewItem listViewItem = new ListViewItem(new string[] { action.DisplayName, "Not Executed", "Never", string.Empty, initialMessage }, mainapplicationGroup);
+                    listViewItem.SubItems[1].ForeColor = statusColor;
+                    listViewItem.SubItems[1].Font = new Font(lblMsiLoc.Font.Name, lblMsiLoc.Font.Size, FontStyle.Bold);
+                    listViewItem.UseItemStyleForSubItems = false;
+                    listViewItem.Tag = action;
+                    listViewControl.Items.Add(listViewItem);
+                }
+
+
+                mainapplicationGroup = new ListViewGroup((-depth).ToString(), string.Format("{0}-----{1}", child.Text , "Deploy Actions"));
+                listViewControl.Groups.Add(mainapplicationGroup);
+                foreach (BaseAction action in ActionFactory.CreateDeployDependentAppsActions(child.Text, appProps.MsiLocation, appProps.Environment))
+                {
+                    Color statusColor = Color.SteelBlue;
+                    string initialMessage = string.Empty;
+                    if (!IsAdministrator() && action.IsAdminOnly)
+                    {
+                        initialMessage = "This action will fail. Action needs Administrator privileges to run. Please run the tool as Administrator.";
+                        statusColor = Color.Salmon;
+                    }
+                    InstallApplicationAction installAction = action as InstallApplicationAction;
+
+                    if (installAction != null && !GenericHelper.PingServer(installAction.ServerName))
+                    {
+                        initialMessage = "This action will fail. The server is not reachable.";
+                        statusColor = Color.Salmon;
+                    }
+                    ListViewItem listViewItem = new ListViewItem(new string[] { action.DisplayName, "Not Executed", "Never", string.Empty, initialMessage }, mainapplicationGroup);
+                    listViewItem.SubItems[1].ForeColor = statusColor;
+                    listViewItem.SubItems[1].Font = new Font(lblMsiLoc.Font.Name, lblMsiLoc.Font.Size, FontStyle.Bold);
+                    listViewItem.UseItemStyleForSubItems = false;
+                    listViewItem.Tag = action;
+                    listViewControl.Items.Add(listViewItem);
+                }
+            }
+        }
+        private void treeViewDependency_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            treeViewDependency.SelectedNode = e.Node;
+            if (e.Button == MouseButtons.Right)
+            {
+                loadActionsToolStripMenuItem.Enabled = false;
+                bool allResolved = true;
+                foreach (TreeNode item in treeViewDependency.Nodes.FlattenTree())
+                {
+                    DependencyDeployment.DependentApplicationProperties props = item.Tag as DependencyDeployment.DependentApplicationProperties;
+                    if (props != null)
+                        allResolved = allResolved && props.MsiSelected;
+                }
+                if (allResolved)
+                {
+                    loadActionsToolStripMenuItem.Enabled = true;
+                }
+                if (allResolved && allDependentActionsLoaded)
+                {
+                    loadActionsToolStripMenuItem.Enabled = false;
+                }
+            }
+        }
+
+        
+
+        private void PopulatePropertyGrid(object obj)
+        {
+            if (obj != null)
+            {
+                //TypeDescriptor.AddAttributes(obj, new Attribute[] { new ReadOnlyAttribute(true) });
+            }
+            propertyGridDepApps.SelectedObject = obj;
+        }
+
+        private void treeViewDependency_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node != null)
+            {
+                PopulatePropertyGrid(e.Node.Tag);
+            }
+        }
     }
 }

@@ -178,6 +178,7 @@
     <Compile Include="Actions\CreateIISAppAction.cs" />
     <Compile Include="Actions\CreateAppPoolAction.cs" />
     <Compile Include="Actions\DeleteApplicationPool.cs" />
+    <Compile Include="Actions\ImportDependentApplicationAction.cs" />
     <Compile Include="Actions\ImportApplicationBindingAction.cs" />
     <Compile Include="Actions\ResourceBaseAction.cs" />
     <Compile Include="Actions\BreBaseAction.cs" />
@@ -247,6 +248,15 @@
     </Compile>
     <Compile Include="ApplicationArtifactsView.Designer.cs">
       <DependentUpon>ApplicationArtifactsView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DependencyDeployment\AssemblyInfo.cs" />
+    <Compile Include="DependencyDeployment\DependencyResolver.cs" />
+    <Compile Include="DependencyDeployment\DependentApplicationProperties.cs" />
+    <Compile Include="DependencyDeployment\SelectMsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DependencyDeployment\SelectMsi.Designer.cs">
+      <DependentUpon>SelectMsi.cs</DependentUpon>
     </Compile>
     <Compile Include="DeploymentHealthCheck.cs">
       <SubType>Form</SubType>
@@ -355,6 +365,12 @@
     </Compile>
     <Compile Include="SSOAffiliateUserCredentials.Designer.cs">
       <DependentUpon>SSOAffiliateUserCredentials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\Dashboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\Dashboard.Designer.cs">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </Compile>
     <Compile Include="WMI\ROOT.MicrosoftBizTalkServer.MSBTS_ReceiveLocation.cs">
       <SubType>Component</SubType>
@@ -473,6 +489,9 @@
     <EmbeddedResource Include="ApplicationArtifactsView.resx">
       <DependentUpon>ApplicationArtifactsView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DependencyDeployment\SelectMsi.resx">
+      <DependentUpon>SelectMsi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HostInstances.resx">
       <DependentUpon>HostInstances.cs</DependentUpon>
     </EmbeddedResource>
@@ -490,6 +509,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\BizTalkHostInstances.resx">
       <DependentUpon>BizTalkHostInstances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\Dashboard.resx">
+      <DependentUpon>Dashboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\MsiDeploy.resx">
       <DependentUpon>MsiDeploy.cs</DependentUpon>

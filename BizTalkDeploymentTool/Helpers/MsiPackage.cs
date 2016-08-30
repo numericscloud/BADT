@@ -26,8 +26,8 @@ namespace BizTalkDeploymentTool
             this.MsiPath = msiPath;
             try
             {
-                
-            _scannedPackage = DeploymentUnit.ScanPackage(msiPath);
+
+                _scannedPackage = DeploymentUnit.ScanPackage(msiPath);
             }
             catch (Exception)
             {
@@ -233,18 +233,26 @@ namespace BizTalkDeploymentTool
 
         public string GetMsiProperty(string property)
         {
-            using (var db = new Database(MsiPath, DatabaseOpenMode.ReadOnly))
+            try
             {
-                using (var view = db.OpenView(db.Tables["Property"].SqlSelectString))
+                using (var db = new Database(MsiPath, DatabaseOpenMode.ReadOnly))
                 {
-                    view.Execute();
-                    var q = from rec in view
-                            where rec.GetString("Property") == property
-                            select rec.GetString("Value");
-                    return q.ToList().FirstOrDefault();
+                    using (var view = db.OpenView(db.Tables["Property"].SqlSelectString))
+                    {
+                        view.Execute();
+                        var q = from rec in view
+                                where rec.GetString("Property") == property
+                                select rec.GetString("Value");
+                        return q.ToList().FirstOrDefault();
 
+                    }
                 }
             }
+            catch (Exception exe)
+            {
+                return "Cant fetch Guid value. " + exe.Message;
+            }
+
         }
 
     }
