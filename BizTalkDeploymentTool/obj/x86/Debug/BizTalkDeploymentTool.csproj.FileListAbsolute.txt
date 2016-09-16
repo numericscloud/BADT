@@ -77,4 +77,3 @@ D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.exe
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.pdb
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\bin\Debug\BizTalkDeploymentTool.pdb
-D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.csprojResolveAssemblyReference.cache

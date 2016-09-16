@@ -382,7 +382,7 @@ namespace BizTalkDeploymentTool
                     dependentAppNode.SelectedImageIndex = 1;
                     dependentAppNode.ContextMenuStrip = contextMenuStripSelectDependentApp;
                     dProps.Assemblies = dependentApps2[item.Value];
-                    dProps.ActionsLoaded = false;
+                   // dProps.ActionsLoaded = false;
                     dProps.MsiSelected = false;
                     dProps.GuidInstalledApplication = RegistryHelper.GetUninstallGuid(item.Value, Environment.MachineName);
                     dependentAppNode.Tag = dProps;

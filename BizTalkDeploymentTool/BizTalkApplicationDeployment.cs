@@ -191,7 +191,7 @@ namespace BizTalkDeploymentTool
 
             TreeNode biztalkApplicationsNode = biztalkGroupNode.Nodes.Add("Applications");
             biztalkApplicationsNode.Nodes.Add("");
-            TreeNode msiDeploy = parentNode.Nodes.Add(Constants._MSI_DEPLOY_TREENODE_TEXT);
+            TreeNode msiDeploy = biztalkGroupNode.Nodes.Add(Constants._MSI_DEPLOY_TREENODE_TEXT);
             msiDeploy.ImageIndex = 19;
             msiDeploy.SelectedImageIndex = 19;
 
@@ -199,11 +199,11 @@ namespace BizTalkDeploymentTool
               resourceDeploy.ImageIndex = 25;
               resourceDeploy.SelectedImageIndex = 25;*/
 
-            TreeNode hostInstancesNode = parentNode.Nodes.Add(Constants._HOST_INSTANCE_TREENODE_TEXT);
+            TreeNode hostInstancesNode = biztalkGroupNode.Nodes.Add(Constants._HOST_INSTANCE_TREENODE_TEXT);
             hostInstancesNode.ImageIndex = 7;
             hostInstancesNode.SelectedImageIndex = 7;
 
-            TreeNode iisNodes = parentNode.Nodes.Add("IIS");
+            TreeNode iisNodes = biztalkGroupNode.Nodes.Add("IIS");
             iisNodes.ImageIndex = 22;
             iisNodes.SelectedImageIndex = 22;
             iisNodes.Nodes.Add("");

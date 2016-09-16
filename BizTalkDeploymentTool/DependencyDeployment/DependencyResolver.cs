@@ -26,7 +26,7 @@ namespace BizTalkDeploymentTool.DependencyDeployment
                 dependentAssemblies.Add(assn.FullName);
             }
             return dependentAssemblies;
-           
+
         }
 
 
@@ -55,7 +55,7 @@ namespace BizTalkDeploymentTool.DependencyDeployment
             {
                 foreach (Microsoft.BizTalk.ExplorerOM.BtsAssembly item2 in explorerHelper.CatalogExplorer.Assemblies)
                 {
-                    if (item == item2.DisplayName && item2.Application.Name !=applicationName)
+                    if (item == item2.DisplayName && item2.Application.Name != applicationName)
                     {
                         if (!dependency.ContainsKey(item))
                         {
@@ -63,6 +63,12 @@ namespace BizTalkDeploymentTool.DependencyDeployment
                         }
                     }
                 }
+            }
+
+            // List referenced application
+            foreach (Microsoft.BizTalk.ExplorerOM.Application item in application.BackReferences)
+            {
+                dependency.Add(item.Name + ": Referenced Application", item.Name);
             }
 
             return dependency;
