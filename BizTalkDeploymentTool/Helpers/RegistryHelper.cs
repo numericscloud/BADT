@@ -27,7 +27,7 @@ namespace BizTalkDeploymentTool.Helpers
         {
             string strdate = "";
             string val = GetKeyValue(applicationGuid, machineName, "InstallDate");
-            return String.IsNullOrEmpty(val) ? strdate : DateTime.ParseExact(val, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("D");            
+            return String.IsNullOrEmpty(val) ? strdate : DateTime.ParseExact(val, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("D");
         }
 
         public static bool IsMsiInstalled(string applicationGuid, string machineName)
@@ -123,7 +123,7 @@ namespace BizTalkDeploymentTool.Helpers
         /// <returns>Returns the application GUID value (Unique to each application on a server).</returns>  
         public static string GetUninstallGuidOfRemoteComputer(string applicationName, string machineName)
         {
-            string identifyingNumber = "";            
+            string identifyingNumber = "";
             using (RegistryKey remoteBaseKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, machineName))
             using (RegistryKey uninstallFolders = remoteBaseKey.OpenSubKey(Constants._UNINSTALL_REGISTRY + applicationName, false))
             {
@@ -163,6 +163,24 @@ namespace BizTalkDeploymentTool.Helpers
             string strpath = GetRegistryKeyValue(computerName, registryKeyPath, registryHive, name).Replace(":", "$");
             strpath = Path.Combine(string.Format("\\\\{0}\\{1}", computerName, strpath));
             return strpath;
+        }
+
+        public static string GetUninstallCommandFor(string productCode, string machineName)
+        {
+            productCode = string.Format("{0}{1}{2}", "{", productCode, "}");
+            using (RegistryKey remoteBaseKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, machineName))
+            using (RegistryKey uninstallFolders = remoteBaseKey.OpenSubKey(Constants._UNINSTALL_REGISTRY + productCode, false))
+            {
+                if (uninstallFolders != null)
+                {
+                    string displayName = (string)uninstallFolders.GetValue("DisplayName");
+                    string displayVersion = (string)uninstallFolders.GetValue("DisplayVersion");
+                    string uninstallCommand = (string)uninstallFolders.GetValue("UninstallString");
+                    return uninstallCommand;
+                }
+            }
+            return "";
+
         }
     }
 }

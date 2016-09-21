@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Security.Principal;
+using System.IO;
 
 namespace BizTalkDeploymentTool
 {
@@ -26,6 +27,7 @@ namespace BizTalkDeploymentTool
         bool IsartifactsNodeExpanded = false;
         bool IsIISNodeExpanded = false;
         bool IsMsiDeployInAction = false;
+        bool IsBTDFMsiDeployInAction = false;
         bool IsHostInstanceRestartInAction = false;
         ExplorerOMHelper explorerHelper = new ExplorerOMHelper(GlobalProperties.MgmtDBServer, GlobalProperties.MgmtDBName);
         List<BreRuleSetInfo> listPolicy = new List<BreRuleSetInfo>();
@@ -33,6 +35,7 @@ namespace BizTalkDeploymentTool
 
         BizTalkHostInstances btHostInstances = new BizTalkHostInstances();
         MsiDeploy msiDeploy = new MsiDeploy();
+        BTDFMsiDeploy btdfmsiDeploy = new BTDFMsiDeploy();
 
         RetstartHostInstances hInstance = new RetstartHostInstances();
         SSOAdminInspector ssoAdminInspector = new SSOAdminInspector();
@@ -45,6 +48,9 @@ namespace BizTalkDeploymentTool
             msiDeploy.ExecutionComplete += new EventHandler(MsiDeployComplete_Eventhandler);
             btHostInstances.ExecutionStarted += new EventHandler(HostInstancesStarted_Eventhandler);
             btHostInstances.ExecutionComplete += new EventHandler(HostInstancesComplete_Eventhandler);
+
+            btdfmsiDeploy.ExecutionStarted += new EventHandler(BtdfMsiDeployStarted_Eventhandler);
+            btdfmsiDeploy.ExecutionComplete += new EventHandler(BtdfMsiDeployComplete_Eventhandler);
         }
 
         private Microsoft.BizTalk.ExplorerOM.ApplicationCollection RefreshAppCollection()
@@ -67,6 +73,25 @@ namespace BizTalkDeploymentTool
             IsMsiDeployInAction = false;
             var treeNode = treeViewBizTalkApplications.FlattenTree()
                    .Where(n => n.Text == Constants._MSI_DEPLOY_TREENODE_TEXT)
+                   .ToList()[0];
+            treeNode.ImageIndex = 19;
+            treeNode.SelectedImageIndex = 19;
+        }
+
+        public void BtdfMsiDeployStarted_Eventhandler(object sender, EventArgs e)
+        {
+            IsBTDFMsiDeployInAction = true;
+            var treeNode = treeViewBizTalkApplications.FlattenTree()
+                     .Where(n => n.Text == Constants._BTDF_MSI_DEPLOY_TREENODE_TEXT)
+                     .ToList()[0];
+            treeNode.ImageIndex = 20;
+            treeNode.SelectedImageIndex = 20;
+        }
+        public void BtdfMsiDeployComplete_Eventhandler(object sender, EventArgs e)
+        {
+            IsBTDFMsiDeployInAction = false;
+            var treeNode = treeViewBizTalkApplications.FlattenTree()
+                   .Where(n => n.Text == Constants._BTDF_MSI_DEPLOY_TREENODE_TEXT)
                    .ToList()[0];
             treeNode.ImageIndex = 19;
             treeNode.SelectedImageIndex = 19;
@@ -194,6 +219,10 @@ namespace BizTalkDeploymentTool
             TreeNode msiDeploy = biztalkGroupNode.Nodes.Add(Constants._MSI_DEPLOY_TREENODE_TEXT);
             msiDeploy.ImageIndex = 19;
             msiDeploy.SelectedImageIndex = 19;
+
+            TreeNode btdfmsiDeploy = biztalkGroupNode.Nodes.Add(Constants._BTDF_MSI_DEPLOY_TREENODE_TEXT);
+            btdfmsiDeploy.ImageIndex = 19;
+            btdfmsiDeploy.SelectedImageIndex = 19;
 
             /*  TreeNode resourceDeploy = parentNode.Nodes.Add(Constants._RESOURCE_DEPLOY_TREENODE_TEXT);
               resourceDeploy.ImageIndex = 25;
@@ -516,6 +545,12 @@ namespace BizTalkDeploymentTool
             {
                 this.splitContainer1.Panel2.Controls.Add(msiDeploy);
             }
+
+            if (e.Node != null && e.Node.Parent != null && e.Node.Text == Constants._BTDF_MSI_DEPLOY_TREENODE_TEXT)
+            {
+                this.splitContainer1.Panel2.Controls.Add(btdfmsiDeploy);
+            }
+
             if (e.Node != null && e.Node.Parent != null && e.Node.Text == "Applications")
             {
                 this.splitContainer1.Panel2.Controls.Add(new UserControlListView(RefreshAppCollection()));
@@ -753,11 +788,28 @@ namespace BizTalkDeploymentTool
 
         private void BizTalkApplicationAdministration_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (IsMsiDeployInAction || IsHostInstanceRestartInAction)
+            if (IsMsiDeployInAction || IsHostInstanceRestartInAction || IsBTDFMsiDeployInAction)
             {
                 DialogResult result = DisplayQuestion("Actions are still executing. Do you want to close ? Closing can lead to inconsistent state in the environment.");
-                e.Cancel = (result == DialogResult.Cancel);
+                if (result == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+                else
+                {
+                    DeleteBTDFTemExtractedFolder();
+                }
             }
+            else
+            {
+                DeleteBTDFTemExtractedFolder();
+            }
+        }
+
+        private void DeleteBTDFTemExtractedFolder()
+        { 
+            if (Directory.Exists(btdfmsiDeploy.extractPath))
+                Directory.Delete(btdfmsiDeploy.extractPath, true);
         }
         private DialogResult DisplayQuestion(string message)
         {

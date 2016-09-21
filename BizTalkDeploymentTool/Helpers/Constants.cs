@@ -13,6 +13,7 @@ namespace BizTalkDeploymentTool
        public const string _DELETE_APPLICATION = "Delete application";
        public const string _UNISTALL_APPLICATION = "Uninstall application: {0} from {1}";
        public const string _INSTALL_APPLICATION = "Install application on {0}";
+       public const string _DEPLOYBTDF_APPLICATION = "BTDF Deploy application on {0}";
        public const string _IMPORT_APPLICATION = "Import application";
        public const string _IMPORT_BINDING = "Import application binding";
        public const string _UNDEPLOY_ACTION_PAGE_TEXT = "UnDeploy Actions";
@@ -63,9 +64,11 @@ namespace BizTalkDeploymentTool
        public const string _AFTER_RUN_TOBECOMPARED_STATUS_SUFFIX = "AfterRunTobeCompared_.xml";
        public const string _BTDT_COMAPRE_STATUS = "BTDTApplicationStatusDifferenceReport.html";
        public const string _AFTER_RUN_STATUS_SUFFIX = "AfterRun_.xml";
+       public const string _BTDF_SETTINGSFILENAMEFILTER = "*SettingsFileGenerator.*";
 
 
        public const string _MSI_DEPLOY_TREENODE_TEXT = "Deploy Application(.msi) on farm";
+       public const string _BTDF_MSI_DEPLOY_TREENODE_TEXT = "(Beta) Deploy BTDF msi on farm";
        public const string _RESOURCE_DEPLOY_TREENODE_TEXT = "Deploy from resources(.dll) on farm";
        public const string _HOST_INSTANCE_TREENODE_TEXT = "Host Instances";
     }

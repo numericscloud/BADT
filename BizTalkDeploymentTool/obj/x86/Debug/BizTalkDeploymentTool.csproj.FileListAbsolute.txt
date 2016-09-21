@@ -51,6 +51,7 @@ D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.SSOAffiliateUserCredentials.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.ApplicationDeploymentHealthCheck.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.BizTalkHostInstances.resources
+D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.BTDFMsiDeploy.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.UserControls.Dashboard.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.MsiDeploy.resources
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.UserControls.ResourceDeploy.resources
@@ -77,3 +78,4 @@ D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.exe
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.pdb
 D:\Solutions\Git\BADT\BizTalkDeploymentTool\bin\Debug\BizTalkDeploymentTool.pdb
+D:\Solutions\Git\BADT\BizTalkDeploymentTool\obj\x86\Debug\BizTalkDeploymentTool.csprojResolveAssemblyReference.cache

@@ -287,7 +287,7 @@
             this.btnToggle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnToggle.Image = global::BizTalkDeploymentTool.Properties.Resources._112_RefreshArrow_Green_16x16_72;
             this.btnToggle.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnToggle.Location = new System.Drawing.Point(4, 1167);
+            this.btnToggle.Location = new System.Drawing.Point(4, 698);
             this.btnToggle.Name = "btnToggle";
             this.btnToggle.Size = new System.Drawing.Size(130, 25);
             this.btnToggle.TabIndex = 14;
@@ -304,7 +304,7 @@
             this.btnExecute.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExecute.Image = ((System.Drawing.Image)(resources.GetObject("btnExecute.Image")));
             this.btnExecute.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnExecute.Location = new System.Drawing.Point(164, 1167);
+            this.btnExecute.Location = new System.Drawing.Point(164, 698);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 25);
             this.btnExecute.TabIndex = 10;
@@ -335,7 +335,7 @@
             this.grpBxMSI.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grpBxMSI.Location = new System.Drawing.Point(3, 3);
             this.grpBxMSI.Name = "grpBxMSI";
-            this.grpBxMSI.Size = new System.Drawing.Size(1586, 159);
+            this.grpBxMSI.Size = new System.Drawing.Size(1163, 159);
             this.grpBxMSI.TabIndex = 8;
             this.grpBxMSI.TabStop = false;
             this.grpBxMSI.Text = "Deployment Configurations";
@@ -397,7 +397,7 @@
             this.btnBrowseConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowseConfig.Image")));
             this.btnBrowseConfig.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBrowseConfig.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowseConfig.Location = new System.Drawing.Point(1492, 101);
+            this.btnBrowseConfig.Location = new System.Drawing.Point(1069, 101);
             this.btnBrowseConfig.Name = "btnBrowseConfig";
             this.btnBrowseConfig.Size = new System.Drawing.Size(82, 23);
             this.btnBrowseConfig.TabIndex = 6;
@@ -414,7 +414,7 @@
             this.txtSSOConfigLoc.Location = new System.Drawing.Point(118, 102);
             this.txtSSOConfigLoc.Name = "txtSSOConfigLoc";
             this.txtSSOConfigLoc.ReadOnly = true;
-            this.txtSSOConfigLoc.Size = new System.Drawing.Size(1357, 21);
+            this.txtSSOConfigLoc.Size = new System.Drawing.Size(934, 21);
             this.txtSSOConfigLoc.TabIndex = 5;
             // 
             // txtMSILocation
@@ -426,7 +426,7 @@
             this.txtMSILocation.Location = new System.Drawing.Point(118, 20);
             this.txtMSILocation.Name = "txtMSILocation";
             this.txtMSILocation.ReadOnly = true;
-            this.txtMSILocation.Size = new System.Drawing.Size(1357, 21);
+            this.txtMSILocation.Size = new System.Drawing.Size(934, 21);
             this.txtMSILocation.TabIndex = 1;
             // 
             // btnBrowseMSI
@@ -437,7 +437,7 @@
             this.btnBrowseMSI.Image = ((System.Drawing.Image)(resources.GetObject("btnBrowseMSI.Image")));
             this.btnBrowseMSI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnBrowseMSI.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnBrowseMSI.Location = new System.Drawing.Point(1492, 20);
+            this.btnBrowseMSI.Location = new System.Drawing.Point(1069, 20);
             this.btnBrowseMSI.Name = "btnBrowseMSI";
             this.btnBrowseMSI.Size = new System.Drawing.Size(82, 23);
             this.btnBrowseMSI.TabIndex = 2;
@@ -466,11 +466,11 @@
             this.tabControl.Controls.Add(this.tabPage2);
             this.tabControl.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.tabControl.ImageList = this.imageList1;
-            this.tabControl.Location = new System.Drawing.Point(7, 201);
+            this.tabControl.Location = new System.Drawing.Point(4, 197);
             this.tabControl.Name = "tabControl";
             this.tabControl.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1600, 956);
+            this.tabControl.Size = new System.Drawing.Size(1170, 487);
             this.tabControl.TabIndex = 17;
             this.tabControl.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControl1_Selected);
             // 
@@ -480,7 +480,7 @@
             this.ActionsPage.Location = new System.Drawing.Point(4, 23);
             this.ActionsPage.Name = "ActionsPage";
             this.ActionsPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ActionsPage.Size = new System.Drawing.Size(1592, 929);
+            this.ActionsPage.Size = new System.Drawing.Size(1162, 460);
             this.ActionsPage.TabIndex = 0;
             this.ActionsPage.Text = "Deploy Actions";
             this.ActionsPage.UseVisualStyleBackColor = true;
@@ -499,8 +499,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rTxtBxMessage);
-            this.splitContainer1.Size = new System.Drawing.Size(1586, 923);
-            this.splitContainer1.SplitterDistance = 854;
+            this.splitContainer1.Size = new System.Drawing.Size(1156, 454);
+            this.splitContainer1.SplitterDistance = 420;
             this.splitContainer1.TabIndex = 14;
             // 
             // listViewControl
@@ -519,7 +519,7 @@
             this.listViewControl.GridLines = true;
             this.listViewControl.Location = new System.Drawing.Point(0, 0);
             this.listViewControl.Name = "listViewControl";
-            this.listViewControl.Size = new System.Drawing.Size(1586, 854);
+            this.listViewControl.Size = new System.Drawing.Size(1156, 420);
             this.listViewControl.TabIndex = 13;
             this.listViewControl.UseCompatibleStateImageBehavior = false;
             this.listViewControl.View = System.Windows.Forms.View.Details;
@@ -564,7 +564,7 @@
             this.rTxtBxMessage.Location = new System.Drawing.Point(0, 0);
             this.rTxtBxMessage.Name = "rTxtBxMessage";
             this.rTxtBxMessage.ReadOnly = true;
-            this.rTxtBxMessage.Size = new System.Drawing.Size(1586, 65);
+            this.rTxtBxMessage.Size = new System.Drawing.Size(1156, 30);
             this.rTxtBxMessage.TabIndex = 0;
             this.rTxtBxMessage.Text = "";
             // 
@@ -574,7 +574,7 @@
             this.InstancesPage.Location = new System.Drawing.Point(4, 23);
             this.InstancesPage.Name = "InstancesPage";
             this.InstancesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.InstancesPage.Size = new System.Drawing.Size(1592, 929);
+            this.InstancesPage.Size = new System.Drawing.Size(1162, 460);
             this.InstancesPage.TabIndex = 1;
             this.InstancesPage.Text = "All In-Progress Service Instances";
             this.InstancesPage.UseVisualStyleBackColor = true;
@@ -593,8 +593,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1586, 923);
-            this.splitContainer2.SplitterDistance = 769;
+            this.splitContainer2.Size = new System.Drawing.Size(1156, 454);
+            this.splitContainer2.SplitterDistance = 378;
             this.splitContainer2.TabIndex = 16;
             // 
             // instancesGridView
@@ -612,7 +612,7 @@
             this.instancesGridView.ReadOnly = true;
             this.instancesGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.instancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.instancesGridView.Size = new System.Drawing.Size(1586, 769);
+            this.instancesGridView.Size = new System.Drawing.Size(1156, 378);
             this.instancesGridView.TabIndex = 15;
             // 
             // contextMenuStripInstances
@@ -655,8 +655,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.label1);
-            this.splitContainer3.Size = new System.Drawing.Size(1586, 150);
-            this.splitContainer3.SplitterDistance = 103;
+            this.splitContainer3.Size = new System.Drawing.Size(1156, 72);
+            this.splitContainer3.SplitterDistance = 43;
             this.splitContainer3.TabIndex = 0;
             // 
             // progressBar1
@@ -664,7 +664,7 @@
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressBar1.Location = new System.Drawing.Point(0, 0);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(1586, 103);
+            this.progressBar1.Size = new System.Drawing.Size(1156, 43);
             this.progressBar1.TabIndex = 0;
             // 
             // label1
@@ -781,7 +781,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1600, 191);
+            this.tabControl1.Size = new System.Drawing.Size(1177, 191);
             this.tabControl1.TabIndex = 21;
             // 
             // tabPage1
@@ -790,7 +790,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1592, 165);
+            this.tabPage1.Size = new System.Drawing.Size(1169, 165);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Farm Deploy";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -817,7 +817,7 @@
             this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnClear.Image = ((System.Drawing.Image)(resources.GetObject("btnClear.Image")));
             this.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClear.Location = new System.Drawing.Point(375, 1167);
+            this.btnClear.Location = new System.Drawing.Point(375, 698);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 25);
             this.btnClear.TabIndex = 20;
@@ -832,7 +832,7 @@
             this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnStop.Image = global::BizTalkDeploymentTool.Properties.Resources.Stop1;
             this.btnStop.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-            this.btnStop.Location = new System.Drawing.Point(269, 1167);
+            this.btnStop.Location = new System.Drawing.Point(269, 698);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 25);
             this.btnStop.TabIndex = 19;
@@ -869,7 +869,7 @@
             this.Controls.Add(this.btnExecute);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F);
             this.Name = "MsiDeploy";
-            this.Size = new System.Drawing.Size(1600, 1200);
+            this.Size = new System.Drawing.Size(1177, 731);
             this.Load += new System.EventHandler(this.BTDT_Load);
             this.contextMenuStripAction.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

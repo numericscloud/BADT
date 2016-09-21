@@ -31,6 +31,8 @@ namespace BizTalkDeploymentTool.Actions
             public string PhysicalPath;
             public string AppName;
             public string SiteName;
+            public string UnDeployExistingApplication;
+            public string BTDFProjFile;
         }
 
         public static List<BaseAction> CreateActions(string applicationName, string msiLocation, List<string> webDirectories)
@@ -147,6 +149,60 @@ namespace BizTalkDeploymentTool.Actions
             return baseActions;
         }
 
+
+        public static List<BaseAction> CreateBTDFActions(string applicationName, string resourceName, string btdfProjFileDirectory, string productName, string productCode)
+        {
+            List<string> messagingServers = GlobalProperties.MessagingServers;
+
+            List<BaseAction> baseActions = new List<BaseAction>();
+            BizTalkInfo bizTalkInfo = new BizTalkInfo();
+            bool applicationExists = bizTalkInfo.CatalogExplorer.ApplicationExists(applicationName);
+
+            ApplicationInfo appInfo = new ApplicationInfo();
+            appInfo.ApplicationName = applicationName;
+            if (applicationExists)
+            {
+                baseActions.Add(new CheckForInProgressInstancesAction(appInfo));
+            }
+
+            foreach (string serverName in messagingServers)
+            {
+                string uninstallString = RegistryHelper.GetUninstallCommandFor(productCode, serverName);
+                if (!string.IsNullOrEmpty(uninstallString))
+                {
+                    baseActions.Add(new UnInstallBTDFMsiAction(uninstallString, serverName, productName));
+                }
+            }
+
+            foreach (string serverName in messagingServers)
+            {
+                ResourceInfo resourceInfo = new ResourceInfo();
+                resourceInfo.ServerName = serverName;
+                resourceInfo.ResourceName = resourceName;
+                baseActions.Add(new InstallBTDFMsiAction(resourceInfo));
+            }
+
+            for (int i = 0; i < messagingServers.Count; i++)
+            {
+                if (!messagingServers[i].Equals(Environment.MachineName))
+                {
+                    baseActions.Add(new DeployBTDFMsiAction(messagingServers[i], btdfProjFileDirectory));
+                }
+            }
+            for (int i = 0; i < messagingServers.Count; i++)
+            {
+                if (messagingServers[i].Equals(Environment.MachineName))
+                {
+                    baseActions.Add(new DeployBTDFMsiLastServerAction(messagingServers[i], btdfProjFileDirectory));
+                }
+            }
+            baseActions.Add(new ValidateStartApplicationAction(appInfo, bizTalkInfo));
+            
+
+            return baseActions;
+
+        }
+
         public static void UpdateActions(List<BaseAction> actions, ActionParameters parameters)
         {
             foreach (BaseAction action in actions)
@@ -238,7 +294,7 @@ namespace BizTalkDeploymentTool.Actions
                 importApplicationAction.TargetEnvironment = parameters.TargetEnvironment;
             }
 
-           
+
             if (action is InstallApplicationAction)
             {
                 InstallApplicationAction installApplicationAction = (InstallApplicationAction)action;
@@ -268,6 +324,23 @@ namespace BizTalkDeploymentTool.Actions
             {
                 ChangeWebAppPool changeWebAppPool = (ChangeWebAppPool)action;
                 changeWebAppPool.ApplicationPool = parameters.AppPoolName;
+            }
+            if (action is DeployBTDFMsiAction)
+            {
+                DeployBTDFMsiAction DeployBTDFMsiAction = (DeployBTDFMsiAction)action;
+                DeployBTDFMsiAction.TargetEnvironment = parameters.TargetEnvironment;
+                DeployBTDFMsiAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
+            }
+            if (action is DeployBTDFMsiLastServerAction)
+            {
+                DeployBTDFMsiLastServerAction DeployBTDFMsiLastServerAction = (DeployBTDFMsiLastServerAction)action;
+                DeployBTDFMsiLastServerAction.TargetEnvironment = parameters.TargetEnvironment;
+                DeployBTDFMsiLastServerAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
+            }
+            if (action is InstallBTDFMsiAction)
+            {
+                InstallBTDFMsiAction InstallBTDFMsiAction = (InstallBTDFMsiAction)action;
+                InstallBTDFMsiAction.TargetDir = parameters.TargetDir;
             }
         }
 

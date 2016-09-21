@@ -178,6 +178,11 @@
     <Compile Include="Actions\CreateIISAppAction.cs" />
     <Compile Include="Actions\CreateAppPoolAction.cs" />
     <Compile Include="Actions\DeleteApplicationPool.cs" />
+    <Compile Include="Actions\UnInstallBTDFMsiAction.cs" />
+    <Compile Include="Actions\UnDeployBTDFMsiAction.cs" />
+    <Compile Include="Actions\DeployBTDFMsiLastServerAction.cs" />
+    <Compile Include="Actions\DeployBTDFMsiAction.cs" />
+    <Compile Include="Actions\InstallBTDFMsiAction.cs" />
     <Compile Include="Actions\ImportDependentApplicationAction.cs" />
     <Compile Include="Actions\ImportApplicationBindingAction.cs" />
     <Compile Include="Actions\ResourceBaseAction.cs" />
@@ -297,6 +302,7 @@
     <Compile Include="Helpers\ApplicationLoad.cs" />
     <Compile Include="Helpers\BizTalkOperationsHelper.cs" />
     <Compile Include="ArtifactView\BreRuleSetInfo.cs" />
+    <Compile Include="Helpers\BTDFDeployHelper.cs" />
     <Compile Include="Helpers\BtsOrchestrationHelper.cs" />
     <Compile Include="Helpers\Impersonation.cs" />
     <Compile Include="Helpers\HighlightColors.cs" />
@@ -365,6 +371,12 @@
     </Compile>
     <Compile Include="SSOAffiliateUserCredentials.Designer.cs">
       <DependentUpon>SSOAffiliateUserCredentials.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\BTDFMsiDeploy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\BTDFMsiDeploy.Designer.cs">
+      <DependentUpon>BTDFMsiDeploy.cs</DependentUpon>
     </Compile>
     <Compile Include="UserControls\Dashboard.cs">
       <SubType>UserControl</SubType>
@@ -509,6 +521,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\BizTalkHostInstances.resx">
       <DependentUpon>BizTalkHostInstances.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\BTDFMsiDeploy.resx">
+      <DependentUpon>BTDFMsiDeploy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>

@@ -25,13 +25,24 @@ namespace BizTalkDeploymentTool.WMI
             ManagementPath managementPath = new ManagementPath("Win32_Process");
             ManagementClass processClass = new ManagementClass
             (manScope, managementPath, objectGetOptions);
+            // Settings the parameters for the Create method in the process class
             ManagementBaseObject inParams = processClass.GetMethodParameters("Create");
 
-           
+            try
+            {
+                ManagementPath processStartupClassPath = new ManagementPath("Win32_ProcessStartup");
+                ManagementClass processStartupClass = new ManagementClass(manScope, processStartupClassPath, objectGetOptions);
+                ManagementObject processStartupInstance = processStartupClass.CreateInstance();
+                processStartupInstance["ShowWindow"] = 0; // A const value for showing the window normally
+                inParams["ProcessStartupInformation"] = processStartupInstance;
+            }
+            catch
+            {
+                // Launch with Pop-Up window
+            }
             // Add the input parameters.
             inParams["CommandLine"] = commandLine;
 
-         
             // Execute the method and obtain the return values.
             ManagementBaseObject outParams =
                 processClass.InvokeMethod("Create", inParams, null);
