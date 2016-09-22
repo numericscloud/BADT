@@ -21,6 +21,7 @@ namespace BizTalkDeploymentTool.Actions
         public string SkipUndeploy { get; set; }
         public string ServerName { get; set; }
         public string BTDFProjFileDirectory { get; set; }
+        public Dictionary<string, string> Configurations { get; set; }
         public override bool IsAdminOnly
         {
             get
@@ -41,6 +42,7 @@ namespace BizTalkDeploymentTool.Actions
         {
             this.TargetEnvironment = null;
             this.SkipUndeploy = null;
+            this.Configurations = null;
             this.ServerName = serverName;
             this.BTDFProjFileDirectory = btdfProjFileDirectory;
         }
@@ -100,11 +102,10 @@ namespace BizTalkDeploymentTool.Actions
         {
             //  /p:DeployBizTalkMgmtDB=true;Configuration=Server;SkipUndeploy=true /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile="C:\Program Files\MyBizTalkApp\1.0\DeployResults\DeployResults.txt" "C:\Program Files\MyBizTalkApp\1.0\Deployment\MyBizTalkApp.btdfproj" /p:ENV_SETTINGS="C:\Program Files\MyBizTalkApp\1.0\Deployment\EnvironmentSettings\Exported_ProdSettings.xml"
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("{0} /p:DeployBizTalkMgmtDB={1};Configuration=Server;SkipUndeploy={2} /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile={3} {4} /p:ENV_SETTINGS={5}", msbuildLoc.Encode(), false.ToString(), this.SkipUndeploy, batchFileLog.Encode(), btdfPrjFile.Encode(), this.TargetEnvironment == null ? string.Empty : this.TargetEnvironment.Encode()));
+            string customConfig = GenericHelper.BuildParametersFromConfigurations(this.Configurations);
+            sb.AppendLine(string.Format("{0} /p:DeployBizTalkMgmtDB={1};Configuration=Server;SkipUndeploy={2} /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile={3} {4} /p:ENV_SETTINGS={5} {6}", msbuildLoc.Encode(), false.ToString(), this.SkipUndeploy, batchFileLog.Encode(), btdfPrjFile.Encode(), this.TargetEnvironment == null ? string.Empty : this.TargetEnvironment.Encode(), customConfig));
             File.WriteAllText(batchFile, sb.ToString());
         }
-
-        
 
     }
 }

@@ -83,6 +83,7 @@ namespace BizTalkDeploymentTool
                     btnStop.Visible = false;
                     btnToggle.Visible = false;
                     chkBoxUnDeploy.Checked = true;
+                    cbTargetEnvironment.Enabled = true;
                     cbTargetEnvironment.DataSource = null;
                     txtAppName.Text = string.Empty;
                     txtMSILocation.Text = string.Empty;
@@ -95,14 +96,15 @@ namespace BizTalkDeploymentTool
                     terminateToolStripMenuItem.Enabled = false;
                     saveToFileToolStripMenuItem.Enabled = false;
                     DeleteTempBTDFMsiExtractedFolder();
+                    dataGridView1.Rows.Clear();
+                    dataGridView1.Refresh();
                     UpdateCursor(Cursors.Default);
                     break;
 
                 case FormStateEnum.End:
-
+                    cbTargetEnvironment.Enabled = true;
                     UpdateCursor(Cursors.Default);
                     chkBoxUnDeploy.Enabled = false;
-                    cbTargetEnvironment.Enabled = false;
                     btnExecute.Enabled = true;
                     btnClear.Enabled = true;
                     threadProcessor = null;
@@ -141,14 +143,15 @@ namespace BizTalkDeploymentTool
             bool allActionExecuted = true;
             foreach (ListViewItem item in listViewControl.Items)
             {
-                if(item.SubItems[1].Text == "Not Executed")
+                if (item.SubItems[1].Text == "Not Executed" || item.SubItems[1].Text == "Failure")
                 {
                     allActionExecuted = false;
                     break;
                 }
             }
-            if(allActionExecuted)
+            if (allActionExecuted)
             {
+                btnExecute.Enabled = false;
                 DeleteTempBTDFMsiExtractedFolder();
             }
         }
@@ -156,7 +159,7 @@ namespace BizTalkDeploymentTool
         private void DeleteTempBTDFMsiExtractedFolder()
         {
             if (Directory.Exists(extractPath))
-                    Directory.Delete(extractPath, true);
+                Directory.Delete(extractPath, true);
         }
 
         private void UpdateCursor(Cursor cursor)
@@ -193,12 +196,13 @@ namespace BizTalkDeploymentTool
         private void btnBrowseMSI_Click(object sender, EventArgs e)
         {
             string fileToOpen = string.Empty;
-            listViewControl.Items.Clear();
-            DeleteTempBTDFMsiExtractedFolder();
+           
             try
             {
                 if (openMsiFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    listViewControl.Items.Clear();
+                    DeleteTempBTDFMsiExtractedFolder();
                     fileToOpen = openMsiFileDialog.FileName;
                     txtMSILocation.Text = fileToOpen;
                     extractPath = ExtractBTDFMsi(fileToOpen);
@@ -210,6 +214,7 @@ namespace BizTalkDeploymentTool
                         PopulateEnvironment(extractPath);
                         LoadActions(applicationName, productName, productCode, fileToOpen);
                         LoadInProgressServiceInstances(txtAppName.Text);
+                        LoadConfiguration(GetInstallWizardFile(extractPath));
                     }
                     else
                     {
@@ -225,7 +230,23 @@ namespace BizTalkDeploymentTool
             {
                 this.FormState = FormStateEnum.NotProcessing;
             }
+        }
 
+        private void LoadConfiguration(string installWizardFilePath)
+        {
+            dataGridView1.Rows.Clear();
+            dataGridView1.Refresh();
+            XmlDocument xDoc = new XmlDocument();
+            xDoc.Load(installWizardFilePath);
+            XmlNodeList envUIConfigItem = xDoc.SelectNodes("//*[local-name()='SetEnvUIConfigItem']");
+            foreach (XmlNode node in envUIConfigItem)
+            {
+                if (node.SelectSingleNode("EnvironmentVarName").InnerText != "BT_DEPLOY_MGMT_DB" && node.SelectSingleNode("EnvironmentVarName").InnerText != "ENV_SETTINGS")
+                {
+                    dataGridView1.Rows.Add(node.SelectSingleNode("PromptText").InnerText, node.SelectSingleNode("EnvironmentVarName").InnerText, "");
+                }
+            }
+            dataGridView1.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
         private void LoadActions(string applicationName, string productName, string productCode, string fileToOpen)
@@ -351,6 +372,21 @@ namespace BizTalkDeploymentTool
 
         }
 
+        private string GetInstallWizardFile(string extractPath)
+        {
+            string[] files = Directory.GetFiles(extractPath, "*InstallWizard.xml", SearchOption.AllDirectories);
+            if (files.Count() > 0)
+            {
+                return files[0];
+            }
+            else
+            {
+                DisplayError(string.Format("Can not find a valid InstallWizard file for configurations ", files.Count()));
+                return "";
+            }
+
+        }
+
         private string ExtractBTDFMsi(string fileToOpen)
         {
             string appNamefromMsi = Path.GetFileNameWithoutExtension(fileToOpen);
@@ -421,7 +457,12 @@ namespace BizTalkDeploymentTool
             }
             obj.TargetDir = textBoxInstallLocation.Text;
             obj.UnDeployExistingApplication = chkBoxUnDeploy.Checked.ToString();
-
+            Dictionary<string, string> configurations = new Dictionary<string, string>();
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                configurations.Add(row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
+            }
+            obj.Configurations = configurations;
             return obj;
         }
 

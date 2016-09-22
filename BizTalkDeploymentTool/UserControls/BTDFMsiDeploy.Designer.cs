@@ -30,6 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BTDFMsiDeploy));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openMsiFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnExecute = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
@@ -62,13 +64,18 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.instancesGridView = new System.Windows.Forms.DataGridView();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.label3 = new System.Windows.Forms.Label();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.contextMenuStripInstances = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.terminateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.label3 = new System.Windows.Forms.Label();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.folderSaveMessagesBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EnvironmentVariableName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grpBxMSI.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -86,11 +93,13 @@
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.instancesGridView)).BeginInit();
+            this.contextMenuStripInstances.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.contextMenuStripInstances.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // openMsiFileDialog
@@ -188,9 +197,9 @@
             this.chkBoxUnDeploy.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkBoxUnDeploy.Location = new System.Drawing.Point(434, 50);
             this.chkBoxUnDeploy.Name = "chkBoxUnDeploy";
-            this.chkBoxUnDeploy.Size = new System.Drawing.Size(167, 17);
+            this.chkBoxUnDeploy.Size = new System.Drawing.Size(163, 17);
             this.chkBoxUnDeploy.TabIndex = 9;
-            this.chkBoxUnDeploy.Text = "UnDeploy Existing Application";
+            this.chkBoxUnDeploy.Text = "Undeploy existing application";
             this.chkBoxUnDeploy.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -335,6 +344,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.InstancesPage);
+            this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(4, 8);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -438,7 +448,7 @@
             this.InstancesPage.Location = new System.Drawing.Point(4, 22);
             this.InstancesPage.Name = "InstancesPage";
             this.InstancesPage.Padding = new System.Windows.Forms.Padding(3);
-            this.InstancesPage.Size = new System.Drawing.Size(876, 535);
+            this.InstancesPage.Size = new System.Drawing.Size(876, 518);
             this.InstancesPage.TabIndex = 1;
             this.InstancesPage.Text = "All In-Progress Service Instances";
             this.InstancesPage.UseVisualStyleBackColor = true;
@@ -457,8 +467,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.label3);
-            this.splitContainer3.Size = new System.Drawing.Size(870, 529);
-            this.splitContainer3.SplitterDistance = 499;
+            this.splitContainer3.Size = new System.Drawing.Size(870, 512);
+            this.splitContainer3.SplitterDistance = 482;
             this.splitContainer3.TabIndex = 0;
             // 
             // splitContainer4
@@ -475,8 +485,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.progressBar1);
-            this.splitContainer4.Size = new System.Drawing.Size(870, 499);
-            this.splitContainer4.SplitterDistance = 430;
+            this.splitContainer4.Size = new System.Drawing.Size(870, 482);
+            this.splitContainer4.SplitterDistance = 415;
             this.splitContainer4.TabIndex = 0;
             // 
             // instancesGridView
@@ -494,15 +504,41 @@
             this.instancesGridView.ReadOnly = true;
             this.instancesGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.instancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.instancesGridView.Size = new System.Drawing.Size(870, 430);
+            this.instancesGridView.Size = new System.Drawing.Size(870, 415);
             this.instancesGridView.TabIndex = 16;
+            // 
+            // contextMenuStripInstances
+            // 
+            this.contextMenuStripInstances.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.terminateToolStripMenuItem,
+            this.saveToFileToolStripMenuItem});
+            this.contextMenuStripInstances.Name = "contextMenuStripInstances";
+            this.contextMenuStripInstances.Size = new System.Drawing.Size(189, 48);
+            // 
+            // terminateToolStripMenuItem
+            // 
+            this.terminateToolStripMenuItem.Enabled = false;
+            this.terminateToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Delete_tableHS;
+            this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
+            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.terminateToolStripMenuItem.Text = "Terminate Instance(s)";
+            this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
+            // 
+            // saveToFileToolStripMenuItem
+            // 
+            this.saveToFileToolStripMenuItem.Enabled = false;
+            this.saveToFileToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.SaveHL;
+            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
+            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
+            this.saveToFileToolStripMenuItem.Text = "SaveToFile";
+            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
             // 
             // progressBar1
             // 
             this.progressBar1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressBar1.Location = new System.Drawing.Point(0, 0);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(870, 65);
+            this.progressBar1.Size = new System.Drawing.Size(870, 63);
             this.progressBar1.TabIndex = 1;
             // 
             // label3
@@ -536,31 +572,62 @@
             this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 0;
             // 
-            // contextMenuStripInstances
+            // tabPage2
             // 
-            this.contextMenuStripInstances.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.terminateToolStripMenuItem,
-            this.saveToFileToolStripMenuItem});
-            this.contextMenuStripInstances.Name = "contextMenuStripInstances";
-            this.contextMenuStripInstances.Size = new System.Drawing.Size(189, 48);
+            this.tabPage2.Controls.Add(this.dataGridView1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(876, 518);
+            this.tabPage2.TabIndex = 2;
+            this.tabPage2.Text = "Configuration";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // terminateToolStripMenuItem
+            // dataGridView1
             // 
-            this.terminateToolStripMenuItem.Enabled = false;
-            this.terminateToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Delete_tableHS;
-            this.terminateToolStripMenuItem.Name = "terminateToolStripMenuItem";
-            this.terminateToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.terminateToolStripMenuItem.Text = "Terminate Instance(s)";
-            this.terminateToolStripMenuItem.Click += new System.EventHandler(this.terminateToolStripMenuItem_Click);
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Description,
+            this.EnvironmentVariableName,
+            this.Value});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.dataGridView1.Name = "dataGridView1";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridView1.Size = new System.Drawing.Size(870, 512);
+            this.dataGridView1.TabIndex = 0;
             // 
-            // saveToFileToolStripMenuItem
+            // Description
             // 
-            this.saveToFileToolStripMenuItem.Enabled = false;
-            this.saveToFileToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.SaveHL;
-            this.saveToFileToolStripMenuItem.Name = "saveToFileToolStripMenuItem";
-            this.saveToFileToolStripMenuItem.Size = new System.Drawing.Size(188, 22);
-            this.saveToFileToolStripMenuItem.Text = "SaveToFile";
-            this.saveToFileToolStripMenuItem.Click += new System.EventHandler(this.saveToFileToolStripMenuItem_Click);
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 500;
+            // 
+            // EnvironmentVariableName
+            // 
+            this.EnvironmentVariableName.HeaderText = "Environment Variable Name";
+            this.EnvironmentVariableName.Name = "EnvironmentVariableName";
+            this.EnvironmentVariableName.ReadOnly = true;
+            this.EnvironmentVariableName.Width = 200;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value";
+            this.Value.Name = "Value";
+            this.Value.Width = 300;
             // 
             // BTDFMsiDeploy
             // 
@@ -588,11 +655,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.instancesGridView)).EndInit();
+            this.contextMenuStripInstances.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.contextMenuStripInstances.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -638,6 +707,11 @@
         private System.Windows.Forms.ToolStripMenuItem terminateToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToFileToolStripMenuItem;
         private System.Windows.Forms.FolderBrowserDialog folderSaveMessagesBrowserDialog;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn EnvironmentVariableName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
 
 
     }

@@ -6,6 +6,8 @@ using System.Xml;
 using System.Reflection;
 using System.Xml.Xsl;
 using System.Net.NetworkInformation;
+using System.Collections.Generic;
+using System.Text;
 
 namespace BizTalkDeploymentTool.Helpers
 {
@@ -122,6 +124,16 @@ namespace BizTalkDeploymentTool.Helpers
                 orchCodeTransform.Transform(xDoc.CreateNavigator(), null, writer);
                 return writer.ToString();
             }
+        }
+
+        public static string BuildParametersFromConfigurations(Dictionary<string, string> configurations)
+        {
+            StringBuilder configString = new StringBuilder(); ;
+            foreach (KeyValuePair<string, string> configuration in configurations)
+            {
+                configString.Append(string.Format(" /p:{0}={1}", configuration.Key, configuration.Value.Encode()));
+            }
+            return configString.ToString();
         }
 
     }

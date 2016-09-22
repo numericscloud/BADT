@@ -33,6 +33,7 @@ namespace BizTalkDeploymentTool.Actions
             public string SiteName;
             public string UnDeployExistingApplication;
             public string BTDFProjFile;
+            public Dictionary<string, string> Configurations;
         }
 
         public static List<BaseAction> CreateActions(string applicationName, string msiLocation, List<string> webDirectories)
@@ -330,12 +331,14 @@ namespace BizTalkDeploymentTool.Actions
                 DeployBTDFMsiAction DeployBTDFMsiAction = (DeployBTDFMsiAction)action;
                 DeployBTDFMsiAction.TargetEnvironment = parameters.TargetEnvironment;
                 DeployBTDFMsiAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
+                DeployBTDFMsiAction.Configurations = parameters.Configurations;
             }
             if (action is DeployBTDFMsiLastServerAction)
             {
                 DeployBTDFMsiLastServerAction DeployBTDFMsiLastServerAction = (DeployBTDFMsiLastServerAction)action;
                 DeployBTDFMsiLastServerAction.TargetEnvironment = parameters.TargetEnvironment;
                 DeployBTDFMsiLastServerAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
+                DeployBTDFMsiLastServerAction.Configurations = parameters.Configurations;
             }
             if (action is InstallBTDFMsiAction)
             {
