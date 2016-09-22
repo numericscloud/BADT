@@ -127,12 +127,12 @@ namespace BizTalkDeploymentTool
                     break;
 
                 case FormStateEnum.Processing:
+                    UpdateCursor(Cursors.WaitCursor);
                     btnExecute.Enabled = false;
                     btnClear.Enabled = false;
                     chkBoxUnDeploy.Enabled = false;
                     cbTargetEnvironment.Enabled = false;
                     grpBxMSI.Enabled = false;
-                    UpdateCursor(Cursors.WaitCursor);
                     break;
 
             }
@@ -201,6 +201,7 @@ namespace BizTalkDeploymentTool
             {
                 if (openMsiFileDialog.ShowDialog() == DialogResult.OK)
                 {
+                    this.FormState = FormStateEnum.Processing;
                     listViewControl.Items.Clear();
                     DeleteTempBTDFMsiExtractedFolder();
                     fileToOpen = openMsiFileDialog.FileName;
@@ -290,10 +291,10 @@ namespace BizTalkDeploymentTool
             }
         }
 
-        private string ReadAppNameFromBTDFProjectFile(string btdfProjFile, out string productName, out string productVersion)
+        private string ReadAppNameFromBTDFProjectFile(string btdfProjFile, out string productName, out string productId)
         {
             productName = "";
-            productVersion = "";
+            productId = "";
             string data = File.ReadAllText(btdfProjFile);
             XmlDocument xDoc = new XmlDocument();
             xDoc.Load(btdfProjFile);
@@ -302,7 +303,7 @@ namespace BizTalkDeploymentTool
             {
                 txtAppName.Text = xNode.InnerText;
                 productName = xDoc.SelectSingleNode("//*[local-name()='ProductName']").InnerText;
-                productVersion = xDoc.SelectSingleNode("//*[local-name()='ProductId']").InnerText;
+                productId = xDoc.SelectSingleNode("//*[local-name()='ProductId']").InnerText;
                 string projectVersion = xDoc.SelectSingleNode("//*[local-name()='ProjectVersion']").InnerText;
                 textBoxInstallLocation.Text = Path.Combine(ConfigurationManager.AppSettings["MsiTargetDirectory"], productName, projectVersion);
                 return xNode.InnerText;
@@ -327,7 +328,7 @@ namespace BizTalkDeploymentTool
             string[] files = Directory.GetFiles(extractPath, Constants._BTDF_SETTINGSFILENAMEFILTER, SearchOption.AllDirectories);
             string[] fileESE = Directory.GetFiles(extractPath, "EnvironmentSettingsExporter.exe", SearchOption.AllDirectories);
 
-            if (fileESE.Count() == 1 && files.Count() == 1)
+            if (fileESE.Count() > 0 && files.Count() > 0)
             {
                 string settingFileDirectory = Path.GetDirectoryName(files[0]);
                 string result = "";
@@ -351,7 +352,6 @@ namespace BizTalkDeploymentTool
             {
                 cbTargetEnvironment.DataSource = null;
                 DisplayMessage(string.Format("Can not find a valid SettingsFileGenerator. There are {0} SettingsFileGenerator files present ", files.Count()));
-
             }
             return bindings;
         }
@@ -359,7 +359,7 @@ namespace BizTalkDeploymentTool
         private string PopulateBTDFProjectName(string extractPath)
         {
             string[] files = Directory.GetFiles(extractPath, "*.btdfproj", SearchOption.AllDirectories);
-            if (files.Count() == 1)
+            if (files.Count() > 0)
             {
                 textBoxBTDFProjName.Text = Path.GetFileName(files[0]);
                 return files[0];
@@ -381,7 +381,7 @@ namespace BizTalkDeploymentTool
             }
             else
             {
-                DisplayError(string.Format("Can not find a valid InstallWizard file for configurations ", files.Count()));
+                DisplayMessage(string.Format("There are no valid InstallWizard file within the package for custom configurations ", files.Count()));
                 return "";
             }
 
