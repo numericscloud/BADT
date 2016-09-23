@@ -67,7 +67,7 @@ namespace BizTalkDeploymentTool.Actions
 
                 this.TargetEnvironment = files1.Count() > 0 ? GenericHelper.FormatPath(this.ServerName, files1[0]) : string.Empty;
 
-                CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, files[0]), batchFile, batchFileLog);
+                this.CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, files[0]), batchFile, batchFileLog);
                 result = Win32_Process.Create(this.ServerName, batchFile, out message);
                 if (File.Exists(batchFileLog))
                 {

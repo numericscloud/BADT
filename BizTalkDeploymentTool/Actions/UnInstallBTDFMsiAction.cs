@@ -16,7 +16,7 @@ namespace BizTalkDeploymentTool.Actions
     public class UnInstallBTDFMsiAction : BaseAction
     {
         public string UninstallString { get; set; }
-        public string ProductName { get; set; }
+        public string ApplicationName { get; set; }
         public string ServerName { get; set; }
         public override bool IsAdminOnly
         {
@@ -29,16 +29,16 @@ namespace BizTalkDeploymentTool.Actions
         {
             get
             {
-                return string.Format(Constants._UNISTALL_APPLICATION,this.ProductName, this.ServerName);
+                return string.Format(Constants._UNISTALL_APPLICATION,this.ApplicationName, this.ServerName);
             }
         }
 
-        public UnInstallBTDFMsiAction(string uninstallString, string serverName, string productName)
+        public UnInstallBTDFMsiAction(string uninstallString, string serverName, string applicationName)
             : base()
         {
             this.UninstallString = uninstallString;
             this.ServerName = serverName;
-            this.ProductName = productName;
+            this.ApplicationName = applicationName;
         }
 
         public override bool Execute(out string message)
@@ -46,14 +46,13 @@ namespace BizTalkDeploymentTool.Actions
             string batchFile = string.Empty;
             string batchFileLog = string.Empty;
             bool result = false;
-            string exceptionMessage = string.Empty;
             message = string.Empty;
             try
             {
                 string uniqueName = Guid.NewGuid().ToString();
                 batchFile = Path.Combine(GenericHelper.GetTempFolder(this.ServerName), uniqueName) + ".bat";
                 batchFileLog = Path.ChangeExtension(batchFile, "txt");
-                CreateAndSaveBatchFile(this.UninstallString, batchFile, batchFileLog);
+                this.CreateAndSaveBatchFile(this.UninstallString, batchFile, batchFileLog);
                 result = Win32_Process.Create(this.ServerName, batchFile, out message);
                 if (File.Exists(batchFileLog))
                 {
@@ -62,7 +61,7 @@ namespace BizTalkDeploymentTool.Actions
             }
             catch (Exception exe)
             {
-                exceptionMessage = exe.Message;
+                message = exe.Message;
             }
             finally
             {
@@ -75,7 +74,6 @@ namespace BizTalkDeploymentTool.Actions
                     File.Delete(batchFileLog);
                 }
             }
-            message = result ? message : exceptionMessage;
             result = message.Contains("Removal completed successfully") ? true : false;
             return result;
         }

@@ -52,7 +52,6 @@ namespace BizTalkDeploymentTool.Actions
             string batchFile = string.Empty;
             string batchFileLog = string.Empty;
             bool result = false;
-            string exceptionMessage = string.Empty;
             message = string.Empty;
             try
             {
@@ -66,7 +65,7 @@ namespace BizTalkDeploymentTool.Actions
 
                 this.TargetEnvironment = files1.Count() > 0 ? GenericHelper.FormatPath(this.ServerName, files1[0]) : string.Empty;
 
-                CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, files[0]), batchFile, batchFileLog);
+                this.CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, files[0]), batchFile, batchFileLog);
                 result = Win32_Process.Create(this.ServerName, batchFile, out message);
                 if (File.Exists(batchFileLog))
                 {
@@ -75,7 +74,7 @@ namespace BizTalkDeploymentTool.Actions
             }
             catch (Exception exe)
             {
-                exceptionMessage = exe.Message + "-- FAILED";
+                message = exe.Message + "-- FAILED";
             }
             finally
             {
@@ -92,7 +91,6 @@ namespace BizTalkDeploymentTool.Actions
                     // File.Delete(batchFileLog);
                 }
             }
-            message = result ? message : exceptionMessage;
             result = (message.Contains("-- FAILED") || message.Contains("Build FAILED.")) ? false : true;
             return result;
         }

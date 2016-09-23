@@ -53,7 +53,6 @@ namespace BizTalkDeploymentTool.Actions
             string batchFile = string.Empty;
             string batchFileLog = string.Empty;
             bool result = false;
-            string exceptionMessage = string.Empty;
             message = string.Empty;
             try
             {
@@ -76,7 +75,7 @@ namespace BizTalkDeploymentTool.Actions
             }
             catch (Exception exe)
             {
-                exceptionMessage = exe.Message + "-- FAILED";
+                message = exe.Message + "-- FAILED";
             }
             finally
             {
@@ -93,7 +92,6 @@ namespace BizTalkDeploymentTool.Actions
                     // File.Delete(batchFileLog);
                 }
             }
-            message = result ? message : exceptionMessage;
             result = (message.Contains("-- FAILED") || message.Contains("Build FAILED.")) ? false : true;
             return result;
         }

@@ -171,7 +171,7 @@ namespace BizTalkDeploymentTool.Actions
                 string uninstallString = RegistryHelper.GetUninstallCommandFor(productCode, serverName);
                 if (!string.IsNullOrEmpty(uninstallString))
                 {
-                    baseActions.Add(new UnInstallBTDFMsiAction(uninstallString, serverName, productName));
+                    baseActions.Add(new UnInstallBTDFMsiAction(uninstallString, serverName, applicationName));
                 }
             }
 

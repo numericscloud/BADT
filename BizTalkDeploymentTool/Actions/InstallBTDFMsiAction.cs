@@ -43,7 +43,6 @@ namespace BizTalkDeploymentTool.Actions
             string batchFile = string.Empty;
             string batchFileLog = string.Empty;
             bool result = false;
-            string exceptionMessage = string.Empty;
             message = string.Empty;
             try
             {
@@ -61,7 +60,7 @@ namespace BizTalkDeploymentTool.Actions
             }
             catch (Exception exe)
             {
-                exceptionMessage = exe.Message;
+                message = exe.Message;
             }
             finally
             {
@@ -78,7 +77,6 @@ namespace BizTalkDeploymentTool.Actions
                     File.Delete(batchFileLog);
                 }
             }
-            message = result ? message : exceptionMessage;
             result = (message.Contains("Installation completed successfully")) ? true : false;
             return result;
         }
