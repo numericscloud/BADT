@@ -252,7 +252,7 @@ namespace BizTalkDeploymentTool
 
         private void LoadActions(string applicationName, string productName, string productCode, string fileToOpen)
         {
-            foreach (BaseAction action in ActionFactory.CreateBTDFActions(applicationName, fileToOpen, textBoxInstallLocation.Text, productName, productCode))
+            foreach (BaseAction action in ActionFactory.CreateBTDFActions(applicationName, fileToOpen, productName, productCode))
             {
                 Color statusColor = Color.SteelBlue;
                 string initialMessage = string.Empty;
@@ -463,6 +463,7 @@ namespace BizTalkDeploymentTool
                 configurations.Add(row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
             }
             obj.Configurations = configurations;
+            obj.BTDFProjFileDirectory = textBoxInstallLocation.Text;
             return obj;
         }
 
@@ -888,6 +889,16 @@ namespace BizTalkDeploymentTool
         private void listViewControl_SelectedIndexChanged(object sender, EventArgs e)
         {
             rTxtBxMessage.Text = listViewControl.FocusedItem != null ? listViewControl.FocusedItem.ToolTipText : string.Empty;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog installPathBrowse = new FolderBrowserDialog();
+            DialogResult res = installPathBrowse.ShowDialog();
+            if(!string.IsNullOrEmpty(installPathBrowse.SelectedPath))
+            {
+                textBoxInstallLocation.Text = installPathBrowse.SelectedPath;
+            }
         }
     }
 }

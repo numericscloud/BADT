@@ -26,7 +26,7 @@ namespace BizTalkDeploymentTool.Actions
         {
             get
             {
-                return false;
+                return true;
             }
         }
         public override string DisplayName
@@ -37,13 +37,13 @@ namespace BizTalkDeploymentTool.Actions
             }
         }
 
-        public DeployBTDFMsiLastServerAction(string serverName, string btdfProjFileDirectory)
+        public DeployBTDFMsiLastServerAction(string serverName)
             : base()
         {
             this.TargetEnvironment = null;
             this.SkipUndeploy = null;
             this.ServerName = serverName;
-            this.BTDFProjFileDirectory = btdfProjFileDirectory;
+            this.BTDFProjFileDirectory = null;
         }
 
         public override bool Execute(out string message)

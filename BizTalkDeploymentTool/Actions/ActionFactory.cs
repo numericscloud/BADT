@@ -32,7 +32,7 @@ namespace BizTalkDeploymentTool.Actions
             public string AppName;
             public string SiteName;
             public string UnDeployExistingApplication;
-            public string BTDFProjFile;
+            public string BTDFProjFileDirectory;
             public Dictionary<string, string> Configurations;
         }
 
@@ -151,7 +151,7 @@ namespace BizTalkDeploymentTool.Actions
         }
 
 
-        public static List<BaseAction> CreateBTDFActions(string applicationName, string resourceName, string btdfProjFileDirectory, string productName, string productCode)
+        public static List<BaseAction> CreateBTDFActions(string applicationName, string resourceName, string productName, string productCode)
         {
             List<string> messagingServers = GlobalProperties.MessagingServers;
 
@@ -187,14 +187,14 @@ namespace BizTalkDeploymentTool.Actions
             {
                 if (!messagingServers[i].Equals(Environment.MachineName))
                 {
-                    baseActions.Add(new DeployBTDFMsiAction(messagingServers[i], btdfProjFileDirectory));
+                    baseActions.Add(new DeployBTDFMsiAction(messagingServers[i]));
                 }
             }
             for (int i = 0; i < messagingServers.Count; i++)
             {
                 if (messagingServers[i].Equals(Environment.MachineName))
                 {
-                    baseActions.Add(new DeployBTDFMsiLastServerAction(messagingServers[i], btdfProjFileDirectory));
+                    baseActions.Add(new DeployBTDFMsiLastServerAction(messagingServers[i]));
                 }
             }
             baseActions.Add(new ValidateStartApplicationAction(appInfo, bizTalkInfo));
@@ -332,6 +332,7 @@ namespace BizTalkDeploymentTool.Actions
                 DeployBTDFMsiAction.TargetEnvironment = parameters.TargetEnvironment;
                 DeployBTDFMsiAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
                 DeployBTDFMsiAction.Configurations = parameters.Configurations;
+                DeployBTDFMsiAction.BTDFProjFileDirectory = parameters.BTDFProjFileDirectory;
             }
             if (action is DeployBTDFMsiLastServerAction)
             {
@@ -339,6 +340,7 @@ namespace BizTalkDeploymentTool.Actions
                 DeployBTDFMsiLastServerAction.TargetEnvironment = parameters.TargetEnvironment;
                 DeployBTDFMsiLastServerAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
                 DeployBTDFMsiLastServerAction.Configurations = parameters.Configurations;
+                DeployBTDFMsiLastServerAction.BTDFProjFileDirectory = parameters.BTDFProjFileDirectory;
             }
             if (action is InstallBTDFMsiAction)
             {
