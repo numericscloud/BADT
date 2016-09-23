@@ -79,6 +79,7 @@ namespace BizTalkDeploymentTool.Actions
                 }
             }
             message = result ? message : exceptionMessage;
+            result = (message.Contains("Installation completed successfully")) ? true : false;
             return result;
         }
 

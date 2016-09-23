@@ -39,8 +39,16 @@ namespace BizTalkDeploymentTool.Actions
             {
                 this.BizTalkInfo.CatalogExplorer.Refresh();
                 Application app = this.BizTalkInfo.CatalogExplorer.Applications[this.ApplicationInfo.ApplicationName];
-                message = string.Format("Application current status is: {0}", app.Status.ToString());
-                result = app.Status == Status.Started ? true : false;                
+                if (app == null)
+                {
+                    message = string.Format("Application :{0} does not exists", this.ApplicationInfo.ApplicationName);
+                    result = false;
+                }
+                else
+                {
+                    message = string.Format("Application current status is: {0}", app.Status.ToString());
+                    result = app.Status == Status.Started ? true : false;
+                }
             }
             catch (Exception ex)
             {

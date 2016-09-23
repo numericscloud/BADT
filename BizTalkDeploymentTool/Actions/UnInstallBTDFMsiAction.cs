@@ -76,6 +76,7 @@ namespace BizTalkDeploymentTool.Actions
                 }
             }
             message = result ? message : exceptionMessage;
+            result = message.Contains("Removal completed successfully") ? true : false;
             return result;
         }
 

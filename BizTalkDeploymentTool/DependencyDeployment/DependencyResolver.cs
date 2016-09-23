@@ -66,9 +66,12 @@ namespace BizTalkDeploymentTool.DependencyDeployment
             }
 
             // List referenced application
-            foreach (Microsoft.BizTalk.ExplorerOM.Application item in application.BackReferences)
+            if (application != null)
             {
-                dependency.Add(item.Name + ": Referenced Application", item.Name);
+                foreach (Microsoft.BizTalk.ExplorerOM.Application item in application.BackReferences)
+                {
+                    dependency.Add(item.Name + ": Referenced Application", item.Name);
+                }
             }
 
             return dependency;

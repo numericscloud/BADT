@@ -368,9 +368,12 @@ namespace BizTalkDeploymentTool
         {
             DependencyDeployment.DependencyResolver cl = new DependencyDeployment.DependencyResolver();
             Dictionary<string, string> dependentApps = cl.ResolveDependency(p);
-            Dictionary<string, List<string>> dependentApps2 = dependentApps.GroupBy(r => r.Value)
-                  .ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
-
+            Dictionary<string, List<string>> dependentApps2 = new Dictionary<string, List<string>>();
+            if (dependentApps != null)
+            {
+                dependentApps2 = dependentApps.GroupBy(r => r.Value)
+                      .ToDictionary(t => t.Key, t => t.Select(r => r.Key).ToList());
+            }
             foreach (KeyValuePair<string, string> item in dependentApps)
             {
                 TreeNode dependentAppNode = baseNode.Nodes[item.Value];
