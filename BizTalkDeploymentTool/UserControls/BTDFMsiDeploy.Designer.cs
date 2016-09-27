@@ -30,15 +30,15 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BTDFMsiDeploy));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.openMsiFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.btnExecute = new System.Windows.Forms.Button();
             this.btnStop = new System.Windows.Forms.Button();
             this.btnToggle = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
             this.grpBxMSI = new System.Windows.Forms.GroupBox();
-            this.chkBoxUnDeploy = new System.Windows.Forms.CheckBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxInstallLocation = new System.Windows.Forms.TextBox();
             this.textBoxBTDFProjName = new System.Windows.Forms.TextBox();
@@ -59,6 +59,14 @@
             this.LastRun = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Elapsed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Message = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStripAction = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.checkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uncheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.runXSelectedActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.runAllCheckedActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.rTxtBxMessage = new System.Windows.Forms.RichTextBox();
             this.InstancesPage = new System.Windows.Forms.TabPage();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
@@ -76,7 +84,6 @@
             this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.folderSaveMessagesBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.button1 = new System.Windows.Forms.Button();
             this.grpBxMSI.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -84,6 +91,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            this.contextMenuStripAction.SuspendLayout();
             this.InstancesPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
@@ -172,7 +180,6 @@
             // 
             this.grpBxMSI.BackColor = System.Drawing.SystemColors.Window;
             this.grpBxMSI.Controls.Add(this.button1);
-            this.grpBxMSI.Controls.Add(this.chkBoxUnDeploy);
             this.grpBxMSI.Controls.Add(this.label2);
             this.grpBxMSI.Controls.Add(this.textBoxInstallLocation);
             this.grpBxMSI.Controls.Add(this.textBoxBTDFProjName);
@@ -192,17 +199,21 @@
             this.grpBxMSI.TabStop = false;
             this.grpBxMSI.Text = "Deployment Configurations";
             // 
-            // chkBoxUnDeploy
+            // button1
             // 
-            this.chkBoxUnDeploy.AutoSize = true;
-            this.chkBoxUnDeploy.Checked = true;
-            this.chkBoxUnDeploy.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkBoxUnDeploy.Location = new System.Drawing.Point(434, 50);
-            this.chkBoxUnDeploy.Name = "chkBoxUnDeploy";
-            this.chkBoxUnDeploy.Size = new System.Drawing.Size(163, 17);
-            this.chkBoxUnDeploy.TabIndex = 9;
-            this.chkBoxUnDeploy.Text = "Undeploy existing application";
-            this.chkBoxUnDeploy.UseVisualStyleBackColor = true;
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F);
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.button1.Location = new System.Drawing.Point(797, 131);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(82, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "         Browse";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -392,6 +403,7 @@
             this.LastRun,
             this.Elapsed,
             this.Message});
+            this.listViewControl.ContextMenuStrip = this.contextMenuStripAction;
             this.listViewControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewControl.FullRowSelect = true;
             this.listViewControl.GridLines = true;
@@ -431,6 +443,71 @@
             // 
             this.Message.Text = "Message";
             this.Message.Width = 1500;
+            // 
+            // contextMenuStripAction
+            // 
+            this.contextMenuStripAction.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.checkToolStripMenuItem,
+            this.uncheckToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.runXSelectedActionsToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.runAllCheckedActionsToolStripMenuItem,
+            this.toolStripSeparator3});
+            this.contextMenuStripAction.Name = "contextMenuStripAction";
+            this.contextMenuStripAction.Size = new System.Drawing.Size(199, 110);
+            this.contextMenuStripAction.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripAction_Opening);
+            // 
+            // checkToolStripMenuItem
+            // 
+            this.checkToolStripMenuItem.Enabled = false;
+            this.checkToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.base_checkboxes;
+            this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.checkToolStripMenuItem.Text = "Check";
+            this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
+            // 
+            // uncheckToolStripMenuItem
+            // 
+            this.uncheckToolStripMenuItem.Enabled = false;
+            this.uncheckToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.error;
+            this.uncheckToolStripMenuItem.Name = "uncheckToolStripMenuItem";
+            this.uncheckToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.uncheckToolStripMenuItem.Text = "Uncheck";
+            this.uncheckToolStripMenuItem.Click += new System.EventHandler(this.uncheckToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
+            // 
+            // runXSelectedActionsToolStripMenuItem
+            // 
+            this.runXSelectedActionsToolStripMenuItem.Enabled = false;
+            this.runXSelectedActionsToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Annotate_Complete;
+            this.runXSelectedActionsToolStripMenuItem.Name = "runXSelectedActionsToolStripMenuItem";
+            this.runXSelectedActionsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.runXSelectedActionsToolStripMenuItem.Text = "Run x selected action(s)";
+            this.runXSelectedActionsToolStripMenuItem.Click += new System.EventHandler(this.runXSelectedActionsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
+            // 
+            // runAllCheckedActionsToolStripMenuItem
+            // 
+            this.runAllCheckedActionsToolStripMenuItem.Enabled = false;
+            this.runAllCheckedActionsToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Annotate_Default1;
+            this.runAllCheckedActionsToolStripMenuItem.Name = "runAllCheckedActionsToolStripMenuItem";
+            this.runAllCheckedActionsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.runAllCheckedActionsToolStripMenuItem.Text = "Run x checked actions";
+            this.runAllCheckedActionsToolStripMenuItem.Click += new System.EventHandler(this.runAllCheckedActionsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
             // 
             // rTxtBxMessage
             // 
@@ -573,19 +650,19 @@
             this.Description,
             this.EnvironmentVariableName,
             this.Value});
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Size = new System.Drawing.Size(870, 512);
             this.dataGridView1.TabIndex = 0;
             // 
@@ -631,22 +708,6 @@
             this.splitContainer1.SplitterDistance = 178;
             this.splitContainer1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.button1.Location = new System.Drawing.Point(797, 131);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "         Browse";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // BTDFMsiDeploy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -662,6 +723,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            this.contextMenuStripAction.ResumeLayout(false);
             this.InstancesPage.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
@@ -692,7 +754,6 @@
         private System.Windows.Forms.Button btnToggle;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.GroupBox grpBxMSI;
-        private System.Windows.Forms.CheckBox chkBoxUnDeploy;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox textBoxInstallLocation;
         private System.Windows.Forms.TextBox textBoxBTDFProjName;
@@ -731,6 +792,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EnvironmentVariableName;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripAction;
+        private System.Windows.Forms.ToolStripMenuItem checkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uncheckToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem runXSelectedActionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem runAllCheckedActionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
 
     }

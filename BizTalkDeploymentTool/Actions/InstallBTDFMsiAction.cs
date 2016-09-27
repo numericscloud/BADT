@@ -77,7 +77,7 @@ namespace BizTalkDeploymentTool.Actions
                     File.Delete(batchFileLog);
                 }
             }
-            result = (message.Contains("Installation completed successfully")) ? true : false;
+            result = (message.Contains("Installation completed successfully") || message.Contains("Configuration completed successfully")) ? true : false;
             return result;
         }
 

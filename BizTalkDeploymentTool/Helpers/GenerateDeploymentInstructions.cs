@@ -35,16 +35,7 @@ namespace BizTalkDeploymentTool
                 instructions.Add(string.Format("Actions needed to be performed in ''{0}'' environment", bizTalkEnv));
                 instructions.Add("Stop BizSpy application");
                 instructions.Add(string.Format("Actions to be performed for application: {0}", applicationName));
-                instructions.Add("Use PRD binding while importing application");
-                if (bizTalkEnv.Contains("2010"))
-                {
-                    instructions.Add(string.Format(@"Copy msi file from: \\intranet\dfsbu\790\IAM Shared Services\Development & Integration\Middleware\BizTalk\Deployment\2010\2_Latest_ACP {0} to: \\intranet\dfsbu\790\IAM Shared Services\Development & Integration\Middleware\BizTalk\Deployment\2010\1_Latest_PRD", Environment.NewLine));
-                }
-                else
-                {
-                    instructions.Add(string.Format(@"Copy msi file from: \\intranet\dfsbu\790\IAM Shared Services\Development & Integration\Middleware\BizTalk\Deployment\2013R2\1_Latest_ACP {0} to: \\intranet\dfsbu\790\IAM Shared Services\Development & Integration\Middleware\BizTalk\Deployment\2013R2\1_Latest_PRD", Environment.NewLine));
-                }
-
+                instructions.Add("Use PRD binding while importing application");               
                 foreach (BaseAction actionForInstruction in actionsForInstruction)
                 {
                     instructions.Add(actionForInstruction.DisplayName);

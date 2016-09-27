@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BizTalkDeploymentTool.Helpers;
 using System.IO;
-using Microsoft.Deployment.WindowsInstaller;
 using BizTalkDeploymentTool.Actions;
 using System.Security.Principal;
 using System.Xml;
@@ -82,7 +81,6 @@ namespace BizTalkDeploymentTool
                     btnClear.Visible = false;
                     btnStop.Visible = false;
                     btnToggle.Visible = false;
-                    chkBoxUnDeploy.Checked = true;
                     cbTargetEnvironment.Enabled = true;
                     cbTargetEnvironment.DataSource = null;
                     txtAppName.Text = string.Empty;
@@ -98,17 +96,24 @@ namespace BizTalkDeploymentTool
                     DeleteTempBTDFMsiExtractedFolder();
                     dataGridView1.Rows.Clear();
                     dataGridView1.Refresh();
+
+                    checkToolStripMenuItem.Enabled = false;
+                    uncheckToolStripMenuItem.Enabled = false;
+                    runXSelectedActionsToolStripMenuItem.Enabled = false;
+                    runAllCheckedActionsToolStripMenuItem.Enabled = false;
+
                     UpdateCursor(Cursors.Default);
                     break;
 
                 case FormStateEnum.End:
                     cbTargetEnvironment.Enabled = true;
                     UpdateCursor(Cursors.Default);
-                    chkBoxUnDeploy.Enabled = false;
                     btnExecute.Enabled = true;
                     btnClear.Enabled = true;
                     threadProcessor = null;
                     grpBxMSI.Enabled = true;
+
+
                     CleanTempExtraction();
                     break;
 
@@ -119,10 +124,15 @@ namespace BizTalkDeploymentTool
                     btnClear.Visible = true;
                     btnClear.Enabled = true;
                     btnExecute.Enabled = true;
-                    chkBoxUnDeploy.Enabled = true;
                     cbTargetEnvironment.Enabled = true;
                     threadProcessor = null;
                     grpBxMSI.Enabled = true;
+
+                    checkToolStripMenuItem.Enabled = true;
+                    uncheckToolStripMenuItem.Enabled = true;
+                    runXSelectedActionsToolStripMenuItem.Enabled = true;
+                    runAllCheckedActionsToolStripMenuItem.Enabled = true;
+
                     UpdateCursor(Cursors.Default);
                     break;
 
@@ -130,7 +140,6 @@ namespace BizTalkDeploymentTool
                     UpdateCursor(Cursors.WaitCursor);
                     btnExecute.Enabled = false;
                     btnClear.Enabled = false;
-                    chkBoxUnDeploy.Enabled = false;
                     cbTargetEnvironment.Enabled = false;
                     grpBxMSI.Enabled = false;
                     break;
@@ -152,6 +161,10 @@ namespace BizTalkDeploymentTool
             if (allActionExecuted)
             {
                 btnExecute.Enabled = false;
+                checkToolStripMenuItem.Enabled = false;
+                uncheckToolStripMenuItem.Enabled = false;
+                runXSelectedActionsToolStripMenuItem.Enabled = false;
+                runAllCheckedActionsToolStripMenuItem.Enabled = false;
                 DeleteTempBTDFMsiExtractedFolder();
             }
         }
@@ -456,7 +469,6 @@ namespace BizTalkDeploymentTool
                 obj.TargetEnvironment = env.Key;
             }
             obj.TargetDir = textBoxInstallLocation.Text;
-            obj.UnDeployExistingApplication = chkBoxUnDeploy.Checked.ToString();
             Dictionary<string, string> configurations = new Dictionary<string, string>();
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
@@ -878,7 +890,10 @@ namespace BizTalkDeploymentTool
             lstViewContextStrip = sender as ListView;
             if (e.Button == MouseButtons.Right)
             {
-
+                if (listViewControl.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    listViewControl.ContextMenuStrip = contextMenuStripAction;
+                }
             }
             else if (e.Button == MouseButtons.Left)
             {
@@ -899,6 +914,60 @@ namespace BizTalkDeploymentTool
             {
                 textBoxInstallLocation.Text = installPathBrowse.SelectedPath;
             }
+        }
+
+        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewControl.SelectedItems)
+            {
+                item.Checked = true;
+            }
+        }
+
+        private void uncheckToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewControl.SelectedItems)
+            {
+                item.Checked = false;
+            }
+        }
+
+        private void runXSelectedActionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BeginExecuteSelectedActions();
+        }
+        private void BeginExecuteSelectedActions()
+        {
+            if (this.ExecutionStarted != null)
+                this.ExecutionStarted(new object(), new EventArgs());
+
+            if (listViewControl.SelectedItems.Count == 0)
+            {
+                DisplayMessage("Please select action(s) to run.");
+                return;
+            }
+            BeginExecuteActions(GetSelectedActions());
+        }
+        private List<BaseAction> GetSelectedActions()
+        {
+            List<BaseAction> actions = new List<BaseAction>();
+
+            foreach (ListViewItem item in listViewControl.SelectedItems)
+            {
+                actions.Add((BaseAction)item.Tag);
+            }
+            return actions;
+        }
+
+        private void runAllCheckedActionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.BeginExecuteCheckedActions();
+        }
+
+        private void contextMenuStripAction_Opening(object sender, CancelEventArgs e)
+        {
+            runXSelectedActionsToolStripMenuItem.Text = string.Format("Run {0} selected action(s)", listViewControl.SelectedItems.Count);
+            runAllCheckedActionsToolStripMenuItem.Text = string.Format("Run {0} checked action(s)", listViewControl.CheckedItems.Count);
         }
     }
 }

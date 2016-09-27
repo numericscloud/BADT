@@ -31,7 +31,6 @@ namespace BizTalkDeploymentTool.Actions
             public string PhysicalPath;
             public string AppName;
             public string SiteName;
-            public string UnDeployExistingApplication;
             public string BTDFProjFileDirectory;
             public Dictionary<string, string> Configurations;
         }
@@ -52,34 +51,7 @@ namespace BizTalkDeploymentTool.Actions
             {
                 baseActions.Add(new CheckForInProgressInstancesAction(appInfo));
                 baseActions.Add(new StopApplicationAction(appInfo, bizTalkInfo));
-                baseActions.AddRange(CreateRestartHostInstancesActions(applicationName));
-                /* Dictionary<string, bool> hostCollection = new Dictionary<string, bool>();
-
-                 //OurStopWatch.Enter("GetHostNamesWithAsAResultOfDynamicPort");
-                 hostCollection = bizTalkInfo.CatalogExplorer.Applications[applicationName].GetHostNamesWithAsAResultOfDynamicPort();
-
-                 HostInstance.HostInstanceCollection hostInstances = HostInstance.GetInstances();
-
-                 // Loop through all hosts of the application
-                 //KeyValuePair<"HostInstance display name", "If the hostinstance was because app had dynamic ports"> 
-                 foreach (KeyValuePair<string, bool> host in hostCollection)
-                 {
-                     // Loop through all host instances of a particular host
-                     //OurStopWatch.Enter("GetEnabledHostInstanceName:"+host.Key);
-
-                     var query = from HostInstance hi in hostInstances
-                                 where !hi.IsDisabled & hi.HostName == host.Key
-                                 select hi;
-
-                     //foreach (string hostInstance in MSBTS_HostInstance.GetEnabledHostInstanceName(host.Key))
-
-                     foreach (HostInstance hostInstance in query)
-                     {
-                         baseActions.Add(new RestartHostInstanceAction(host.Value, hostInstance));
-                     }
-                     //OurStopWatch.Exit();
-                 }*/
-                //OurStopWatch.Exit();
+                baseActions.AddRange(CreateRestartHostInstancesActions(applicationName));               
                 baseActions.Add(new DeleteApplicationAction(appInfo, bizTalkInfo));
             }
 
@@ -164,7 +136,11 @@ namespace BizTalkDeploymentTool.Actions
             if (applicationExists)
             {
                 baseActions.Add(new CheckForInProgressInstancesAction(appInfo));
+                baseActions.Add(new StopApplicationAction(appInfo, bizTalkInfo));
+                baseActions.Add(new DeleteApplicationAction(appInfo, bizTalkInfo));
             }
+
+          
 
             foreach (string serverName in messagingServers)
             {
@@ -174,6 +150,8 @@ namespace BizTalkDeploymentTool.Actions
                     baseActions.Add(new UnInstallBTDFMsiAction(uninstallString, serverName, applicationName));
                 }
             }
+
+           
 
             foreach (string serverName in messagingServers)
             {
@@ -330,7 +308,6 @@ namespace BizTalkDeploymentTool.Actions
             {
                 DeployBTDFMsiAction DeployBTDFMsiAction = (DeployBTDFMsiAction)action;
                 DeployBTDFMsiAction.TargetEnvironment = parameters.TargetEnvironment;
-                DeployBTDFMsiAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
                 DeployBTDFMsiAction.Configurations = parameters.Configurations;
                 DeployBTDFMsiAction.BTDFProjFileDirectory = parameters.BTDFProjFileDirectory;
             }
@@ -338,9 +315,13 @@ namespace BizTalkDeploymentTool.Actions
             {
                 DeployBTDFMsiLastServerAction DeployBTDFMsiLastServerAction = (DeployBTDFMsiLastServerAction)action;
                 DeployBTDFMsiLastServerAction.TargetEnvironment = parameters.TargetEnvironment;
-                DeployBTDFMsiLastServerAction.SkipUndeploy = (!Convert.ToBoolean(parameters.UnDeployExistingApplication)).ToString();
                 DeployBTDFMsiLastServerAction.Configurations = parameters.Configurations;
                 DeployBTDFMsiLastServerAction.BTDFProjFileDirectory = parameters.BTDFProjFileDirectory;
+            }
+            if (action is UnDeployBTDFMsiAction)
+            {
+                UnDeployBTDFMsiAction UnDeployBTDFMsiAction = (UnDeployBTDFMsiAction)action;               
+                UnDeployBTDFMsiAction.BTDFProjFileDirectory = parameters.BTDFProjFileDirectory;
             }
             if (action is InstallBTDFMsiAction)
             {

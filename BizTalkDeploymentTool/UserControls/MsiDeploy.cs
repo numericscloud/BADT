@@ -114,7 +114,7 @@ namespace BizTalkDeploymentTool
                     uncheckToolStripMenuItem.Enabled = false;
                     runXSelectedActionsToolStripMenuItem.Enabled = false;
                     runAllCheckedActionsToolStripMenuItem.Enabled = false;
-                    generateInstructionsToolStripMenuItem.Enabled = false;
+                   // generateInstructionsToolStripMenuItem.Enabled = false;
                     selectMsiToolStripMenuItem.Enabled = true;
                     pictureBox1.Enabled = false;
                     tabControl1.Enabled = true;
@@ -138,7 +138,7 @@ namespace BizTalkDeploymentTool
                     uncheckToolStripMenuItem.Enabled = true;
                     runXSelectedActionsToolStripMenuItem.Enabled = true;
                     runAllCheckedActionsToolStripMenuItem.Enabled = true;
-                    generateInstructionsToolStripMenuItem.Enabled = true;
+                   // generateInstructionsToolStripMenuItem.Enabled = true;
                     rTxtBxMessage.Text = string.Empty;
                     pictureBox1.Enabled = true;
                     threadProcessor = null;

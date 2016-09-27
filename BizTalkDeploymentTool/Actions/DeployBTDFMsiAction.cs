@@ -18,7 +18,6 @@ namespace BizTalkDeploymentTool.Actions
 
         string msbuildLoc = ConfigurationManager.AppSettings["MsBuild"];
         public string TargetEnvironment { get; set; }
-        public string SkipUndeploy { get; set; }
         public string ServerName { get; set; }
         public string BTDFProjFileDirectory { get; set; }
         public Dictionary<string, string> Configurations { get; set; }
@@ -41,7 +40,6 @@ namespace BizTalkDeploymentTool.Actions
             : base()
         {
             this.TargetEnvironment = null;
-            this.SkipUndeploy = null;
             this.Configurations = null;
             this.ServerName = serverName;
             this.BTDFProjFileDirectory = null;
@@ -49,24 +47,19 @@ namespace BizTalkDeploymentTool.Actions
 
         public override bool Execute(out string message)
         {
-            string tempMsiPath = string.Empty;
             string batchFile = string.Empty;
             string batchFileLog = string.Empty;
             bool result = false;
             message = string.Empty;
             try
             {
-                //tempMsiPath = GenericHelper.FormatPath(this.resourceInfo.ServerName, this.resourceInfo.ResourceName);
                 string uniqueName = Guid.NewGuid().ToString();
                 batchFile = Path.Combine(GenericHelper.GetTempFolder(this.ServerName), uniqueName) + ".bat";
                 batchFileLog = Path.Combine(GenericHelper.FormatPath(this.ServerName, this.BTDFProjFileDirectory), "DeployResults", "DeployResults.txt");
-                string[] files = Directory.GetFiles(this.BTDFProjFileDirectory, "*.btdfproj", SearchOption.AllDirectories);
-                string[] files1 = Directory.GetFiles(this.BTDFProjFileDirectory, this.TargetEnvironment == null ? string.Empty : "*" + this.TargetEnvironment + "*", SearchOption.AllDirectories);
-
-                
-                this.TargetEnvironment = files1.Count() > 0 ? GenericHelper.FormatPath(this.ServerName, files1[0]) : string.Empty;
-
-                CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, files[0]), batchFile, batchFileLog);
+                string[] btdfProjfiles = Directory.GetFiles(this.BTDFProjFileDirectory, "*.btdfproj", SearchOption.AllDirectories);
+                string[] targetEnvironmentfiles = Directory.GetFiles(this.BTDFProjFileDirectory, this.TargetEnvironment == null ? string.Empty : "*" + this.TargetEnvironment + "*", SearchOption.AllDirectories);                               
+                this.TargetEnvironment = targetEnvironmentfiles.Count() > 0 ? GenericHelper.FormatPath(this.ServerName, targetEnvironmentfiles[0]) : string.Empty;
+                CreateAndSaveBatchFile(GenericHelper.FormatPath(this.ServerName, btdfProjfiles[0]), batchFile, batchFileLog);
                 result = Win32_Process.Create(this.ServerName, batchFile, out message);
                 if (File.Exists(batchFileLog))
                 {
@@ -79,17 +72,9 @@ namespace BizTalkDeploymentTool.Actions
             }
             finally
             {
-                if (File.Exists(tempMsiPath))
-                {
-                    File.Delete(tempMsiPath);
-                }
                 if (File.Exists(batchFile))
                 {
                     File.Delete(batchFile);
-                }
-                if (File.Exists(batchFileLog))
-                {
-                    // File.Delete(batchFileLog);
                 }
             }
             result = (message.Contains("-- FAILED") || message.Contains("Build FAILED.")) ? false : true;
@@ -98,10 +83,9 @@ namespace BizTalkDeploymentTool.Actions
 
         private void CreateAndSaveBatchFile(string btdfPrjFile, string batchFile, string batchFileLog)
         {
-            //  /p:DeployBizTalkMgmtDB=true;Configuration=Server;SkipUndeploy=true /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile="C:\Program Files\MyBizTalkApp\1.0\DeployResults\DeployResults.txt" "C:\Program Files\MyBizTalkApp\1.0\Deployment\MyBizTalkApp.btdfproj" /p:ENV_SETTINGS="C:\Program Files\MyBizTalkApp\1.0\Deployment\EnvironmentSettings\Exported_ProdSettings.xml"
             StringBuilder sb = new StringBuilder();
             string customConfig = GenericHelper.BuildParametersFromConfigurations(this.Configurations);
-            sb.AppendLine(string.Format("{0} /p:DeployBizTalkMgmtDB={1};Configuration=Server;SkipUndeploy={2} /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile={3} {4} /p:ENV_SETTINGS={5} {6}", msbuildLoc.Encode(), false.ToString(), this.SkipUndeploy, batchFileLog.Encode(), btdfPrjFile.Encode(), this.TargetEnvironment == null ? string.Empty : this.TargetEnvironment.Encode(), customConfig));
+            sb.AppendLine(string.Format("{0} /p:DeployBizTalkMgmtDB={1};Configuration=Server;SkipUndeploy={2} /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile={3} {4} /p:ENV_SETTINGS={5} {6}", msbuildLoc.Encode(), false.ToString(), true, batchFileLog.Encode(), btdfPrjFile.Encode(), this.TargetEnvironment == null ? string.Empty : this.TargetEnvironment.Encode(), customConfig));
             File.WriteAllText(batchFile, sb.ToString());
         }
 

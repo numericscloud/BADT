@@ -14,6 +14,7 @@ namespace BizTalkDeploymentTool
        public const string _UNISTALL_APPLICATION = "Uninstall application: {0} from {1}";
        public const string _INSTALL_APPLICATION = "Install application on {0}";
        public const string _DEPLOYBTDF_APPLICATION = "BTDF Deploy application on {0}";
+       public const string _UN_DEPLOYBTDF_APPLICATION = "BTDF Un-Deploy application from {0}";
        public const string _IMPORT_APPLICATION = "Import application";
        public const string _IMPORT_BINDING = "Import application binding";
        public const string _UNDEPLOY_ACTION_PAGE_TEXT = "UnDeploy Actions";

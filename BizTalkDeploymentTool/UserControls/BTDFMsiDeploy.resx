@@ -234,6 +234,9 @@
         5XDxVrXaVmrNa7byxQcHWavWDPvfBf8Cecbn4+YpVAUAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="contextMenuStripAction.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>499, 54</value>
+  </metadata>
   <metadata name="contextMenuStripInstances.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>178, 15</value>
   </metadata>

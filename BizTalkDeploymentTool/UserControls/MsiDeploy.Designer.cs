@@ -38,7 +38,6 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.runAllCheckedActionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.generateInstructionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.messageSubItemTooltip = new System.Windows.Forms.ToolTip(this.components);
             this.lblssoAppname = new System.Windows.Forms.Label();
             this.lblssoLoc = new System.Windows.Forms.Label();
@@ -138,10 +137,9 @@
             this.runXSelectedActionsToolStripMenuItem,
             this.toolStripSeparator2,
             this.runAllCheckedActionsToolStripMenuItem,
-            this.toolStripSeparator3,
-            this.generateInstructionsToolStripMenuItem});
+            this.toolStripSeparator3});
             this.contextMenuStripAction.Name = "contextMenuStripAction";
-            this.contextMenuStripAction.Size = new System.Drawing.Size(233, 132);
+            this.contextMenuStripAction.Size = new System.Drawing.Size(199, 132);
             this.contextMenuStripAction.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripAction_Opening);
             // 
             // checkToolStripMenuItem
@@ -149,7 +147,7 @@
             this.checkToolStripMenuItem.Enabled = false;
             this.checkToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.base_checkboxes;
             this.checkToolStripMenuItem.Name = "checkToolStripMenuItem";
-            this.checkToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.checkToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.checkToolStripMenuItem.Text = "Check";
             this.checkToolStripMenuItem.Click += new System.EventHandler(this.checkToolStripMenuItem_Click);
             // 
@@ -158,50 +156,42 @@
             this.uncheckToolStripMenuItem.Enabled = false;
             this.uncheckToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.error;
             this.uncheckToolStripMenuItem.Name = "uncheckToolStripMenuItem";
-            this.uncheckToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.uncheckToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.uncheckToolStripMenuItem.Text = "Uncheck";
             this.uncheckToolStripMenuItem.Click += new System.EventHandler(this.uncheckToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(229, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(195, 6);
             // 
             // runXSelectedActionsToolStripMenuItem
             // 
             this.runXSelectedActionsToolStripMenuItem.Enabled = false;
             this.runXSelectedActionsToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Annotate_Complete;
             this.runXSelectedActionsToolStripMenuItem.Name = "runXSelectedActionsToolStripMenuItem";
-            this.runXSelectedActionsToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.runXSelectedActionsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.runXSelectedActionsToolStripMenuItem.Text = "Run x selected action(s)";
             this.runXSelectedActionsToolStripMenuItem.Click += new System.EventHandler(this.executeActionToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(229, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(195, 6);
             // 
             // runAllCheckedActionsToolStripMenuItem
             // 
             this.runAllCheckedActionsToolStripMenuItem.Enabled = false;
             this.runAllCheckedActionsToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Annotate_Default1;
             this.runAllCheckedActionsToolStripMenuItem.Name = "runAllCheckedActionsToolStripMenuItem";
-            this.runAllCheckedActionsToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
+            this.runAllCheckedActionsToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.runAllCheckedActionsToolStripMenuItem.Text = "Run x checked actions";
             this.runAllCheckedActionsToolStripMenuItem.Click += new System.EventHandler(this.runAllCheckedActionsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(229, 6);
-            // 
-            // generateInstructionsToolStripMenuItem
-            // 
-            this.generateInstructionsToolStripMenuItem.Enabled = false;
-            this.generateInstructionsToolStripMenuItem.Name = "generateInstructionsToolStripMenuItem";
-            this.generateInstructionsToolStripMenuItem.Size = new System.Drawing.Size(232, 22);
-            this.generateInstructionsToolStripMenuItem.Text = "Generate selected instructions";
-            this.generateInstructionsToolStripMenuItem.Click += new System.EventHandler(this.generateInstructionsToolStripMenuItem_Click);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(195, 6);
             // 
             // lblssoAppname
             // 
@@ -594,7 +584,7 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Size = new System.Drawing.Size(1156, 454);
-            this.splitContainer2.SplitterDistance = 378;
+            this.splitContainer2.SplitterDistance = 377;
             this.splitContainer2.TabIndex = 16;
             // 
             // instancesGridView
@@ -612,7 +602,7 @@
             this.instancesGridView.ReadOnly = true;
             this.instancesGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.instancesGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.instancesGridView.Size = new System.Drawing.Size(1156, 378);
+            this.instancesGridView.Size = new System.Drawing.Size(1156, 377);
             this.instancesGridView.TabIndex = 15;
             // 
             // contextMenuStripInstances
@@ -655,7 +645,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.label1);
-            this.splitContainer3.Size = new System.Drawing.Size(1156, 72);
+            this.splitContainer3.Size = new System.Drawing.Size(1156, 73);
             this.splitContainer3.SplitterDistance = 43;
             this.splitContainer3.TabIndex = 0;
             // 
@@ -683,7 +673,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 23);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1592, 929);
+            this.tabPage2.Size = new System.Drawing.Size(1162, 460);
             this.tabPage2.TabIndex = 2;
             this.tabPage2.Text = "Dependent Applications";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -695,7 +685,7 @@
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1586, 923);
+            this.groupBox1.Size = new System.Drawing.Size(1156, 454);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
@@ -713,8 +703,8 @@
             // 
             this.splitContainerDependency.Panel2.Controls.Add(this.propertyGridDepApps);
             this.splitContainerDependency.Panel2.Controls.Add(this.listView1);
-            this.splitContainerDependency.Size = new System.Drawing.Size(1580, 903);
-            this.splitContainerDependency.SplitterDistance = 333;
+            this.splitContainerDependency.Size = new System.Drawing.Size(1150, 434);
+            this.splitContainerDependency.SplitterDistance = 242;
             this.splitContainerDependency.TabIndex = 1;
             // 
             // treeViewDependency
@@ -727,7 +717,7 @@
             this.treeViewDependency.Location = new System.Drawing.Point(0, 0);
             this.treeViewDependency.Name = "treeViewDependency";
             this.treeViewDependency.SelectedImageIndex = 0;
-            this.treeViewDependency.Size = new System.Drawing.Size(333, 903);
+            this.treeViewDependency.Size = new System.Drawing.Size(242, 434);
             this.treeViewDependency.TabIndex = 0;
             this.treeViewDependency.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewDependency_AfterSelect);
             this.treeViewDependency.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeViewDependency_NodeMouseClick);
@@ -745,7 +735,7 @@
             this.propertyGridDepApps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.propertyGridDepApps.Location = new System.Drawing.Point(0, 0);
             this.propertyGridDepApps.Name = "propertyGridDepApps";
-            this.propertyGridDepApps.Size = new System.Drawing.Size(1243, 903);
+            this.propertyGridDepApps.Size = new System.Drawing.Size(904, 434);
             this.propertyGridDepApps.TabIndex = 1;
             // 
             // listView1
@@ -753,7 +743,7 @@
             this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView1.Location = new System.Drawing.Point(0, 0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1243, 903);
+            this.listView1.Size = new System.Drawing.Size(904, 434);
             this.listView1.TabIndex = 0;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -953,7 +943,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem runAllCheckedActionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem generateInstructionsToolStripMenuItem;
         private System.Windows.Forms.ColumnHeader Elapsed;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ColorDialog colorDialog1;

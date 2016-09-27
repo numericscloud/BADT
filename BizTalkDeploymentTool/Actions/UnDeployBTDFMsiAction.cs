@@ -33,18 +33,18 @@ namespace BizTalkDeploymentTool.Actions
         {
             get
             {
-                return string.Format(Constants._DEPLOYBTDF_APPLICATION, this.ServerName);
+                return string.Format(Constants._UN_DEPLOYBTDF_APPLICATION, this.ServerName);
             }
         }
 
-        public UnDeployBTDFMsiAction(string serverName, string btdfProjFileDirectory, string deployBizTalkMgmtDb)
+        public UnDeployBTDFMsiAction(string serverName, string deployBizTalkMgmtDb)
             : base()
         {
             this.TargetEnvironment = null;
             this.SkipUndeploy = null;
             this.DeployBizTalkMgmtDb = deployBizTalkMgmtDb;
             this.ServerName = serverName;
-            this.BTDFProjFileDirectory = btdfProjFileDirectory;
+            this.BTDFProjFileDirectory = null;
         }
 
         public override bool Execute(out string message)
@@ -60,7 +60,7 @@ namespace BizTalkDeploymentTool.Actions
                 //tempMsiPath = GenericHelper.FormatPath(this.resourceInfo.ServerName, this.resourceInfo.ResourceName);
                 string uniqueName = Guid.NewGuid().ToString();
                 batchFile = Path.Combine(GenericHelper.GetTempFolder(this.ServerName), uniqueName) + ".bat";
-                batchFileLog = Path.Combine(GenericHelper.FormatPath(this.ServerName, this.BTDFProjFileDirectory), "DeployResults", "DeployResults.txt");
+                batchFileLog = Path.ChangeExtension(batchFile, "txt");
                 string[] files = Directory.GetFiles(this.BTDFProjFileDirectory, "*.btdfproj", SearchOption.AllDirectories);
 
                 string[] files1 = Directory.GetFiles(this.BTDFProjFileDirectory, this.TargetEnvironment == null ? string.Empty : "*" + this.TargetEnvironment + "*", SearchOption.AllDirectories);
@@ -102,7 +102,7 @@ namespace BizTalkDeploymentTool.Actions
         {
             //  /p:DeployBizTalkMgmtDB=true;Configuration=Server;SkipUndeploy=true /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile="C:\Program Files\MyBizTalkApp\1.0\DeployResults\DeployResults.txt" "C:\Program Files\MyBizTalkApp\1.0\Deployment\MyBizTalkApp.btdfproj" /p:ENV_SETTINGS="C:\Program Files\MyBizTalkApp\1.0\Deployment\EnvironmentSettings\Exported_ProdSettings.xml"
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine(string.Format("{0} /p:DeployBizTalkMgmtDB={1};Configuration=Server;SkipUndeploy={2} /target:Deploy /l:FileLogger,Microsoft.Build.Engine;logfile={3} {4} /p:ENV_SETTINGS={5}", msbuildLoc.Encode(), this.DeployBizTalkMgmtDb, this.SkipUndeploy, batchFileLog.Encode(), btdfPrjFile.Encode(), this.TargetEnvironment == null ? string.Empty : this.TargetEnvironment.Encode()));
+            sb.AppendLine(string.Format("{0} {1} /p:DeployBizTalkMgmtDB={2};Configuration=Server;/nologo /t:Undeploy /l:FileLogger,Microsoft.Build.Engine;logfile={3}", msbuildLoc.Encode(), btdfPrjFile.Encode(), this.DeployBizTalkMgmtDb, batchFileLog.Encode()));
             File.WriteAllText(batchFile, sb.ToString());
         }
     }
