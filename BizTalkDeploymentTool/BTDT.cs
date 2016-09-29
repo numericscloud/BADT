@@ -174,11 +174,7 @@ namespace BizTalkDeploymentTool
         {
             LoadSSOConfig();
             UpdateSSOActionsList();
-            //foreach (ListViewItem item in listViewControl.Items)
-            //{
-            //    if (item.StateImageIndex == -1)
-            //        item.StateImageIndex = 0;
-            //}
+           
         }
 
         private void UpdateSSOActionsList()
