@@ -1,9 +1,0 @@
-Action	Type	Source	Target	ExtendedType
-s72	i2	S72	S255	I4
-CustomAction	Action
-LaunchApplication	34	INSTALLDIR	cmd.exe /C "Deployment\Framework\DeployTools\UacElevate.exe "[MSBUILDPATH]" "/p:Configuration=Server /t:LaunchServerDeployWizard Deployment\HelloWorld.Deployment.btdfproj [MSBUILDTOOLSVER]""	
-SetDEPLOYMENTDIR	51	DEPLOYMENTDIR	[INSTALLDIR]\Deployment	
-SetMSBUILDPATH2010	51	MSBUILDPATH	[NETFRAMEWORK40FULLINSTALLROOTDIR]\MSBuild.exe	
-SetMSBUILDTOOLSVER2010	51	MSBUILDTOOLSVER	/tv:4.0	
-WixUIPrintEula	65	WixUIWixca	PrintEula	
-WixUIValidatePath	65	WixUIWixca	ValidatePath	
