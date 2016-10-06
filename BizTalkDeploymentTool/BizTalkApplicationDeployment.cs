@@ -273,7 +273,7 @@ namespace BizTalkDeploymentTool
                 appPool.ImageIndex = 10;
                 appPool.SelectedImageIndex = 10;
                 appPool.ContextMenuStrip = contextMenuStripServer;
-                foreach (Microsoft.Web.Administration.ApplicationPool applicationPool in applicationPools)
+                foreach (Microsoft.Web.Administration.ApplicationPool applicationPool in applicationPools.OrderBy(x=>x.Name))
                 {
                     TreeNode pool = appPool.Nodes.Add(applicationPool.Name);
                     pool.ImageIndex = 10;
@@ -284,14 +284,14 @@ namespace BizTalkDeploymentTool
                 TreeNode nodeWebSite = node.Nodes.Add("Sites");
                 nodeWebSite.ImageIndex = 18;
                 nodeWebSite.SelectedImageIndex = 18;
-                foreach (Microsoft.Web.Administration.Site site in sites)
+                foreach (Microsoft.Web.Administration.Site site in sites.OrderBy(x => x.Name))
                 {
                     TreeNode nodeSites = nodeWebSite.Nodes.Add(site.Name);
                     nodeSites.ImageIndex = 11;
                     nodeSites.SelectedImageIndex = 11;
                     nodeSites.ContextMenuStrip = contextMenuStripWebSite;
                     nodeSites.Tag = site;
-                    foreach (Microsoft.Web.Administration.Application application in site.Applications)
+                    foreach (Microsoft.Web.Administration.Application application in site.Applications.OrderBy(x=>x.Path))
                     {
                         if (application.Path != @"/")
                         {
@@ -865,6 +865,19 @@ namespace BizTalkDeploymentTool
         {
             this.FormState = FormStateEnum.Initial;
             LoadAdministration();
+        }
+
+        private void toolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            this.FormState = FormStateEnum.Processing;
+            IISDeploymentTool iisActionTool = new IISDeploymentTool(3);
+            Microsoft.Web.Administration.Application app = treeViewBizTalkApplications.SelectedNode.Tag as Microsoft.Web.Administration.Application;
+            if (app != null)
+            {
+                iisActionTool.applicationPoolName = app.ApplicationPoolName;
+                iisActionTool.ShowDialog();
+            }
+            this.FormState = FormStateEnum.NotProcessing;
         }
     }
 }

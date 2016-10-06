@@ -70,6 +70,7 @@
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip3 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem15 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.SuspendLayout();
@@ -368,15 +369,16 @@
             this.contextMenuStripDeletApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.checkStausToolStripMenuItem,
             this.changeApplicationPoolToolStripMenuItem,
-            this.deleteApplicationToolStripMenuItem});
+            this.deleteApplicationToolStripMenuItem,
+            this.toolStripMenuItem3});
             this.contextMenuStripDeletApp.Name = "contextMenuStripDeletApp";
-            this.contextMenuStripDeletApp.Size = new System.Drawing.Size(204, 70);
+            this.contextMenuStripDeletApp.Size = new System.Drawing.Size(206, 114);
             // 
             // checkStausToolStripMenuItem
             // 
             this.checkStausToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkStausToolStripMenuItem.Image")));
             this.checkStausToolStripMenuItem.Name = "checkStausToolStripMenuItem";
-            this.checkStausToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.checkStausToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.checkStausToolStripMenuItem.Text = "Check Staus";
             this.checkStausToolStripMenuItem.ToolTipText = "List the web service address for quick check if its a biztalk location";
             this.checkStausToolStripMenuItem.Click += new System.EventHandler(this.checkStausToolStripMenuItem_Click);
@@ -385,7 +387,7 @@
             // 
             this.changeApplicationPoolToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeApplicationPoolToolStripMenuItem.Image")));
             this.changeApplicationPoolToolStripMenuItem.Name = "changeApplicationPoolToolStripMenuItem";
-            this.changeApplicationPoolToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.changeApplicationPoolToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.changeApplicationPoolToolStripMenuItem.Text = "Change ApplicationPool";
             this.changeApplicationPoolToolStripMenuItem.Click += new System.EventHandler(this.changeApplicationPoolToolStripMenuItem_Click);
             // 
@@ -393,7 +395,7 @@
             // 
             this.deleteApplicationToolStripMenuItem.Image = global::BizTalkDeploymentTool.Properties.Resources.Annotate_Disabled1;
             this.deleteApplicationToolStripMenuItem.Name = "deleteApplicationToolStripMenuItem";
-            this.deleteApplicationToolStripMenuItem.Size = new System.Drawing.Size(203, 22);
+            this.deleteApplicationToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.deleteApplicationToolStripMenuItem.Text = "Delete Application";
             this.deleteApplicationToolStripMenuItem.Click += new System.EventHandler(this.deleteApplicationToolStripMenuItem_Click);
             // 
@@ -450,6 +452,14 @@
             this.toolStripMenuItem15.Size = new System.Drawing.Size(113, 22);
             this.toolStripMenuItem15.Text = "Refresh";
             this.toolStripMenuItem15.Click += new System.EventHandler(this.toolStripMenuItem15_Click);
+            // 
+            // toolStripMenuItem3
+            // 
+            this.toolStripMenuItem3.Image = ((System.Drawing.Image)(resources.GetObject("toolStripMenuItem3.Image")));
+            this.toolStripMenuItem3.Name = "toolStripMenuItem3";
+            this.toolStripMenuItem3.Size = new System.Drawing.Size(205, 22);
+            this.toolStripMenuItem3.Text = "Recycle Application Pool";
+            this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
             // BizTalkApplicationDeployment
             // 
@@ -524,5 +534,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip3;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem3;
     }
 }

@@ -49,6 +49,7 @@
             this.listViewAppPoolsCreate = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnToggle = new System.Windows.Forms.Button();
             this.buttonCreateAppPool = new System.Windows.Forms.Button();
@@ -128,12 +129,8 @@
             this.richTextBoxChangeApplicationPool = new System.Windows.Forms.RichTextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.contextMenuStripWebApp = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openInIEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripRefreshWebApplicationStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.listViewDeleteAppPool = new System.Windows.Forms.ListView();
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -144,7 +141,17 @@
             this.label17 = new System.Windows.Forms.Label();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.splitContainer5 = new System.Windows.Forms.SplitContainer();
+            this.contextMenuStripWebApp = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openInIEToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripRefreshWebApplicationStatus = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabControl1.SuspendLayout();
             this.tabPageCreateAppPool.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -177,14 +184,14 @@
             this.splitContainer2.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.groupBox7.SuspendLayout();
-            this.contextMenuStripWebApp.SuspendLayout();
-            this.contextMenuStripRefreshWebApplicationStatus.SuspendLayout();
             this.tabPage4.SuspendLayout();
-            this.groupBox8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).BeginInit();
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            this.groupBox8.SuspendLayout();
+            this.contextMenuStripWebApp.SuspendLayout();
+            this.contextMenuStripRefreshWebApplicationStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -403,6 +410,7 @@
             this.listViewAppPoolsCreate.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
+            this.columnHeader22,
             this.columnHeader3});
             this.listViewAppPoolsCreate.FullRowSelect = true;
             this.listViewAppPoolsCreate.GridLines = true;
@@ -424,6 +432,12 @@
             this.columnHeader2.Text = "Status";
             this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeader2.Width = 125;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Last Run";
+            this.columnHeader22.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader22.Width = 130;
             // 
             // columnHeader3
             // 
@@ -523,6 +537,7 @@
             this.listViewCreateApp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
             this.columnHeader5,
+            this.columnHeader23,
             this.columnHeader6});
             this.listViewCreateApp.FullRowSelect = true;
             this.listViewCreateApp.GridLines = true;
@@ -682,6 +697,7 @@
             this.listViewDeleteWebApp.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader11,
             this.columnHeader12,
+            this.columnHeader24,
             this.columnHeader13});
             this.listViewDeleteWebApp.FullRowSelect = true;
             this.listViewDeleteWebApp.GridLines = true;
@@ -706,6 +722,7 @@
             // 
             // columnHeader13
             // 
+            this.columnHeader13.DisplayIndex = 3;
             this.columnHeader13.Text = "Message";
             this.columnHeader13.Width = 500;
             // 
@@ -828,6 +845,7 @@
             this.listViewRecycleAppPools.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7,
             this.columnHeader8,
+            this.columnHeader25,
             this.columnHeader9});
             this.listViewRecycleAppPools.FullRowSelect = true;
             this.listViewRecycleAppPools.GridLines = true;
@@ -1086,6 +1104,7 @@
             this.listViewRestartIIS.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader10,
             this.columnHeader14,
+            this.columnHeader26,
             this.columnHeader15});
             this.listViewRestartIIS.FullRowSelect = true;
             this.listViewRestartIIS.GridLines = true;
@@ -1251,6 +1270,7 @@
             this.listViewChangeApplicationPool.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader16,
             this.columnHeader17,
+            this.columnHeader27,
             this.columnHeader18});
             this.listViewChangeApplicationPool.FullRowSelect = true;
             this.listViewChangeApplicationPool.GridLines = true;
@@ -1318,45 +1338,6 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // contextMenuStripWebApp
-            // 
-            this.contextMenuStripWebApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openInIEToolStripMenuItem,
-            this.recheckToolStripMenuItem});
-            this.contextMenuStripWebApp.Name = "contextMenuStripWebApp";
-            this.contextMenuStripWebApp.Size = new System.Drawing.Size(113, 48);
-            // 
-            // openInIEToolStripMenuItem
-            // 
-            this.openInIEToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openInIEToolStripMenuItem.Image")));
-            this.openInIEToolStripMenuItem.Name = "openInIEToolStripMenuItem";
-            this.openInIEToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.openInIEToolStripMenuItem.Text = "Browse";
-            this.openInIEToolStripMenuItem.Click += new System.EventHandler(this.openInIEToolStripMenuItem_Click);
-            // 
-            // recheckToolStripMenuItem
-            // 
-            this.recheckToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("recheckToolStripMenuItem.Image")));
-            this.recheckToolStripMenuItem.Name = "recheckToolStripMenuItem";
-            this.recheckToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
-            this.recheckToolStripMenuItem.Text = "Check";
-            this.recheckToolStripMenuItem.Click += new System.EventHandler(this.recheckToolStripMenuItem_Click);
-            // 
-            // contextMenuStripRefreshWebApplicationStatus
-            // 
-            this.contextMenuStripRefreshWebApplicationStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.refreshToolStripMenuItem});
-            this.contextMenuStripRefreshWebApplicationStatus.Name = "contextMenuStripRefreshWebApplicationStatus";
-            this.contextMenuStripRefreshWebApplicationStatus.Size = new System.Drawing.Size(114, 26);
-            // 
-            // refreshToolStripMenuItem
-            // 
-            this.refreshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripMenuItem.Image")));
-            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
-            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.refreshToolStripMenuItem.Text = "Refresh";
-            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
-            // 
             // tabPage4
             // 
             this.tabPage4.BackColor = System.Drawing.SystemColors.Control;
@@ -1372,12 +1353,33 @@
             this.tabPage4.Text = "Delete Application Pool";
             this.tabPage4.Enter += new System.EventHandler(this.tabPage4_Enter);
             // 
+            // splitContainer5
+            // 
+            this.splitContainer5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer5.Location = new System.Drawing.Point(7, 123);
+            this.splitContainer5.Name = "splitContainer5";
+            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer5.Panel1
+            // 
+            this.splitContainer5.Panel1.Controls.Add(this.listViewDeleteAppPool);
+            // 
+            // splitContainer5.Panel2
+            // 
+            this.splitContainer5.Panel2.Controls.Add(this.richTextBoxDeleteAppPool);
+            this.splitContainer5.Size = new System.Drawing.Size(970, 531);
+            this.splitContainer5.SplitterDistance = 463;
+            this.splitContainer5.TabIndex = 28;
+            // 
             // listViewDeleteAppPool
             // 
             this.listViewDeleteAppPool.CheckBoxes = true;
             this.listViewDeleteAppPool.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader19,
             this.columnHeader20,
+            this.columnHeader28,
             this.columnHeader21});
             this.listViewDeleteAppPool.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewDeleteAppPool.FullRowSelect = true;
@@ -1478,25 +1480,80 @@
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
-            // splitContainer5
+            // contextMenuStripWebApp
             // 
-            this.splitContainer5.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer5.Location = new System.Drawing.Point(7, 123);
-            this.splitContainer5.Name = "splitContainer5";
-            this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.contextMenuStripWebApp.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openInIEToolStripMenuItem,
+            this.recheckToolStripMenuItem});
+            this.contextMenuStripWebApp.Name = "contextMenuStripWebApp";
+            this.contextMenuStripWebApp.Size = new System.Drawing.Size(113, 48);
             // 
-            // splitContainer5.Panel1
+            // openInIEToolStripMenuItem
             // 
-            this.splitContainer5.Panel1.Controls.Add(this.listViewDeleteAppPool);
+            this.openInIEToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openInIEToolStripMenuItem.Image")));
+            this.openInIEToolStripMenuItem.Name = "openInIEToolStripMenuItem";
+            this.openInIEToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.openInIEToolStripMenuItem.Text = "Browse";
+            this.openInIEToolStripMenuItem.Click += new System.EventHandler(this.openInIEToolStripMenuItem_Click);
             // 
-            // splitContainer5.Panel2
+            // recheckToolStripMenuItem
             // 
-            this.splitContainer5.Panel2.Controls.Add(this.richTextBoxDeleteAppPool);
-            this.splitContainer5.Size = new System.Drawing.Size(970, 531);
-            this.splitContainer5.SplitterDistance = 463;
-            this.splitContainer5.TabIndex = 28;
+            this.recheckToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("recheckToolStripMenuItem.Image")));
+            this.recheckToolStripMenuItem.Name = "recheckToolStripMenuItem";
+            this.recheckToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.recheckToolStripMenuItem.Text = "Check";
+            this.recheckToolStripMenuItem.Click += new System.EventHandler(this.recheckToolStripMenuItem_Click);
+            // 
+            // contextMenuStripRefreshWebApplicationStatus
+            // 
+            this.contextMenuStripRefreshWebApplicationStatus.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.refreshToolStripMenuItem});
+            this.contextMenuStripRefreshWebApplicationStatus.Name = "contextMenuStripRefreshWebApplicationStatus";
+            this.contextMenuStripRefreshWebApplicationStatus.Size = new System.Drawing.Size(114, 26);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripMenuItem.Image")));
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
+            this.refreshToolStripMenuItem.Text = "Refresh";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "Last Run";
+            this.columnHeader23.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader23.Width = 130;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "Last Run";
+            this.columnHeader24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader24.Width = 130;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "Last Run";
+            this.columnHeader25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader25.Width = 130;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "Last Run";
+            this.columnHeader26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader26.Width = 130;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Last Run";
+            this.columnHeader27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader27.Width = 130;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "Last Run";
+            this.columnHeader28.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnHeader28.Width = 130;
             // 
             // IISDeploymentTool
             // 
@@ -1548,15 +1605,15 @@
             this.tabPage3.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
-            this.contextMenuStripWebApp.ResumeLayout(false);
-            this.contextMenuStripRefreshWebApplicationStatus.ResumeLayout(false);
             this.tabPage4.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox8.PerformLayout();
             this.splitContainer5.Panel1.ResumeLayout(false);
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
+            this.groupBox8.PerformLayout();
+            this.contextMenuStripWebApp.ResumeLayout(false);
+            this.contextMenuStripRefreshWebApplicationStatus.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1678,5 +1735,12 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.SplitContainer splitContainer5;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
     }
 }

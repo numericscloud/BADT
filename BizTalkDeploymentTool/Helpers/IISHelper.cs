@@ -380,7 +380,7 @@ namespace BizTalkDeploymentTool.Helpers
         public static ServerManager GetServerManager(string server, out ApplicationPoolCollection applicationPools, out SiteCollection sites)
         {
             ServerManager serverManager = ServerManager.OpenRemote(server);
-            applicationPools = serverManager.ApplicationPools;
+            applicationPools = serverManager.ApplicationPools;            
             sites = serverManager.Sites;
             return serverManager;
 

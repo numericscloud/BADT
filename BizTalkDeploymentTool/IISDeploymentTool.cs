@@ -130,7 +130,7 @@ namespace BizTalkDeploymentTool
             listViewAppPoolsCreate.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -181,7 +181,7 @@ namespace BizTalkDeploymentTool
 
                 return;
             }
-            UpdateLog(e.ActionStatus, "", GetListViewItemForLogUpdate(this.actionableListView, e.Action));
+            UpdateLog(sender, e); 
         }
 
         void threadProcessor_Executed(object sender, ActionExecutedEventArgs e)
@@ -202,7 +202,7 @@ namespace BizTalkDeploymentTool
 
                 return;
             }
-            UpdateLog(e.ActionStatus, e.Message, GetListViewItemForLogUpdate(this.actionableListView, e.Action));
+            UpdateLog(sender, e);           
         }
 
         void threadProcessor_Completed(object sender, CompletedEventArgs e)
@@ -230,34 +230,62 @@ namespace BizTalkDeploymentTool
             }
         }
 
-        private void UpdateLog(ActionStatusEnum actionStatus, string resultMessage, ListViewItem item)
+        void UpdateLog(object sender, ActionExecutedEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                // We're on a thread other than the GUI thread
+                this.Invoke(new MethodInvoker(() => UpdateLog(sender, e)));
+                return;
+            }
+
+            UpdateLog(e.ActionStatus, e.RunTime, e.Message, GetListViewItemForLogUpdate(this.actionableListView, e.Action));
+        }
+
+        void UpdateLog(object sender, ActionExecutingEventArgs e)
+        {
+            if (this.InvokeRequired)
+            {
+                // We're on a thread other than the GUI thread
+                this.Invoke(new MethodInvoker(() => UpdateLog(sender, e)));
+                return;
+            }
+
+            UpdateLog(e.ActionStatus, e.RunTime, e.Message, GetListViewItemForLogUpdate(this.actionableListView, e.Action));
+        }
+
+        private void UpdateLog(ActionStatusEnum actionStatus, DateTime runTime, string resultMessage, ListViewItem item)
         {
             Color color;
             string text;
-
+            string lastRun;
             switch (actionStatus)
             {
                 case ActionStatusEnum.Executing:
                     text = "Executing";
                     color = Color.Blue;
+                    lastRun = "";
                     break;
 
                 case ActionStatusEnum.Succeeded:
                     text = "Success";
                     color = Color.Green;
+                    lastRun = runTime.ToString();
                     item.Checked = false;
                     break;
 
                 default:
                     text = "Failure";
                     item.Checked = false;
+                    lastRun = runTime.ToString();                    
                     color = Color.Red;
                     break;
             }
 
             item.SubItems[1].Text = text;
             item.SubItems[1].ForeColor = color;
-            item.SubItems[2].Text = resultMessage;
+            item.SubItems[2].Text = lastRun;
+            item.SubItems[3].Text = resultMessage;
             item.UseItemStyleForSubItems = false;
             item.ToolTipText = resultMessage;
         }
@@ -407,7 +435,7 @@ namespace BizTalkDeploymentTool
             listViewCreateApp.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -465,7 +493,7 @@ namespace BizTalkDeploymentTool
             listViewRecycleAppPools.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -639,7 +667,7 @@ namespace BizTalkDeploymentTool
             listViewDeleteWebApp.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -808,7 +836,7 @@ namespace BizTalkDeploymentTool
             listViewRestartIIS.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed","Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -881,7 +909,7 @@ namespace BizTalkDeploymentTool
             listViewChangeApplicationPool.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
@@ -902,6 +930,11 @@ namespace BizTalkDeploymentTool
             if (listViewChangeApplicationPool.CheckedItems.Count == 0)
             {
                 DisplayMessage("Please check the server(s).");
+                return;
+            }
+            if (comboBox3.SelectedItem==null)
+            {
+                DisplayMessage("Select the application pool to which it should be changed");
                 return;
             }
             this.actionableListView = listViewChangeApplicationPool;
@@ -1003,7 +1036,7 @@ namespace BizTalkDeploymentTool
             listViewDeleteAppPool.Items.Clear();
             foreach (string server in serverList)
             {
-                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "" });
+                ListViewItem listViewItem = new ListViewItem(new string[] { server, "Not Executed", "Never", "" });
                 listViewItem.SubItems[1].ForeColor = Color.SteelBlue;
                 listViewItem.SubItems[1].Font = new Font(label1.Font.Name, label1.Font.Size, FontStyle.Bold);
                 listViewItem.UseItemStyleForSubItems = false;
